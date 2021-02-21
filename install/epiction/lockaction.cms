@@ -1,0 +1,36 @@
+<?cms
+	string path;
+	array parts;
+	int err;
+	
+	path = get("path");
+
+	// validate the inputs
+	set("error", "");
+	
+	if ((path == "") || (path == "/")) {
+		set("error", "Cannot lock root folder.");
+	}
+
+	parts = split(path, "/");
+	
+	if (parts[0] == "epiction") {
+		set("error", "Cannot lock from epiction folder.");
+	}
+	
+	if (get("error") == "") {
+		// do the lock
+		err = lockFile(path);
+	
+		// set the metadata
+		if (err == 0) {
+			set("message", "The file <em>" + xmlEscape(path) + "</em> was locked for editing.");
+		} else {
+			set("message", "The file <em>" + xmlEscape(path) + "</em> was not locked for editing. The error was: " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/lock.cms");
+	}
+
+?>

@@ -1,0 +1,557 @@
+/* This is the css file for the content page. This is the main page of the cms. */
+
+/* Set page defaults */
+html, body {
+	height: 100%;
+}
+
+body {
+	font-family: Verdana, sans-serif;
+	font-size: smaller;
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+	}
+
+#container {
+	min-height: 100%;
+	position: relative;
+	height: 100%;
+	voice-family: "\"}\"";
+	voice-family: inherit;
+	height: 100%;
+	overflow: hidden;
+}
+
+/* align the logo */
+h1 {
+	margin: 0px;
+	padding: 0px;
+	}
+
+#columnspacer {
+	width: 167px; 
+	height: 1000px; 
+	border-left: 2px solid white; 
+	background-color: #900;
+}
+	
+/* disabled menu entries */
+.disabled {
+	color: #999;
+}
+
+/* The body doesn't fill the page in xhtml so we set the colors on the html element */
+html {
+	background-color: white;
+	color: #000;
+	}
+
+/* This is the menu bar at the top of the page */
+#navigation {
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+	background-color: #f0f0f0;
+}
+
+/* Fill the row and set the sizes */
+#navigation ul {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0.4em;
+	padding-bottom: 0.4em;
+	margin: 0px;
+	display: block;
+	width: 100%;
+	background-color: transparent;
+	color: #000;
+	height: 1.2em;
+}
+
+/* These are the top menus eg File */
+#navigation li {
+	list-style: none;
+	background-color: transparent;
+	color: #000;
+	margin-left: 1em;
+}
+
+/* no blue links */
+a {
+	color: #000;
+}
+
+/* These are the link styles for the menu */
+#navigation li a, #navigation li span {
+	text-decoration: none;
+	padding-left: 0.4em;
+	padding-right: 0.4em;
+	border: 0px;
+	background-color: transparent;
+	height: 2em;
+}
+
+/* Highlight the links when hovered */
+#navigation li a:hover {
+	background-color: #479;
+	color: #FFF;
+}
+
+/* underline the access keys */
+#navigation li em {
+	text-decoration: underline;
+	font-style: normal;
+}
+
+/* This is a sub menu */
+#navigation ul ul {
+	width: 15em;
+	height: auto;
+	position: absolute;
+	z-index: 3;
+	top: 95px;
+	display: none;
+	border: 1px solid #999;
+	background-color: #f0f0f0;
+	color: #000;
+}
+
+/* sub menu entries */
+#navigation ul ul li {
+	padding-top: 0.2em;
+	margin: 0px;
+	padding-left: 0.4em;
+	padding-right: 0.4em;
+	padding-bottom: 0.3em;
+	border: 0px;
+	background-color: #f0f0f0;
+	display: block;
+	color: #000;
+}
+
+/* Menu separator */
+#navigation hr {
+	border: 0px;
+	padding: 0px;
+	height: 1px;
+	margin-left: 0.4em;
+	margin-right: 0.4em;
+	color: #000;
+	background-color: #999;
+}
+
+/* stack the menus across */
+.menu {
+	display: inline;
+	float: left;
+}
+
+/* Each menu is positioned absolutely */
+#filemenu {
+	left: 1em;
+}
+
+#editmenu {
+	left: 4.4em;
+}
+
+#viewmenu {
+	left: 8.1em;
+}
+
+#toolmenu {
+	left: 12.2em;
+}
+
+#gomenu {
+	left: 16.7em;
+}
+
+#helpmenu {
+	left: 20.0em;
+}
+
+/* This is the top banner */
+#titlebar {
+	height: 70px;
+	color: white;
+	font-weight: bold;
+	text-transform: uppercase;
+	background-image: url(<?cms urlRewrite("/cms/epiction/images/titlebg.png"); ?>);
+	background-repeat: repeat-x;
+	background-color: #fff;
+}
+
+/* This is the list of buttons - common functions */
+#buttonbar {
+	height: 26px;
+	background-color: #f0f0f0;
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #999;
+	padding-top: 2px;
+	margin: 0px;
+	color: #000;
+}
+
+#buttonbar hr {
+	height: 16px;
+	margin: 0px;
+	border: 0px;
+	background-color: #999;
+	padding: 0px;
+	margin-left: 0.4em; margin-right: 0.4em;
+	width: 1px;
+}
+
+/* sizing for the button list */
+#buttonbar ul {
+	padding: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	margin-left: 1em;
+}
+
+/* each button on the button list */
+#buttonbar li {
+	padding: 0px;
+	list-style-type: none;
+	display: block;
+	float: left;
+	margin: 0px;
+}
+
+/* each button link style */
+#buttonbar li a {
+	display: block;
+	width: 20px;
+	text-align: center;
+	padding: 1px;
+	margin-top: 0px;
+	margin-left: 0px;
+	border: solid 1px #f0f0f0;
+	text-decoration: none;
+	color: black;
+	background-color: #f0f0f0;
+} 
+
+/* 3d effect when hovered */
+#buttonbar li a:hover {
+	border: outset 1px #999;
+}
+
+/* This is the navigation crumb trail */
+#crumbtrail {
+	height: 1.8em;
+	background-color: #900;
+	background-repeat: no-repeat;
+	background-image: url(<?cms urlRewrite("/cms/epiction/images/texture-red.jpg"); ?>);
+	border-top: 1px solid #300;
+	border-bottom: 1px solid #300;
+	padding-bottom: 0px;
+	margin: 0px;
+	color: #fff;
+	padding-left: 0em;
+	padding-right: 1em;
+	padding-top: 0.2em;
+}
+
+/* Force 0 gaps */
+#crumbtrail ul {
+	padding: 0px;
+	margin: 0px;
+}
+
+/* Stack across */
+#crumblist {
+	float: left;
+	display: inline;
+}
+
+/* Each link in the crumb trail */
+#crumbtrail li {
+	list-style-type: none;
+	display: block;
+	float: left;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	padding: 0px;
+	margin-left: 1em;
+}
+
+
+/* remove underlines from links */
+#crumbtrail li a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+}
+	
+/* underline on hover */
+#crumbtrail li a:hover {
+	text-decoration: underline;
+}
+
+/* stack accross */
+#crumbtrail p {
+	display: block;
+	float: left;
+	font-weight: bold;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin: 0px;
+	border: 0px;
+	padding-left: 1.2em;
+}
+
+/* This holds the table of goodies */
+#contentpane {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	border: 1px solid #f0f0f0;
+	border-bottom: 0px;
+	margin-left: 1px;
+}
+
+/* Don't show scroll bars */
+#contentpane {
+	background-color: white;
+	color: #000;
+	overflow: hidden;
+}
+
+/* Try and make the table the same in all browsers by removing gaps */
+table {
+	padding: 0px;
+	margin: 0px;
+	border-left: 0px;
+	border-top: 0px;
+	border-bottom: 0px;
+	border-right: 1px solid #f0f0f0;
+	height: 100%;
+}
+
+/* column headings */
+thead {
+	background-color: #f0f0f0;
+	color: #000;
+}
+
+/* 3d effect */
+th {
+	border-right: solid 1px #999;
+	border-bottom: solid 1px #999;
+	border-top: solid 1px #f0f0f0;
+	border-left: solid 1px #f0f0f0;
+	padding-left: 1em;
+	padding-right: 1em;
+	text-align: left;
+	height: 1.5em;
+}
+
+/* white cells with borders */
+tbody td {
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	padding-left: 0.4em;
+	padding-right: 0.4em;
+}
+
+/* the table is clickable */
+tbody td {
+	cursor: pointer;
+	height: 1.5em;
+}
+
+tbody td a {
+	color: inherit;
+}
+
+/* This is the status bar at the bottom */
+#footer {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-right: 0px;
+	margin: 0px;
+	padding-left: 1em;
+	background-color: #f0f0f0;
+	color: #000;
+	height: 1.5em;
+	position: absolute;
+	bottom: -1px;
+	border-right: solid 1px #999;
+	border-top: solid 1px #999;
+	border-left: solid 1px #f0f0f0;
+	border-bottom: 2px solid #999;
+	width: 100%;
+}
+
+/* stack across */
+#footer p {
+	display: block;
+	float: left;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* stack on right */
+#footer ul {
+	display: block;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	float: right;
+	padding-right: 1em;
+	margin-right: 1px;
+}
+
+/* single row */
+#footer li {
+	list-style-type: none;
+	display: inline;
+}
+
+/* separate image and filename */
+#contentpane img {
+	margin-right: 1em;
+	padding: 1px;
+}
+
+/* no spacing on images */
+img { 
+	border: 0px;
+	padding: 0px;
+}
+
+/* highlight selected row */
+.selected td {
+	background-color: #479;
+	color: white;
+}
+
+/* hide inactive menus */
+.rowcontext { 
+	display: none;
+}
+
+/* This is the context menu */
+#info { 
+	width: 140px;
+	height: 550px;
+}
+
+.info {
+	background-color: #900;
+	background-repeat: no-repeat;
+	background-image: url(<?cms urlRewrite("/cms/epiction/images/texture-red.jpg"); ?>);
+	color: white;
+	font-weight: bold;
+	cursor: default;
+	border-right: 1px solid #900;
+}
+
+/* context menu entries */
+#info li {
+	list-style-type: none;
+}
+
+/* context menu spacing */
+#info {
+	padding-bottom: 0px;
+	margin: 0px;
+	padding-left: 1em;
+	padding-top: 0.4em;
+	padding-right: 1em;
+}
+
+/* context menu spacing */
+#info ul {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+
+/* context menu links */
+#info li a {
+	padding: 0em;
+	margin: 0px;
+	width: 10em;
+	color: white;
+	display: block;
+	clear: left;
+	text-decoration: none;
+}
+
+/* 3d effect on hover */
+#info li a:hover {
+	text-decoration: underline;
+}
+
+/* make input fields look unique */
+.forminput { 
+	border-width: 1px;
+	font-size: smaller;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* same for buttons */
+.button { 
+	border-width: 1px;
+	background-color: #f0f0f0;
+	font-size: smaller;
+	color: black;
+}
+
+/* same for the filter stuff */
+#filter {
+	background-color: #f0f0f0;
+	color: black;
+	float: right;
+	list-style-type: none;
+	display: inline;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+
+.empty {
+	background-color: #fff;
+}
+
+.odd {
+	background-color: #efefef;
+	height: 20px;
+}
+
+#loading {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        opacity: .0;
+        display: block;
+        filter: alpha(opacity=0);
+        text-align: center;
+        font-weight: bold;
+        font-size: larger;
+        margin: 0px;
+        border: 0px;
+        background-color: #000;
+        color: #ddd;
+        z-index: 10;
+}
+
+.even {
+	height: 20px;
+}
+

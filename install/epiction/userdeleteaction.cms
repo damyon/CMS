@@ -1,0 +1,26 @@
+<?cms
+	map details;
+	int userid;
+	int err;
+	
+	userid = get("user");
+	details = getUserDetails(userid);
+
+	// validate the inputs
+	set("error", "");
+	
+	if (get("error") == "") {
+		err = deleteUser(userid);
+
+		// set the metadata
+		if (err == 0) {
+			set("message", "The user " + xmlEscape(details["userName"]) + " was deleted.");
+		} else {
+			set("message", "The user " + xmlEscape(details["userName"]) + " was not deleted. The error was " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/userdelete.cms");
+	}
+
+?>

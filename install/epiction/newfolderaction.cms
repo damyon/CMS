@@ -1,0 +1,58 @@
+<?cms
+	string path;
+	string title;
+	string filename;
+	string description;
+	string keywords;
+	int ispublic;
+	int order;
+	int parentid;
+	int err;
+	
+
+	path = get("path");
+	title = get("title");
+	filename = get("filename");
+	description = get("description");
+	keywords = get("keywords");
+	ispublic = get("ispublic");
+	order = get("order");
+
+	// validate the inputs
+	set("error", "");
+	
+	
+	if (title == "") {
+		title = filename;
+	}
+
+	if (filename == "") {
+		set("error", "Filename is a required field.");
+	}
+
+	if (isValidFilename(filename) == 0) {
+		set("error", "Filename can only contain numbers, letters and the characters '-', '_' and '.'.");
+	}
+
+	if (get("error") == "") {
+		// create the folder
+		err = createNewFolder(path, filename, ispublic, order);
+	
+		// set the metadata
+		if (err == 0) {
+			setFileMetadata((path + "/" + filename), "dc:title", title);
+			setFileMetadata((path + "/" + filename), "dc:description", description);
+			setFileMetadata((path + "/" + filename), "dc:subject", keywords);
+		}
+
+		if (err == 0) {
+			set("message", "The folder <em>" + xmlEscape(filename) + "</em> was created.");
+		} else {
+			set("message", "The folder <em>" + xmlEscape(filename) + "</em> was not created. The error was: " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/newfolder.cms");
+	}
+
+?>

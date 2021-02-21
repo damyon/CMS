@@ -1,0 +1,49 @@
+<?cms
+	string username;
+	string fullname;
+	string email;
+	string password;
+	string password2;
+	int administrator;
+	int enabled;
+	map details;
+	int err;
+	
+	username = get("newusername");
+	fullname = get("newfullname");
+	email = get("newemail");
+	password = get("password1");
+	password2 = get("password2");
+	administrator = get("newadministrator");
+	enabled = get("newenabled");
+
+	// validate the inputs
+	set("error", "");
+	
+	if (username == "") {
+		set("error", "Username is a required field.");
+	}
+	
+	if (fullname == "") {
+		set("error", "Fullname is a required field.");
+	}
+
+	if (password != password2) {
+		set("error", "Passwords do not match.");
+	}
+
+	if (get("error") == "") {
+		// create the folder
+		err = createNewUser(username, password, fullname, administrator, enabled, email);
+	
+		if (err == 0) {
+			set("message", "The user <em>" + xmlEscape(username) + "</em> was created.");
+		} else {
+			set("message", "The user <em>" + xmlEscape(username) + "</em> was not created. The error was: " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/newuser.cms");
+	}
+
+?>

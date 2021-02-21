@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Remove Permissions (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/epiction/js/popup.js"); ?>"></script>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	function actionCancel() {
+		window.close();
+	}
+
+	function showLoading() {
+		var ele = document.getElementById("loading");
+		ele.style.display = "block";
+	}
+
+	function actionOK() {
+		showLoading();
+	}
+
+	function setFocus(ele) {
+		var ele = document.getElementById(ele);
+		ele.focus();
+	}
+
+	function setDefaultFocus() {
+		setFocus("ok");
+	}
+
+	window.onload = setDefaultFocus;
+  //-->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+    <form action="<?cms urlRewrite("/cms/epiction/permissionsdeleteaction.cms"); ?>" method="POST">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Remove Permissions </legend>
+	<p><span>Path:</span>
+	<?cms write(xmlEscape(get("path"))); ?>
+	</p>
+	<p><span>Group:</span>
+	<?cms
+		int groupid;
+		map groupdetails;
+		
+		groupid = get("group");
+	
+		groupdetails = getGroupDetails(groupid);
+
+		write(xmlEscape(groupdetails["groupName"])); 
+	?>
+	</p>
+	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	</fieldset>
+	</div>
+	<div id="actions">
+	<p>
+	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
+	<input type="hidden" name="group" value="<?cms write(xmlEscape(get("group"))); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK();" id="ok"/>
+	</p>
+	</div>
+    </form>
+  </div>
+  <div id="loading"> <span>Please Wait...</span> </div>
+</body>
+</html>

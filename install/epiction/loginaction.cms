@@ -1,0 +1,17 @@
+<?cms
+	string username;
+	string password;
+	int error;
+
+	username = get("username");
+	password = get("password");
+
+	error = login(username, password);
+
+	if (error == 0) {
+		include("epiction/content.cms");
+	} else {
+		set("error-message", "The username and password provided were not correct. Usernames and passwords are case sensitive.");
+		include("epiction/login.cms");
+	}
+?>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Receipt</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	function actionOK() {
+		window.opener.document.location.reload();
+		window.close();
+	}
+
+	function setFocus(ele) {
+		var ele = document.getElementById(ele);
+		ele.focus();
+	}
+
+	function setDefaultFocus() {
+		setFocus("ok");
+	}
+
+	window.onload = setDefaultFocus;
+  //-->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+    <form action="#">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Receipt </legend>
+	<p style="padding: 1.5em;">
+	<?cms write(get("message")); ?>
+	</p>
+	</fieldset>
+	</div>
+	<div id="actions">
+	<p>
+	<input type="submit" class="button" value="OK" onclick="actionOK();" id="ok"/>
+	</p>
+	</div>
+    </form>
+  </div>
+</body>
+</html>

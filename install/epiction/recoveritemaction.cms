@@ -1,0 +1,38 @@
+<?cms
+	string path;
+	array parts;
+	int itemID;
+	int err;
+	
+	path = get("path");
+	itemID = get("itemID");
+
+	// validate the inputs
+	set("error", "");
+	
+	if ((path == "") || (path == "/")) {
+		set("error", "Cannot recover root folder.");
+	}
+
+	parts = split(path, "/");
+	
+	if (parts[0] == "epiction") {
+		set("error", "Cannot recover from epiction folder.");
+	}
+	
+	if (get("error") == "") {
+		// do the copy
+		err = recoverFileVersion(path, itemID, "y");
+	
+		// all done
+		if (err == 0) {
+			set("message", "The file <em>" + xmlEscape(path) + "</em> was recovered.");
+		} else {
+			set("message", "The file <em>" + xmlEscape(path) + "</em> was not recovered. The error was: " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/recoveritem.cms");
+	}
+
+?>

@@ -1,0 +1,5 @@
+
+RewriteEngine On
+
+RewriteRule ^(.*)$      /cgi-bin/dav.cgi [E=AUTHORIZATION:%{HTTP:Authorization},E=QUERY_STRING:%{QUERY_STRING},PT]
+

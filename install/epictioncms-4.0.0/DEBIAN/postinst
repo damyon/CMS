@@ -1,0 +1,62 @@
+#!/bin/sh
+
+#DEBHELPER#
+
+case "$1" in
+    configure)
+
+# Stop apache
+/etc/init.d/apache2 stop
+
+# Enable mod_rewrite in apache
+/usr/sbin/a2enmod rewrite
+/usr/sbin/a2enmod cgi
+
+# Enable overrides via .htaccess in apache (just for cms directory)
+/usr/sbin/a2ensite cms
+
+# Start apache
+/etc/init.d/apache2 start
+
+# Generate a random database password
+DBPWD="cms$RANDOM"
+/bin/cat /var/lib/cms/install/database-mysql.sql | /bin/sed -e "s/DATABASEPASSWORD/$DBPWD/g" > /var/lib/cms/install/database-mysql.sql.new
+/bin/cat /etc/cms.conf | /bin/sed -e "s/DATABASEPASSWORD/$DBPWD/g" > /etc/cms.conf.new
+/bin/mv /etc/cms.conf.new /etc/cms.conf
+
+# install a database without the root password
+echo "Install DB"
+/usr/bin/mysql -u root < /var/lib/cms/install/database-mysql.sql.new
+# /bin/rm -f /var/lib/cms/install/database-mysql.sql.new
+
+echo "Create user"
+# Create the cms user
+/usr/sbin/useradd cms -r
+
+echo "Start on boot"
+# Install the startup scripts
+update-rc.d epictioncms defaults
+
+# Set some permissions
+chown -R cms /var/lib/cms
+chown -R cms /var/log/cms
+
+echo "Start CMS"
+# Start the CMS
+/etc/init.d/epictioncms start
+
+echo "Install CMS"
+# Install the interface
+/usr/bin/curl -# -F package=@/var/lib/cms/install/interface.xml -F "username=administrator" -F "password=changeme" "http://localhost/cms/epiction/bootstrap.txt"
+
+
+        ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        ;;
+esac
+
+
+

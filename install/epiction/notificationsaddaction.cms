@@ -1,0 +1,40 @@
+<?cms
+	string path;
+	int groupid;
+	map groupdetails;
+	int err;
+	
+	path = get("path");
+	groupid = get("group");
+
+	groupdetails = getGroupDetails(groupid);
+
+	// validate the inputs
+	set("error", "");
+	
+	if ((path == "") || (path == "/")) {
+		set("error", "Cannot set notifications for root folder.");
+	}
+
+	
+	if (groupid <= 0) {
+		set("error", "Group is required.");
+	}
+
+	if (get("error") == "") {
+		// set the notifications
+
+		err = attachNotificationSettings(path, groupid);
+
+		// set the metadata
+		if (err == 0) {
+			set("message", "The notification settings for the group <em>" + xmlEscape(groupdetails["groupName"]) + "</em> were added to the folder " + xmlEscape(path) + ".");
+		} else {
+			set("message", "The notification settings for the group <em>" + xmlEscape(groupdetails["groupName"]) + "</em> were not added to the folder " + xmlEscape(path) + ". The error was " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/notificationadd.cms");
+	}
+
+?>

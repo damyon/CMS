@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Deleted Items</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	var lastColor = "";
+	function actionOK() {
+		window.opener.document.location.reload();
+		window.close();
+	}
+	
+	function actionRecover() {
+		var ele = document.getElementById("itemID");
+		itemID = ele.value;
+		ele = document.getElementById("itemPath");
+		itemPath = ele.value;
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
+
+		if (itemID != "") {
+		window.open("<?cms urlRewrite("/cms/epiction/recoveritem.cms"); ?>&path=" + escape(itemPath) + "&itemID=" + itemID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		} else {
+			return false;
+		}
+	}
+
+	function selectItem(itemID, itemPath) {
+		var ele = document.getElementById("itemID");
+
+		if (ele != null) {
+			ele = document.getElementById("item" + ele.value);
+			if (ele != null) {
+				ele.style.backgroundColor = lastColor;
+				ele.style.color = "#000";
+			}
+		}
+		
+		ele = document.getElementById("item" + itemID);
+
+		if (ele != null) {
+			lastColor = ele.style.backgroundColor;
+			ele.style.backgroundColor = "#479";
+			ele.style.color = "#fff";
+		}
+
+		ele = document.getElementById("viewbutton");
+		if (ele != null) {
+			ele.style.color = "#000";
+		}
+		ele = document.getElementById("recoverbutton");
+		if (ele != null) {
+			ele.style.color = "#000";
+		}
+		ele = document.getElementById("itemID");
+		if (ele != null) {
+			ele.value = itemID;
+		}
+		ele = document.getElementById("itemPath");
+		if (ele != null) {
+			ele.value = itemPath;
+		}
+	}
+  -->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Deleted Items </legend>
+	<div id="info">
+	<p><span>Folder:</span><?cms write(xmlEscape(get("path"))); ?></p>
+	<table width="100%" cellpadding="0" cellspacing="0" id="recovertable">
+	<tr><th>Filename</th><th>Publisher</th><th>Version</th><th>Mimetype</th><th>Size</th></tr>
+
+	<?cms
+		string path;
+		int i;
+		int filesize;
+		array items;
+		map details;
+		string publishdate;
+		string publisher;
+		int err;
+	
+		path = get("path");
+		if ((path == "") || (path == "/")) {
+			items = getDeletedRootFolderContents("", 0, 2048, "relative");
+		} else {
+			items = getDeletedFolderContents(path, "", 0, 2048, "relative");
+		}
+
+		for (i = 0; i < arrayLength(items); i++) {
+			details = getDeletedFileDetails(items[i]["fileID"]);
+			publishdate = getDeletedFileMetadata(items[i]["fileID"], "dc:date");
+			publisher = getDeletedFileMetadata(items[i]["fileID"], "dc:publisher");
+			filesize = details["fileSize"];
+			filesize /= 1024;
+			if (filesize == 0) {
+				filesize = 1;
+			}
+			write("<tr ");
+			if (i % 2) {
+				write(" class=\"odd\" ");
+			}
+			writeln(" id=\"item" + items[i]["fileID"] + "\" onclick=\"selectItem(" + items[i]["fileID"] + ", '" + xmlEscape(details["path"]) + "');\" style=\"cursor: pointer;\"><td>" + xmlEscape(details["fileName"]) + "</td><td>" + xmlEscape(publisher) + "</td><td>" + xmlEscape(publishdate) + "</td><td>" + xmlEscape(details["mimeType"]) + "</td><td>" + xmlEscape(filesize) + " kb</td></tr>");
+		}
+		
+		while (i < 5) {
+			if (i % 2) {
+				writeln("<tr class=\"disabled\"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+			} else {
+				writeln("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+			}
+			i++;
+		}
+
+	?>
+	</table>
+	</div>
+	<div id="leftmenu">
+	<form action="#">
+	<input type="hidden" name="itemID" id="itemID" value=""/>
+	<input type="hidden" name="itemPath" id="itemPath" value=""/>
+	<input type="button" onclick="actionRecover();" id="recoverbutton" name="recoveritem" class="button" value="Recover" style="color: #999;"/>
+	</form>
+	</div>
+	</fieldset>
+  </div>
+  <div id="actions">
+  <p>
+  <input type="button" onclick="actionOK();" class="button" name="submit-action" value="Close"/>
+  </p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title><?cms 
+		string path;
+		string parent;
+		string title;
+		string filter;
+		array parts;
+		array files;
+		int skip;
+		int page;
+		int i;
+		int total;
+		int found;
+		int err;
+
+		path = get("path");
+		skip = get("skip");
+		filter = get("filter");
+		page = get("pagination");
+		if (page == 0) {
+			page = 15;
+			set("pagination", page);
+		}
+		if ((path == "") || (path == "/")) {
+			write("/");
+		} else {
+			title = getFileMetadata(path, "dc:title");
+			write(xmlEscape(title));
+		}
+
+		// load the number of files found and available
+		if ((path == "") || (path == "/")) {
+			total = getRootFolderContentsLength(filter);
+			files = getRootFolderContents(filter, skip, (skip + page), "relative");
+		} else {
+			total = getFolderContentsLength(path, filter);
+			files = getFolderContents(path, filter, skip, (skip + page), "relative");
+		}
+		found = arrayLength(files);
+
+		parts = split(path, "/");
+		parent = "";
+		for (i = 0; i < (arrayLength(parts) - 1); i++) {
+			if (i > 0) {
+				parent += "/";
+			}
+			parent += parts[i];
+		}
+		?> - Content Management System </title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/content.css"); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/epiction/js/content.js"); ?>"></script>
+<?cms 
+	int userid;
+
+	/* Check we are still logged in - otherwise refresh to the login page */
+	userid = get("userID");
+	if (userid == 0) {
+		writeln("<meta http-equiv=\"refresh\" content=\"0,url=" + urlBase("/cms/epiction/login.cms") + "\"></meta>");
+	}
+?>
+</head>
+<body>
+  <div id="container">
+  <div id="titlebar">
+	<h1><img width="356" height="70" src="<?cms urlRewrite("/cms/epiction/images/logo.png"); ?>" alt="Epiction Pty Ltd" /></h1>
+  </div>
+  <div id="navigation">
+  <ul>
+    <li class="menu"><a accesskey="f" href="#" onclick="setToggle('filemenu');" title="File"><em>F</em>ile</a>
+    <ul id="filemenu">
+      <?cms
+	map details;
+	string super;
+
+	super = get("isSuperUser");
+
+	if ((path != "") && (path != "/")) {
+		details = getFileDetails(path);
+	}
+
+	if ((super == "y") || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
+		// user has write access to this folder
+		writeln("<li><a accesskey=\"c\" title=\"Create Folder\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newfolder.cms?path=" + xmlEscape(path)) + "', 640, 300);\"><em>C</em>reate Folder...</a></li>");		
+		writeln("<li><a accesskey=\"g\" title=\"Create Page\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newpage.cms?path=" + xmlEscape(path)) + "', 680, 640);\">Create Pa<em>g</em>e...</a></li>");		
+		writeln("<li><a accesskey=\"r\" title=\"Create Resource\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newresource.cms?path=" + xmlEscape(path)) + "', 640, 380);\">Create <em>R</em>esource...</a></li>");		
+	} else {
+      		writeln("<li><span class=\"disabled\"><em>C</em>reate Folder...</span></li>");
+      		writeln("<li><span class=\"disabled\">Create Pa<em>g</em>e...</span></li>");
+      		writeln("<li><span class=\"disabled\">Create <em>R</em>esource...</span></li>");
+      		writeln("<li><span class=\"disabled\">Create O<em>t</em>her...</span></li>");
+	}
+
+	
+      ?>
+      <li><hr/></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/properties.cms?path=" + xmlEscape(path)); ?>', 480, 420);" accesskey="o" title="Properties"><em>P</em>roperties...</a></li>
+      <li><hr/></li>
+      <li><a href="<?cms urlRewrite("/cms/epiction/login.cms"); ?>" accesskey="l" title="Logout"><em>L</em>ogout (<?cms write(xmlEscape(get("FULLNAME"))); ?>)</a></li>
+    </ul>
+    </li>
+    <li class="menu"><a accesskey="e" href="#" onclick="setToggle('editmenu');" title="Edit"><em>E</em>dit</a>
+    <ul id="editmenu">
+	<?cms
+
+	string cut;
+	string copy;
+	string source;
+	
+	cut = get("buffer-cut");
+	copy = get("buffer-copy");
+	if (cut != "") {
+		setSessionData("session:copy", "");
+		setSessionData("session:cut", cut);
+	}
+	if (copy != "") {
+		setSessionData("session:cut", "");
+		setSessionData("session:copy", copy);
+	}
+	
+	if (((super == "y") && (mapLength(details) > 0)) || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
+      		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(filter) + "&pagination=" + xmlEscape(page) + "&skip=" + xmlEscape(skip) + "&buffer-cut=" + xmlEscape(path)) + "\" accesskey=\"t\" title=\"Cut\">Cu<em>t</em></a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\">Cu<em>t</em></span></li>");
+	}
+	
+	if (mapLength(details) > 0) {
+        	writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(filter) + "&pagination=" + xmlEscape(page) + "&skip=" + xmlEscape(skip) + "&buffer-copy=" + xmlEscape(path)) + "\" accesskey=\"y\" title=\"Copy\">Cop<em>y</em></a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\">Cop<em>y</em></span></li>");
+	}
+
+	source = getSessionData("session:copy");
+	if (source == "") {
+		source = getSessionData("session:cut");
+	}
+	if (source != "") {
+      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/paste.cms?path=" + xmlEscape(path)) + "', 480, 420);\" accesskey=\"s\" title=\"Paste\">Pa<em>s</em>te</a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\">Pa<em>s</em>te</span></li>");
+	}
+
+	writeln("<li><hr/></li>");
+
+	if (((super == "y") && (mapLength(details) > 0)) || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
+		if ((details["type"] != "RESOURCE") && (details["type"] != "FOLDER") && (details["type"] != "CONTENT")) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/extensions/" + details["type"] + "/delete.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"d\" title=\"Delete\"><em>D</em>elete</a></li>");
+      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/extensions/" + details["type"] + "/rename.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"n\" title=\"Rename\">Re<em>n</em>ame...</a></li>");
+		} else {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/delete.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"d\" title=\"Delete\"><em>D</em>elete</a></li>");
+      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/rename.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"n\" title=\"Rename\">Re<em>n</em>ame...</a></li>");
+		}
+	} else {
+		writeln("<li><span class=\"disabled\"><em>D</em>elete</span></li>");
+		writeln("<li><span class=\"disabled\">Re<em>n</em>ame...</span></li>");
+	}
+	
+	if ((super == "y") || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
+      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/import.cms?path=" + xmlEscape(path)) + "', 540, 180);\" accesskey=\"i\" title=\"Restore\"><em>R</em>estore...</a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\"><em>R</em>estore...</span></li>");
+	}
+	
+	writeln("<li><hr/></li>");
+
+	if ((super == "y") || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
+      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/permissions.cms?path=" + xmlEscape(path)) + "', 640, 480);\" accesskey=\"m\" title=\"Permissions\">Per<em>m</em>issions...</a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\">Per<em>m</em>issions...</span></li>");
+	}
+
+	if ((super == "y") && (mapLength(details) > 0)) {
+      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/workflow.cms?path=" + xmlEscape(path)) + "', 640, 200);\" accesskey=\"w\" title=\"Workflow Settings\"><em>W</em>orkflow Settings...</a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\"><em>W</em>orkflow Settings...</span></li>");
+	}
+	writeln("<li><hr/></li>");
+	if ((super == "y") && (mapLength(details) > 0)) {
+      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/recover.cms?path=" + xmlEscape(path)) + "', 800, 600);\" accesskey=\"c\" title=\"Recover Deleted Items\">Re<em>c</em>over Deleted Items...</a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\">Re<em>c</em>over Deleted Items...</span></li>");
+	}
+	?>
+    </ul>
+    </li>
+    <li class="menu"><a accesskey="v" href="#" onclick="setToggle('viewmenu');" title="View"><em>V</em>iew</a>
+    <ul id="viewmenu">
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/contentfilter.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter)); ?>', 350, 200);" title="Filter">Filter...</a></li>
+      <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&pagination=" + page + "&filter=" + filter + "&skip=" + skip); ?>" accesskey="r" title="Reload"><em>R</em>eload</a></li>
+    </ul>
+    </li>
+    <li class="menu"><a accesskey="t" href="#" onclick="setToggle('toolmenu');" title="Tools"><em>T</em>ools</a>
+    <ul id="toolmenu">
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/accountdetails.cms"); ?>', 480, 340);" accesskey="m" title="My Details"><em>M</em>y Details</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/changepassword.cms"); ?>', 480, 240);" accesskey="c" title="Change Password"><em>C</em>hange Password</a></li>
+      <li><hr/></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/users.cms"); ?>', 800, 480);" accesskey="u" title="Users"><em>U</em>sers</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/groups.cms"); ?>', 800, 480);" accesskey="g" title="Groups"><em>G</em>roups</a></li>
+      <li><hr/></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/myworkflow.cms"); ?>', 800, 480);" accesskey="w" title="My Workflow Items">My <em>W</em>orkflow Items</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/search.cms?path=" + xmlEscape(path)); ?>', 800, 480);" accesskey="s" title="Search"><em>S</em>earch</a></li>
+    </ul>
+    </li>
+    <li class="menu"><a accesskey="g" href="#" onclick="setToggle('gomenu');" title="Go"><em>G</em>o</a>
+    <ul id="gomenu">
+      <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=" + xmlEscape(parent) + "&pagination=" + page); ?>" title="Open Parent Folder">Open Parent Folder</a></li>
+      <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=/&pagination=" + page); ?>" title="Open Parent">Open Top Folder</a></li>
+      <li><hr/></li>
+<?cms
+	int last;
+	if (skip > 0) {
+		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=" + (skip - page)) + "\" title=\"Previous Page\">Previous Page</a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\">Previous Page</span></li>");
+	}
+
+	if ((skip + page) < total) {
+		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=" + (skip + page)) + "\" title=\"Next Page\">Next Page</a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\">Next Page</span></li>");
+	}
+
+	if (total > page) {
+		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/contentpagination.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(filter) + "&pagination=" + xmlEscape(page) + "&total=" + xmlEscape(total)) + "', 300, 150);\" title=\"Go to Page\">Go to Page...</a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\">Go to Page...</span></li>");
+	}
+
+	if (skip > 0) {
+		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=0") + "\" title=\"First Page\">First Page</a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\">First Page</span></li>");
+	}
+
+	if ((skip + page) < total) {
+		last = (total / page) * page;
+		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=" + last) + "\" title=\"Last Page\">Last Page</a></li>");
+	} else {
+		writeln("<li><span class=\"disabled\">Last Page</span></li>");
+	}
+
+?>
+      <li><hr/></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/contentlocation.cms?pagination=" + page); ?>', 500, 200);" title="Location">Location...</a></li>
+    </ul>
+    </li>
+    <li class="menu"><a href="#" accesskey="h" title="Help" onclick="setToggle('helpmenu');"><em>H</em>elp</a>
+    <ul id="helpmenu">
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/help.cms"); ?>', 800, 600);" title="Help">Help</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/about.cms"); ?>', 500, 550);" title="About">About</a></li>
+    </ul>
+    </li>
+  </ul>
+  </div>
+  <div id="crumbtrail">
+    <p>Location: </p>
+    <ul id="crumblist">
+    <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=/"); ?>" title="cms">cms</a></li>
+<?cms
+	string path;
+	string url;
+	array trail;
+	int i;
+
+	// split the crumb trail into folders
+	path = get("path");
+	page = get("pagination");
+	trail = split(path, "/");
+	url = "";	
+
+	// write each entry in the crumb trail
+	for (i = 0; i < arrayLength(trail); i++) {
+		if ((trail[i] != "") && (trail[i] != "/")) {
+			url += trail[i];
+			writeln("<li>&#187;&nbsp;<a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(url)) + "&pagination=" + page + "\" title=\"" + xmlEscape(trail[i]) + "\">" + xmlEscape(trail[i]) + "</a></li>");
+		url += "/";
+		}
+	}
+
+?>
+    </ul>
+  </div>
+  <div id="buttonbar">
+    <ul id="buttonlist">
+	<?cms 
+		map details;
+		string super;
+
+		super = get("isSuperUser");
+
+		if ((path != "") && (path != "/")) {
+			details = getFileDetails(path);
+		}
+
+		if ((super == "y") || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
+			writeln("<li><a title=\"Create Folder\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newfolder.cms?path=" + xmlEscape(path)) + "', 640, 300);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/folder-white-16x16.png") + "\" alt=\"New Folder\"/></a></li>");		
+      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newpage.cms?path=" + xmlEscape(path)) + "', 680, 640);\" title=\"Create Page\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/content-white-16x16.png") + "\" alt=\"New Page\"/></a></li>");
+      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newresource.cms?path=" + xmlEscape(path)) + "', 640, 380);\" title=\"Create Resource\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/resource-white-16x16.png") + "\" alt=\"New Resource\"/></a></li>");
+		} else {
+			writeln("<li><a title=\"Create Folder\" href=\"javascript:void(0);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/folder-disabled.gif") + "</a></li>");		
+			writeln("<li><a title=\"Create Page\" href=\"javascript:void(0);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/content-disabled.gif") + "</a></li>");		
+			writeln("<li><a title=\"Create Resource\" href=\"javascript:void(0);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/resource-disabled.gif") + "</a></li>");		
+		}
+	?>
+      <li><hr/></li>
+      <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=/&pagination=" + page); ?>" title="Go to the top folder"><img width="16" height="16" src="<?cms urlRewrite("/cms/epiction/images/top-folder-white-16x16.png"); ?>" alt="Top Folder"/></a></li>
+      <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=" + xmlEscape(parent) + "&pagination=" + page); ?>" title="Go to the parent folder"><img width="16" height="16" src="<?cms urlRewrite("/cms/epiction/images/parent-folder-white-16x16.png"); ?>" alt="Open Parent"/></a></li>
+      <li><hr/></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/users.cms"); ?>', 800, 480);" title="Users"><img width="16" height="16" src="<?cms urlRewrite("/cms/epiction/images/users-white-16x16.png"); ?>" alt="Users"/></a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/groups.cms"); ?>', 800, 480);" title="Groups"><img width="16" height="16" src="<?cms urlRewrite("/cms/epiction/images/groups-white-16x16.png"); ?>" alt="Groups"/></a></li>
+      <li><hr/></li>
+      <li><a href="<?cms urlRewrite("/cms/epiction/login.cms"); ?>" title="Logout"><img width="16" height="16" src="<?cms urlRewrite("/cms/epiction/images/logout-white-16x16.png"); ?>" alt="Logout"/></a></li>
+    </ul>
+    <form action="<?cms urlRewrite("/cms/epiction/content.cms"); ?>" method="GET">
+    <input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
+    <ul id="filter">
+      <li><select class="forminput" name="pagination" onchange="submit();">
+<?cms
+	int i;
+
+	// set the default pagination
+	if (get("pagination") == "") {
+		set("pagination", "15");
+	}
+	
+	// write out the option list from 5 to 50
+	for (i = 5; i <= 50; i += 5) {
+		write("<option value=\"" + i + "\"");
+		if (i == get("pagination")) {
+			write(" selected=\"selected\"");
+		}
+		writeln(">" + i + "</option>");
+	}
+?>
+	  </select> per page. </li>
+      <li>&nbsp;<input type="text" name="filter" value="<?cms write(xmlEscape(get("filter"))); ?>" size="8" class="forminput" /></li>
+      <li>&nbsp;<input class="button" type="submit" name="submit-action" value="Filter"/>&nbsp;</li>
+    </ul>
+    </form>
+  </div>
+  <div id="contentpane">
+    <table width="100%" cellpadding="0" cellspacing="0" summary="List of files and folders">
+      <thead><tr><th>&nbsp;</th><th>Filename</th><th>Title</th><th>Size</th><th>Type</th><th>Last Modified</th></tr></thead>
+      <tbody>
+	<tr>
+<?cms
+	int i;
+	array files;
+	array type;
+	map details;
+	array pathlist;
+	string path;
+	string title;
+	string filter;
+	int skip;
+	int err;
+	int size;
+	int verifier;
+	int uid;
+	int len;
+	string super;
+
+	page = get("pagination");
+	path = get("path");
+	skip = get("skip");
+	filter = get("filter");
+	super = get("isSuperUser");
+	uid = get("userID");
+
+	if ((path == "") || (path == "/")) {
+		len = getRootFolderContentsLength(filter);
+		set("total", len);
+		files = getRootFolderContents(filter, skip, (skip + page), "relative");
+	} else {
+		len = getFolderContentsLength(path, filter);
+		set("total", len);
+		files = getFolderContents(path, filter, skip, (skip + page), "relative");
+	}
+
+	writeln("<td id=\"info\" class=\"info\" rowspan=\"50\" valign=\"top\">");
+	writeln("<span style=\"display:block;width:140px;height:1px;\">&nbsp;</span>");
+	set("found", arrayLength(files));
+
+	for (i = 0; i < arrayLength(files); i++) {
+		// load the details for this file
+		details = getFileDetails(files[i]["path"]);
+		type = split(details["mimeType"], "/");
+		pathlist = split(details["path"], "/");
+
+		verifier = isVerifier(details["path"]);
+		writeln("<ul id=\"row" + details["fileID"] + "context\" class=\"rowcontext\">");
+		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/backup.cms?path=" + xmlEscape(details["path"])) + "', 480, 200);\" title=\"Backup this file\"><img alt=\"Backup\" src=\"" + urlBase("/cms/epiction/images/backup-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Backup</a></li>");
+		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?buffer-copy=" + xmlEscape(details["path"])) + "&path=" + xmlEscape(path) + "&filter=" + xmlEscape(get("filter")) + "&skip=" + xmlEscape(get("skip")) + "&pagination=" + xmlEscape(get("pagination")) + "\" title=\"Copy the file\"><img alt=\"Copy\" src=\"" + urlBase("/cms/epiction/images/copy-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Copy</a></li>");
+		if (details["writePermission"] == 1) {
+			writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?buffer-cut=" + xmlEscape(details["path"])) + "&path=" + xmlEscape(path) + "&filter=" + xmlEscape(get("filter")) + "&skip=" + xmlEscape(get("skip")) + "&pagination=" + xmlEscape(get("pagination")) + "\" title=\"Cut the file\"><img alt=\"Cut\" src=\"" + urlBase("/cms/epiction/images/cut-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Cut</a></li>");
+		}
+		if (details["writePermission"] == 1) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/delete.cms?path=" + xmlEscape(details["path"])) + "', 480, 240);\" title=\"Delete the file\"><img alt=\"Delete\" src=\"" + urlBase("/cms/epiction/images/delete-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Delete</a></li>");
+		}
+		if ((details["writePermission"] == 1) && (details["type"] == "CONTENT")) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/editpage.cms?path=" + xmlEscape(details["path"])) + "', 680, 640);\" title=\"Edit the contents of this file\"><img alt=\"Edit\" src=\"" + urlBase("/cms/epiction/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/editsource.cms?path=" + xmlEscape(details["path"])) + "', 680, 640);\" title=\"Edit the source of this file\"><img alt=\"Edit Source\" src=\"" + urlBase("/cms/epiction/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit Source</a></li>");
+		}
+		if ((details["writePermission"] == 1) && (details["type"] == "RESOURCE")) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/editresource.cms?path=" + xmlEscape(details["path"])) + "', 640, 380);\" title=\"Upload a new resource file\"><img alt=\"Edit\" src=\"" + urlBase("/cms/epiction/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit</a></li>");
+		}
+		if ((details["writePermission"] == 1) && (details["type"] != "RESOURCE") && (details["type"] != "FOLDER") && (details["type"] != "CONTENT")) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/editpage.cms?path=" + xmlEscape(details["path"])) + "', 680, 640);\" title=\"Edit this extension\"><img alt=\"Edit\" src=\"" + urlBase("/cms/epiction/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit</a></li>");
+		}
+		if ((details["lockedByUserID"] == -1) && (details["type"] != "FOLDER") && (details["writePermission"] == 1)) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/lock.cms?path=" + xmlEscape(details["path"])) + "', 640, 240);\" title=\"Lock this file for editing\"><img alt=\"Lock\" src=\"" + urlBase("/cms/epiction/images/lock-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Lock</a></li>");	
+		}
+		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/metadata.cms?path=" + xmlEscape(details["path"])) + "', 800, 480);\" title=\"View the file metadata\"><img alt=\"Metadata\" src=\"" + urlBase("/cms/epiction/images/metadata-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Metadata</a></li>");
+		if ((details["type"] == "FOLDER") && (details["writePermission"] == 1)) {
+			writeln("<li><a href=\"javascript:void(0);\" title=\"Notifications\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/notifications.cms?path=" + xmlEscape(details["path"])) + "', 800, 480);\"><img alt=\"Notifications\" src=\"" + urlBase("/cms/epiction/images/notifications-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Notifications</a></li>");
+		}
+		if ((details["type"] == "FOLDER")) {
+			writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(details["path"]) + "&pagination=" + page) + "\" title=\"Open the folder\"><img alt=\"Open\" src=\"" + urlBase("/cms/epiction/images/open-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Open</a></li>");
+		}
+		if ((details["writePermission"] == 1)) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/permissions.cms?path=" + xmlEscape(details["path"])) + "', 640, 480);\" title=\"Change the file permissions\"><img alt=\"Permissions\" src=\"" + urlBase("/cms/epiction/images/permissions-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Permissions</a></li>");
+		}
+		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/properties.cms?path=" + xmlEscape(details["path"])) + "', 480, 420);\" title=\"View the file properties\"><img alt=\"Properties\" src=\"" + urlBase("/cms/epiction/images/properties-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Properties</a></li>");
+		if (details["writePermission"] == 1) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/rename.cms?path=" + xmlEscape(details["path"])) + "', 480, 240);\" title=\"Rename the file\"><img alt=\"Rename\" src=\"" + urlBase("/cms/epiction/images/rename-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Rename</a></li>");
+		}
+		if ((details["lockedByUserID"] == uid) || ((details["lockedByUserID"] != "-1") && (super == "y"))) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/unlock.cms?path=" + xmlEscape(details["path"])) + "', 640, 240);\" title=\"Unlock the file for editing\"><img alt=\"Unlock\" src=\"" + urlBase("/cms/epiction/images/unlock-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Unlock</a></li>");
+		}
+		if ((details["writePermission"] == 1) && (details["type"] != "FOLDER")) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/versions.cms?path=" + xmlEscape(details["path"])) + "', 640, 480);\" title=\"View previous versions of this file\"><img alt=\"Versions\" src=\"" + urlBase("/cms/epiction/images/versions-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Versions</a></li>");
+		}
+		if ((details["type"] != "FOLDER") && (pathlist[0] != "templates")) {
+			if (type[0] != "text") {
+				writeln("<li><a href=\"" + urlBase("/cms/" + xmlEscape(details["path"]) + "?SAVEASFILENAME=" + xmlEscape(details["fileName"])) + "\" title=\"Download this file\" ><img alt=\"View\" src=\"" + urlBase("/cms/epiction/images/view-red-16x16.png") + "\" width=\"16\" height=\"16\"/>View</a></li>");
+			} else {
+				writeln("<li><a href=\"javascript:void(0);\" onclick=\"return openWindow('" + urlBase("/cms/" + xmlEscape(details["path"])) + "');\" title=\"View this file in a new window\" ><img alt=\"View\" src=\"" + urlBase("/cms/epiction/images/view-red-16x16.png") + "\" width=\"16\" height=\"16\"/>View</a></li>");
+			}
+		}
+		if ((type[0] == "text") && (details["type"] != "FOLDER")) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"openWindow('" + urlBase("/cms/" + xmlEscape(details["path"]) + "?parse=no") + "');\" title=\"View the source of this file\"><img alt=\"View Source\" src=\"" + urlBase("/cms/epiction/images/source-red-16x16.png") + "\" width=\"16\" height=\"16\"/>View Source</a></li>");
+		}
+		if ((verifier) || (super == "y")) {
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/workflowcomments.cms?path=" + xmlEscape(details["path"])) + "', 640, 480);\" title=\"Workflow\"><img alt=\"Workflow\" src=\"" + urlBase("/cms/epiction/images/workflow-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Workflow</a></li>");
+		}
+
+
+
+		writeln("</ul>");
+	}
+	
+	writeln("&nbsp;");
+	writeln("</td>");
+	writeln("</tr>");
+	
+	for (i = 0; i < arrayLength(files); i++) {
+		// load the details for this file
+		details = getFileDetails(files[i]["path"]);
+		title = getFileMetadata(files[i]["path"], "dc:title");
+
+		// get the file size in kb
+		// convert to int
+		size = details["fileSize"];
+		// convert to kb
+		size /= 1024;
+		// do not show 0 size
+		if (size == 0) 
+			size = 1;
+
+		// split the mime type
+		type = split(details["mimeType"], "/");
+
+		// write the table row
+		if (i % 2) {
+			write("<tr class=\"odd\"");
+		} else {
+			write("<tr class=\"even\"");
+		}
+		if (((path != "") && (path != "/")) || (details["path"] != "epiction")) {
+			writeln(" onclick=\"setSelection('row" + files[i]["fileID"] + "');\" id=\"row" + files[i]["fileID"] + "\">");	
+		} else {
+			writeln(" id=\"row" + files[i]["fileID"] + "\">");	
+		}
+		write("<td style=\"width: 30%;\"><img src=\"");
+
+		// calculate the preview image
+		if (details["type"] == "FOLDER") {
+			write(urlBase("/cms/epiction/images/folder-white-16x16.png"));
+		} else if (details["type"] == "CONTENT") {
+			write(urlBase("/cms/epiction/images/content-white-16x16.png"));
+		} else if (details["type"] == "RESOURCE") {
+			// if this is an image show a preview
+			if (type[0] == "image") {
+				write(urlBase("/cms/" + details["path"] + "?image-size=16-16"));
+			} else {
+				write(urlBase("/cms/epiction/images/resource-white-16x16.png"));
+			}
+		} else {
+			write(urlBase("/cms/epiction/extensions/" + details["type"] + "/icon.png"));
+		}
+		
+		writeln("\" width=\"16\" height=\"16\" alt=\"Preview Icon\"/>");
+		if (details["type"] == "FOLDER") {
+			if (((path != "") && (path != "/")) || (details["path"] != "epiction")) {
+				writeln("<a href=\"javascript:void(0);\" ondblclick=\"return setLocation('" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(details["path"]) + "&pagination=" + page) + "');\">");
+			} else {
+				writeln("<a href=\"javascript:void(0);\" class=\"disabled\">");
+			}
+		}
+		writeln(xmlEscape(details["fileName"]));
+		if (((path == "") || (path == "/")) && (details["path"] == "epiction")) {
+			write(" (system folder)");
+		}
+		if (details["type"] == "FOLDER") {
+			writeln("</a>");
+		}
+		writeln("</td>");
+		writeln("<td>" + xmlEscape(title) + "</td>");
+		writeln("<td>" + (size) + " kb</td>");
+		writeln("<td>" + xmlEscape(details["type"]) + "</td>");
+		writeln("<td>" + getISODate(details["version"]) + "</td>");
+		writeln("</tr>");	
+	}
+
+	while (i < 50) {
+		writeln("<tr class=\"empty\"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+		i++;
+	}
+	
+
+?>
+      </tbody>
+    </table>
+  </div>
+  <div id="columnspacer">&nbsp;</div>
+  <div id="footer">
+    <p><?cms
+	int found;
+	int total;
+	int skip;
+
+	found = get("found");
+	total = get("total");
+	skip = get("skip");
+
+	if (found > 0) {
+		writeln("Displaying files " + (skip + 1) + " to " + (skip + found) + " of " + total + ".");
+	} else {
+		writeln("No files found.");
+	}
+	
+	?>
+    </p>
+    <ul>
+      <li>Page</li>
+      <?cms
+	int total;
+	int skip;
+	int i;
+
+	page = get("pagination");
+	if (page < 5) {
+		page = 5;
+	}
+	total = get("total");
+	skip = get("skip");
+	
+	for (i = 0; i < total; i += page) {
+		if (i == skip) {
+			writeln("<li>&nbsp;<strong>" + ((i / page) + 1) + "</strong></li>");
+		} else {
+			write("<li>&nbsp;");
+			write("<a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(get("filter")) + "&skip=" + i + "&pagination=" + page) + "\" title=\"Page " + ((i / page) + 1) + "\">");
+			write(((i / page) + 1));
+			write("</a></li>");
+		}
+	}
+      ?>
+    </ul>
+  </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<?cms
+	string path;
+	string tool;
+	array parts;
+	int err;
+	
+	path = get("path");
+	tool = get("tool");
+	
+	// validate the inputs
+	set("error", "");
+	
+	if ((path == "") || (path == "/")) {
+		set("error", "Cannot delete root folder.");
+	}
+
+	parts = split(path, "/");
+	
+	if (parts[0] == "epiction") {
+		set("error", "Cannot delete from epiction folder.");
+	}
+	
+	if (get("error") == "") {
+
+		if ((tool == "CONTENT") || (tool == "RESOURCE") || (tool == "FOLDER")) {
+			// do the delete
+			err = deleteFile(xmlEscape(path));
+	
+			// set the metadata
+			if (err == 0) {
+				set("message", "The file <em>" + xmlEscape(path) + "</em> was deleted.");
+			} else {
+				set("message", "The file <em>" + xmlEscape(path) + "</em> was not deleted. The error was: " + getErrorMessage(err));
+			}
+			include("epiction/receipt.cms");
+		} else {
+			include("epiction/extensions/" + xmlEscape(tool) + "/deleteaction.cms");
+		}
+	} else {
+		include("epiction/delete.cms");
+	}
+
+?>

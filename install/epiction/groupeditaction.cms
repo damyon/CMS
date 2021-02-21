@@ -1,0 +1,33 @@
+<?cms
+	string groupname;
+	int public;
+	int groupid;
+	map details;
+	int err;
+	
+	groupid = get("group");
+	groupname = get("newgroupname");
+	public = get("newpublic");
+
+	// validate the inputs
+	set("error", "");
+	
+	if (groupname == "") {
+		set("error", "Groupname is a required field.");
+	}
+	
+	if (get("error") == "") {
+		// edit the group
+		err = editGroupDetails(groupid, groupname, public);
+	
+		if (err == 0) {
+			set("message", "The group <em>" + xmlEscape(groupname) + "</em> was updated.");
+		} else {
+			set("message", "The group <em>" + xmlEscape(groupname) + "</em> was not updated. The error was: " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/groupedit.cms");
+	}
+
+?>

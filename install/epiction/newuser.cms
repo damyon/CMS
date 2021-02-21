@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Create New User (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	function actionCancel() {
+		window.close();
+	}
+
+	function showLoading() {
+		var ele = document.getElementById("loading");
+		ele.style.display = "block";
+	}
+
+	function actionOK() {
+		showLoading();
+	}
+
+	function setFocus(ele) {
+		var ele = document.getElementById(ele);
+		ele.focus();
+	}
+
+	function setDefaultFocus() {
+		setFocus("newusername");
+	}
+
+	window.onload = setDefaultFocus;
+  //-->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+    <form action="<?cms urlRewrite("/cms/epiction/newuseraction.cms"); ?>" method="POST">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Create New User </legend>
+	<p>Create a new user account.</p>
+	<p><span>Username:</span><input type="text" class="forminput" size="16" id="newusername" name="newusername" value="<?cms write(xmlEscape(get("newusername"))); ?>"/></p>
+	<p><span>Full name:</span><input type="text" class="forminput" size="16" id="newfullname" name="newfullname" value="<?cms write(xmlEscape(get("newfullname"))); ?>"/></p>
+	<p><span>Email:</span><input type="text" class="forminput" size="16" id="newemail" name="newemail" value="<?cms write(xmlEscape(get("newemail"))); ?>"/></p>
+	<p><span>Password:</span><input type="password" class="forminput" size="16" id="password1" name="password1" value=""/></p>
+	<p><span>Confirm Password:</span><input type="password" class="forminput" size="16" id="password2" name="password2" value=""/></p>
+	<p><span>Administrator:</span>
+	<select name="newadministrator">
+		<?cms
+		if (get("newadministrator") == 1) {
+			writeln("<option value=\"1\" selected=\"selected\">True</option>");
+			writeln("<option value=\"0\">False</option>");
+		} else {
+			writeln("<option value=\"1\">True</option>");
+			writeln("<option value=\"0\" selected=\"selected\">False</option>");
+		}
+		?>
+	</select>
+	</p>
+	<p><span>Enabled:</span>
+	<select name="newenabled">
+		<?cms
+		if (get("newenabled") == "1") {
+			writeln("<option value=\"1\">True</option>");
+			writeln("<option value=\"0\" selected=\"selected\">False</option>");
+		} else {
+			writeln("<option value=\"1\" selected=\"selected\">True</option>");
+			writeln("<option value=\"0\">False</option>");
+		}
+		?>
+	</select>
+	</p>
+	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	</fieldset>
+	</div>
+	<div id="actions">
+	<p>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel();" id="cancel"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
+	</p>
+	</div>
+    </form>
+  </div>
+  <div id="loading"> <span>Please Wait...</span> </div>
+</body>
+</html>

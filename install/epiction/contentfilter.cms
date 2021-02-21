@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Filter</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	function actionCancel() {
+		window.close();
+	}
+
+	function actionOK() {
+		var ele = document.getElementById("filter");
+		filter = ele.value;
+
+		if (filter.substring(0, 4) == "/cms") {
+			filter = filter.substring(4);
+		}
+
+		window.opener.document.location = "<?cms urlRewrite("/cms/epiction/content.cms?path=" + xmlEscape(get("path")) + "&pagination=" + xmlEscape(get("pagination"))); ?>" + "&filter=" + filter;
+		window.close();
+	}
+
+	function setFocus(ele) {
+		var ele = document.getElementById(ele);
+		ele.focus();
+	}
+
+	function setDefaultFocus() {
+		setFocus("filter");
+	}
+
+	window.onload = setDefaultFocus;
+  //-->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+    <form action="#">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Filter </legend>
+	<p>Enter a search string to filter the results.</p>
+	<p><span>Filter: </span>
+	<input type="text" name="filter" id="filter" value="<?cms write(xmlEscape(get("filter"))); ?>" size="16" maxlength="256"/>
+	</p>
+	</fieldset>
+	</div>
+	<div id="actions">
+	<p>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
+	</p>
+	</div>
+    </form>
+  </div>
+</body>
+</html>

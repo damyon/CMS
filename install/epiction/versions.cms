@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Versions</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+
+	var lastColor = "";
+	function actionOK() {
+                window.opener.document.location.reload();
+		window.close();
+	}
+	
+	function actionView() {
+		var ele = document.getElementById("versionTimestamp");
+		versionTimestamp = ele.value;
+		r = Math.round(Math.random() * 1024);
+		ele = document.getElementById("versionMimetype");
+		mimetype = ele.value;
+		id = "win" + r;
+
+		filename = "<?cms write(xmlEscape(get("path"))); ?>";
+		parts = filename.split("/");
+		filename = parts[parts.length - 1];
+
+		if (mimetype.split("/")[0] == "text") {
+			window.open("<?cms urlRewrite("/cms/" + xmlEscape(get("path"))); ?>?CTIME=" + versionTimestamp, id, "menubar=yes,location=yes,toolbar=yes,width=800,height=600,screenX=160,screenY=160");
+		} else {
+			document.location.href = "<?cms urlRewrite("/cms/" + xmlEscape(get("path"))); ?>?CTIME=" + versionTimestamp + "&SAVEASFILENAME=" + filename;
+		}
+	}
+
+	function actionRollback() {
+		var ele = document.getElementById("versionID");
+		versionID = ele.value;
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
+
+		window.open("<?cms urlRewrite("/cms/epiction/versionsrollback.cms?path=" + xmlEscape(get("path"))); ?>&versionID=" + versionID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+	}
+
+	function selectVersion(versionID, timestamp, mimetype) {
+		var ele = document.getElementById("versionID");
+
+		if (ele != null) {
+			ele = document.getElementById("version" + ele.value);
+			if (ele != null) {
+				ele.style.backgroundColor = lastColor;
+				ele.style.color = "#000";
+			}
+		}
+		
+		ele = document.getElementById("version" + versionID);
+
+		if (ele != null) {
+			lastColor = ele.style.backgroundColor;
+			ele.style.backgroundColor = "#479";
+			ele.style.color = "#fff";
+		}
+
+		ele = document.getElementById("viewbutton");
+		if (ele != null) {
+			ele.style.color = "#000";
+		}
+		ele = document.getElementById("rollbackbutton");
+		if (ele != null) {
+			ele.style.color = "#000";
+		}
+		ele = document.getElementById("versionID");
+		if (ele != null) {
+			ele.value = versionID;
+		}
+		ele = document.getElementById("versionTimestamp");
+		if (ele != null) {
+			ele.value = timestamp;
+		}
+		ele = document.getElementById("versionMimetype");
+		if (ele != null) {
+			ele.value = mimetype;
+		}
+	}
+  -->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Versions </legend>
+	<div id="info">
+	<p><span>Versions for file:</span><?cms write(xmlEscape(get("path"))); ?></p>
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr><th>Publisher</th><th>Version</th><th>Mimetype</th></tr>
+
+	<?cms
+		string path;
+		int i;
+		int timestamp;
+		array versions;
+		map details;
+		string publishdate;
+		string publisher;
+		int err;
+	
+		path = get("path");
+		versions = getFileVersions(path, 0, 2048);
+
+		for (i = 0; i < arrayLength(versions); i++) {
+			details = getFileDetails(versions[i]["path"]);
+			publishdate = getFileMetadata(versions[i]["path"], "dc:date");
+			publisher = getFileMetadata(versions[i]["path"], "dc:publisher");
+			timestamp = details["version"];
+			timestamp += 1;
+			if ((i % 2)) {
+				write("<tr id=\"version" + versions[i]["fileID"] + "\" onclick=\"selectVersion(" + versions[i]["fileID"] + ", " + (timestamp) + ", '" + xmlEscape(details["mimeType"]) + "');\" style=\"cursor: pointer;\" class=\"odd\">");
+			} else {
+				write("<tr id=\"version" + versions[i]["fileID"] + "\" onclick=\"selectVersion(" + versions[i]["fileID"] + ", " + (timestamp) + ", '" + xmlEscape(details["mimeType"]) + "');\" style=\"cursor: pointer;\">");
+			}
+			
+			write("<td>" + xmlEscape(publisher) + "</td><td>" + xmlEscape(publishdate) + "</td><td>" + xmlEscape(details["mimeType"]) + "</td></tr>");
+		}
+		
+		while (i < 5) {
+			if (i % 2) {
+				writeln("<tr class=\"odd\"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+			} else {
+				writeln("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+			}
+			i++;
+		}
+
+	?>
+	</table>
+	</div>
+	<div id="leftmenu">
+	<form action="#">
+	<input type="hidden" name="versionID" id="versionID" value=""/>
+	<input type="hidden" name="versionTimestamp" id="versionTimestamp" value=""/>
+	<input type="hidden" name="versionMimetype" id="versionMimetype" value=""/>
+	<input type="button" onclick="actionView();" id="viewbutton" name="viewversion" class="button" value="View" style="color: #999;"/><br/><br/>
+	<input type="button" onclick="actionRollback();" id="rollbackbutton" name="rollbackversion" class="button" value="Rollback" style="color: #999;"/>
+	</form>
+	</div>
+	</fieldset>
+  </div>
+  <div id="actions">
+  <p>
+  <input type="button" onclick="actionOK();" class="button" name="submit-action" value="Close"/>
+  </p>
+  </div>
+</body>
+</html>

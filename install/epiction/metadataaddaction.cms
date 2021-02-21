@@ -1,0 +1,45 @@
+<?cms
+	string path;
+	string fieldname;
+	string namespace;
+	string fieldvalue;
+	string fullname;
+	int err;
+	
+	path = get("path");
+	fieldname = get("fieldname");
+	fieldvalue = get("fieldvalue");
+	namespace = get("namespace");
+
+	// validate the inputs
+	set("error", "");
+
+	if (fieldname == "") {
+		set("error", "Field name is required.");
+	}
+
+	if (namespace == "http://purl.org/dc/elements/1.1/") {
+		fullname = "dc:" + fieldname;
+	} else {
+		fullname = fieldname + "[" + namespace + "]";
+	}
+	
+	if ((path == "") || (path == "/")) {
+		set("error", "Cannot set permissions for root folder.");
+	}
+
+	if (get("error") == "") {
+		err = setFileMetadata(path, fullname, fieldvalue);
+
+		// set the metadata
+		if (err == 0) {
+			set("message", "The metadata field <em>" + xmlEscape(fieldname) + "</em> was set for the file " + xmlEscape(path) + ".");
+		} else {
+			set("message", "The metadata field <em>" + xmlEscape(fieldname) + "</em> was not set for the file " + xmlEscape(path) + ". The error was: " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/metadataadd.cms");
+	}
+
+?>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Open Location</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	function actionCancel() {
+		window.close();
+	}
+
+	function actionOK() {
+		var ele = document.getElementById("path");
+		path = ele.value;
+
+		if (path.substring(0, 4) == "/cms") {
+			path = path.substring(4);
+		}
+
+		if (path.substring(0, 8) == "epiction") {
+			alert("Cannot navigate to system folder.");
+			return false;
+		}
+
+		if (path.substring(0, 9) == "/epiction") {
+			alert("Cannot navigate to system folder.");
+			return false;
+		}
+
+		window.opener.document.location = "<?cms urlRewrite("/cms/epiction/content.cms?pagination=" + xmlEscape(get("pagination"))); ?>" + "&path=" + path;
+		window.close();
+	}
+
+    function selectFolder() {
+		var ele = document.getElementById("path");
+		var r = Math.round(Math.random() * 1024);
+		var id = "win" + r;
+
+		window.open("<?cms urlRewrite("/cms/epiction/filechooser.cms?fileelement=path"); ?>&onlyfolders=true&path=" + ele.value, id, "menubar=no,width=800,height=480,screenX=160,screenY=160");
+	}
+
+	function setFocus(ele) {
+		var ele = document.getElementById(ele);
+		ele.focus();
+	}
+
+	function setDefaultFocus() {
+		setFocus("path");
+	}
+
+	window.onload = setDefaultFocus;
+  //-->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+    <form action="#">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Open Location </legend>
+	<p>Enter a path to open.</p>
+	<p><span>Path: </span>
+	<input type="text" name="path" id="path" size="32" maxlength="256"/><a href="javascript:selectFolder();" title="Select a folder"><img src="<?cms urlRewrite("/cms/epiction/images/folder-white-16x16.png"); ?>" alt="Folder" width="16" height="16"/></a>
+	</p>
+	</fieldset>
+	</div>
+	<div id="actions">
+	<p>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
+	</p>
+	</div>
+    </form>
+  </div>
+</body>
+</html>

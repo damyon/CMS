@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - New Resource (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	function actionCancel() {
+		window.close();
+	}
+
+	function showLoading() {
+		var ele = document.getElementById("loading");
+		ele.style.display = "block";
+	}
+
+	function actionOK() {
+		var ele = document.getElementById("filename");
+
+		var parts = ele.value.split(".");
+
+		if (parts.length < 2) {
+			if (!window.confirm("You have not supplied a file extension. This may cause compatibility problems with some browsers. Do you want to continue?")) {
+				ele.focus();
+				return false;
+			}
+		}
+		showLoading();
+		return true;
+	}
+
+	function setFocus(ele) {
+		var ele = document.getElementById(ele);
+		ele.focus();
+	}
+
+	function setDefaultFocus() {
+		setFocus("title");
+	}
+
+	window.onload = setDefaultFocus;
+  //-->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+    <form action="<?cms urlRewrite("/cms/epiction/newresourceaction.cms"); ?>" method="POST" enctype="multipart/form-data">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Create New Resource </legend>
+	<fieldset id="lefttop">
+	<legend> Metadata </legend>
+	<p><span>Title:</span>
+	<input type="text" class="forminput" id="title" name="title" size="16" value="<?cms write(xmlEscape(get("title"))); ?>" maxlength="250"/>
+	</p>
+	<p><span>Filename:</span>
+	<input type="text" class="forminput" id="filename" name="filename" size="16" value="<?cms write(xmlEscape(get("filename"))); ?>" maxlength="250"/>
+	</p>
+	<p><span><em>Description</em>:</span>
+	<input type="text" class="forminput" name="description" size="16" value="<?cms write(xmlEscape(get("description"))); ?>" maxlength="250"/>
+	</p>
+	<p><span><em>Keywords</em>:</span>
+	<input type="text" class="forminput" name="keywords" size="16" value="<?cms write(xmlEscape(get("keywords"))); ?>" maxlength="250"/>
+	</p>
+	</fieldset>
+	<fieldset id="righttop">
+	<legend>Other</legend>
+	<p><span>Security:</span>
+	<select name="public" class="forminput">
+	<?cms
+	map details;
+
+	if (get("public") == "") {
+		details = getFileDetails(get("path"));
+		if (mapLength(details) > 0) {
+			set("public", details["isPublic"]);
+		}
+	}
+
+	if (get("public") == 1) {
+		writeln("<option value=\"1\" selected=\"selected\">Public</option>");
+		writeln("<option value=\"0\">Private</option>");
+	} else {
+		writeln("<option value=\"1\">Public</option>");
+		writeln("<option value=\"0\" selected=\"selected\">Private</option>");
+	}
+
+	?>
+	</select>
+	</p>
+	<p><span>Display Order:</span>
+	<select name="order" class="forminput">
+	<?cms 
+	int i;
+
+	for (i = 1; i < 100; i += 1) {
+		if (i == get("order")) {
+			writeln("<option selected=\"selected\">" + i + "</option>");
+		} else {
+			writeln("<option>" + i + "</option>");
+		}
+	}
+	?>
+	</select>
+	</p>
+	</fieldset>
+	<fieldset>
+        <legend>File</legend>
+        <p><span>File:</span>
+	<input type="file" name="upload" size="16" class="forminput"/>
+	</p>
+	</fieldset>
+	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	</fieldset>
+	</div>
+	<div id="actions">
+	<p>
+	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
+	<input type="submit" class="button" value="OK" onclick="return actionOK();"/>
+	</p>
+	</div>
+    </form>
+  </div>
+  <div id="loading"> <span>Please Wait...</span> </div>
+</body>
+</html>

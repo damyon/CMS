@@ -1,0 +1,26 @@
+<?cms
+	map details;
+	int groupid;
+	int err;
+	
+	groupid = get("group");
+	details = getGroupDetails(groupid);
+
+	// validate the inputs
+	set("error", "");
+	
+	if (get("error") == "") {
+		err = deleteGroup(groupid);
+
+		// set the metadata
+		if (err == 0) {
+			set("message", "The group " + xmlEscape(details["groupName"]) + " was deleted.");
+		} else {
+			set("message", "The group " + xmlEscape(details["groupName"]) + " was not deleted. The error was " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/groupdelete.cms");
+	}
+
+?>

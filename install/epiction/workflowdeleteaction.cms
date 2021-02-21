@@ -1,0 +1,30 @@
+<?cms
+	string path;
+	int err;
+	
+	path = get("path");
+
+	// validate the inputs
+	set("error", "");
+	
+	if ((path == "") || (path == "/")) {
+		set("error", "Cannot set workflow for root folder.");
+	}
+
+	if (get("error") == "") {
+		// delete the workflow settings
+
+		err = removeWorkflowSettings(path);
+
+		// set the metadata
+		if (err == 0) {
+			set("message", "The workflow settings were removed from the file " + xmlEscape(path) + ".");
+		} else {
+			set("message", "The workflow settings were not removed from the file " + xmlEscape(path) + ". The error was " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/workflowdelete.cms");
+	}
+
+?>

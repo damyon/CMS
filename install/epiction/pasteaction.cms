@@ -1,0 +1,68 @@
+<?cms
+	string path;
+	string source;
+	string mode;
+	array parts;
+	string subpath;
+	int err;
+	int i;
+	
+	path = get("path");
+	source = get("source");
+	mode = get("mode");
+
+	// validate the inputs
+	set("error", "");
+	
+	if ((source == "") || (source == "/")) {
+		set("error", "Cannot copy/cut root folder.");
+	}
+	
+	parts = split(source, "/");
+
+	if (parts[0] == "epiction") {
+		set("error", "Cannot copy/cut from epiction folder.");
+	}
+
+	parts = split(path, "/");
+
+	if (parts[0] == "epiction") {
+		set("error", "Cannot copy/cut from epiction folder.");
+	}
+	
+	for (i = 0; i < arrayLength(parts); i++) {
+		if (i > 0) {
+			subpath += "/";
+		}
+		subpath += parts[i];
+
+		if ((subpath == source) || 
+			(("/" + subpath) == source) || 
+			((subpath + "/") == source) || 
+			(("/" + subpath + "/") == source)) {
+			set("error", "Cannot copy/cut from parent folder to subfolder.");
+		}
+	}
+	
+	if (get("error") == "") {
+		// do the copy
+		err = copyFile(source, path);
+	
+		// set the metadata
+		if (err == 0) {
+			if (mode == "cut") {
+				err = deleteFile(source);
+			}
+		}
+
+		if (err == 0) {
+			set("message", "The <em>" + xmlEscape(mode) + "</em> was successful.");
+		} else {
+			set("message", "The <em>" + xmlEscape(mode) + "</em> was not successful. The error was: " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/paste.cms");
+	}
+
+?>

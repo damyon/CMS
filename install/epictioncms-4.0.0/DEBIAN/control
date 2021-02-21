@@ -1,0 +1,9 @@
+Package: epictioncms
+Version: 4.0.0
+Section: web
+Priority: optional
+Architecture: i386
+Depends: imagemagick
+Maintainer: Epiction Pty Ltd <dwiese@epiction.com>
+Description: Epiction Content Management System
+ Content Management System by Epiction Pty Ltd.

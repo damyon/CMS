@@ -1,0 +1,19 @@
+#!/bin/sh
+
+#DEBHELPER#
+
+case "$1" in
+    remove|upgrade|remove-in-favour|deconfigure-in-favour)
+
+	/usr/sbin/a2dissite cms
+	/etc/init.d/epictioncms stop
+        ;;
+    failed-upgrade)
+        ;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        ;;
+
+esac
+
+

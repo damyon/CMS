@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - User Groups</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	var issuper = "<?cms write(get("isSuperUser")); ?>";
+	var lastColor = "";
+
+	function actionOK() {
+                window.opener.document.location.reload();
+		window.close();
+	}
+	
+	function actionAdd() {
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
+
+		window.open("<?cms urlRewrite("/cms/epiction/usersgroupsadd.cms?user=" + xmlEscape(get("user"))); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
+	}
+	
+	function actionRemove() {
+		var ele = document.getElementById("groupID");
+		groupid = ele.value;
+		ele = document.getElementById("groupPublic");
+		groupPublic = ele.value;
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
+
+		if (((issuper == "y") || (groupPublic == "1")) && (groupid != "")) {
+			window.open("<?cms urlRewrite("/cms/epiction/usersgroupsdelete.cms?user=" + xmlEscape(get("user"))); ?>&group=" + groupid, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		} else {
+			return false;
+		}
+	}
+
+	function selectGroup(groupID, groupPublic) {
+		var ele = document.getElementById("groupID");
+
+		if (ele != null) {
+			ele = document.getElementById("group" + ele.value);
+			if (ele != null) {
+				ele.style.backgroundColor = lastColor;
+				ele.style.color = "#000";
+			}
+		}
+		
+		ele = document.getElementById("group" + groupID);
+
+		if (ele != null) {
+			lastColor = ele.style.backgroundColor;
+			ele.style.backgroundColor = "#479";
+			ele.style.color = "#fff";
+		}
+
+		ele = document.getElementById("removebutton");
+		if (ele != null) {
+			if ((groupPublic == "1") || (issuper == "y")) {
+				ele.style.color = "#000";
+			} else {
+				ele.style.color = "#999";
+			}
+		}
+		ele = document.getElementById("groupID");
+		if (ele != null) {
+			ele.value = groupID;
+		}
+		ele = document.getElementById("groupPublic");
+		if (ele != null) {
+			ele.value = groupPublic;
+		}
+	}
+  -->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> User Groups </legend>
+	<div id="info">
+	<table width="100%" cellpadding="0" cellspacing="0" id="groupstable">
+	<tr><th>Groupname</th><th>Public</th></tr>
+	<?cms
+		int i;
+		int userid;
+		array groups;
+		map details;
+		int err;
+	
+		userid = get("user");
+		groups = getUsersGroups(userid, "", 0, 2048);
+
+		for (i = 0; i < arrayLength(groups); i++) {
+			details = getGroupDetails(groups[i]["groupID"]);
+			write("<tr ");
+			if (i % 2) {
+				write(" class=\"odd\" ");
+			}
+			write("id=\"group" + groups[i]["groupID"] + "\" onclick=\"selectGroup(" + groups[i]["groupID"] + ", '" + details["isPublic"] + "');\" style=\"cursor: pointer;\"><td>" + xmlEscape(details["groupName"]) + "</td><td>");
+			if (details["isPublic"] == "1") {
+				write("True");
+			} else {
+				write("False");
+			}
+			write("</td></tr>");
+		}
+		
+		while (i < 5) {
+			if (i % 2) {
+				writeln("<tr class=\"odd\"><td>&nbsp;</td><td>&nbsp;</td></tr>");
+			} else {
+				writeln("<tr><td>&nbsp;</td><td>&nbsp;</td></tr>");
+			}
+			i++;
+		}
+
+	?>
+	</table>
+	</div>
+	<div id="leftmenu">
+	<form action="#">
+	<input type="hidden" name="groupID" id="groupID" value=""/>
+	<input type="hidden" name="groupPublic" id="groupPublic" value=""/>
+	<?cms
+		writeln("<input type=\"button\" onclick=\"actionAdd();\" id=\"addbutton\" name=\"adduser\" class=\"button\" value=\"Add\"/><br/><br/>");
+		writeln("<input type=\"button\" onclick=\"actionRemove();\" id=\"removebutton\" name=\"removeuser\" class=\"button\" value=\"Remove\" style=\"color: #999;\"/><br/><br/>");
+	?>
+	</form>
+	</div>
+	</fieldset>
+  </div>
+  <div id="actions">
+  <p>
+  <input type="button" onclick="actionOK();" class="button" name="submit-action" value="Close"/>
+  </p>
+  </div>
+</body>
+</html>

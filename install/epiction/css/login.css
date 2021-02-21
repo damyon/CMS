@@ -1,0 +1,153 @@
+/* Style sheet for Epiction CMS login page */
+
+/* Set the defaults for the html document */
+body {
+	font-family: Verdana, sans-serif; 
+	font-size: smaller; 
+	padding: 0px; 
+	border: 0px; 
+	margin: 0px; 
+	text-align: center;
+}
+
+/* The body doesn't fill the whole page in xhtml 
+ * so we set the background on the html element 
+ */
+html { 
+	background-color: #fff; 
+	color: #000; 
+}
+
+.error { font-weight: bold; color: red; }
+h1 {
+	margin: 0px;
+	padding: 0px;
+}
+
+/* This is the banner at the top of the page
+ */
+#titlebar { 
+	text-align: left;
+	height: 70px; 
+	background-color: #fff; 
+	color: white; 
+	font-weight: bold;
+	padding: 0px;
+	letter-spacing: 0.2em; 
+	text-transform: uppercase; 
+	background-image: url(<?cms urlRewrite("/cms/epiction/images/titlebg.png"); ?> ); 
+}
+
+/* This removes borders from all images */
+img {
+	border: 0px; 
+}
+
+/* This makes the form elements look a little bit unique */
+.forminput { 
+	border-width: 1px; 
+}
+
+/* The spans are the labels before the input fields */
+#loginform span { 
+	display: block; 
+	float: left; 
+	text-align: right;
+	margin: 0px; 
+	padding: 0px; 
+	width: 100px; 
+}
+
+#loginform .error {
+	text-align: left;
+}
+
+/* This are the input fields - right aligned */
+#loginform input { 
+	background-color: #fafafa;
+	float: right; 
+	display: block; 
+	width: 10em; 
+	margin-right: 2em;
+	font-family: Verdana, sans-serif;
+}
+
+form {
+	background-color: #fafafa;
+	padding: 10px;
+	width: 440px;
+	border: 2px outset #eee;
+}
+
+fieldset {
+	border: 0px;
+}
+
+#loginform h2 {
+	border-top: 2px outset #eee;
+	border-right: 2px outset #eee;
+	border-left: 2px outset #eee;
+	color: white;
+	display: block;
+	position: relative;
+	padding: 10px;
+	top: 24px;
+	border-bottom: 1px solid black;
+	width: 440px;
+	background-color: #900;
+	background-image: url(<?cms urlRewrite("/cms/epiction/images/texture-red.jpg"); ?>);
+	background-repeat: no-repeat;
+}
+
+/* This is the box around the login form */
+#loginform { 
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	color: black;
+	padding: 1em; 
+	padding-bottom: 0.1em;
+	z-index: 2; 
+	margin-top: 5%; 
+	width: 440px;
+}
+
+/* The rows on the logni form */
+#loginform .input { 
+	height: 1.8em; 
+}
+
+/* This makes the form look cool */
+#loginform { 
+	background-color: #fff; 
+	background-repeat: no-repeat;
+	position: relative;
+}
+
+/* Login button */
+#loginform .button { 
+	cursor: pointer;
+	border: 1px outset #999;
+	background-color: #eee; 
+	width: auto; 
+	color: black;
+	padding: 0.5em;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+}
+
+/* The bit above the login form */
+legend { 
+	color: #fff;
+	font-family: Verdana, sans-serif;
+	font-size: 400%;
+}
+
+.submit {
+	clear: left;
+}
+
+p {
+	clear: left;
+}

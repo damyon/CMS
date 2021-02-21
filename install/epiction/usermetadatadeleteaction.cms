@@ -1,0 +1,30 @@
+<?cms
+	int userid;
+	string fieldname;
+	map details;
+	int err;
+	
+	userid = get("user");
+	fieldname = get("fieldname");
+	details = getUserDetails(userid);
+
+	// validate the inputs
+	set("error", "");
+	
+	if (get("error") == "") {
+		// remove the metadata
+
+		err = removeUserMetadata(userid, fieldname);
+
+		// set the metadata
+		if (err == 0) {
+			set("message", "The metadata was removed from the user " + xmlEscape(details["fullName"]) + ".");
+		} else {
+			set("message", "The metadata was not removed from the user " + xmlEscape(details["fullName"]) + ". The error was " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/usermetadatadelete.cms");
+	}
+
+?>

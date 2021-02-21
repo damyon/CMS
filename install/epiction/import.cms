@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Import Package</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	function actionCancel() {
+		window.close();
+	}
+	
+	function showLoading() {
+		var ele = document.getElementById("loading");
+		ele.style.display = "block";
+	}
+
+	function actionOK() {
+		showLoading();
+	}
+
+	function setFocus(ele) {
+		var ele = document.getElementById(ele);
+		ele.focus();
+	}
+
+	function setDefaultFocus() {
+		setFocus("path");
+	}
+
+	window.onload = setDefaultFocus;
+  //-->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+    <form action="<?cms urlRewrite("/cms/epiction/importaction.cms"); ?>" method="POST" enctype="multipart/form-data">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Import Package</legend>
+	<p><span>Upload File: </span>
+	<input type="file" name="package" id="package" size="32"/>
+	</p>
+	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	</fieldset>
+	</div>
+	<div id="actions">
+	<p>
+	<input type="hidden" name="path" id="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
+	</p>
+	</div>
+    </form>
+  </div>
+  <div id="loading"> <span>Please Wait...</span> </div>
+</body>
+</html>

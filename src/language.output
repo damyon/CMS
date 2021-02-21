@@ -1,0 +1,2527 @@
+Terminals unused in grammar
+
+   SUBTRACT
+
+
+State 111 conflicts: 1 shift/reduce
+State 112 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: input $end
+
+    1 input: %empty
+    2      | input statement
+    3      | input block
+    4      | input error
+
+    5 block: OPEN_SCOPE input CLOSE_SCOPE
+
+    6 statement: exp SEMICOLON
+    7          | RETURN_KEYWORD exp SEMICOLON
+    8          | TYPE var_list SEMICOLON
+    9          | function_decl
+   10          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement
+   11          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement ELSE_KEYWORD statement
+   12          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN block
+   13          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN block ELSE_KEYWORD block
+   14          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement ELSE_KEYWORD block
+   15          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN block ELSE_KEYWORD statement
+   16          | FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp SEMICOLON exp CLOSE_PAREN block
+   17          | FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp SEMICOLON exp CLOSE_PAREN statement
+   18          | DO_KEYWORD block WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN SEMICOLON
+   19          | DO_KEYWORD statement WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN SEMICOLON
+   20          | WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN block
+   21          | WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement
+
+   22 var_list: var_list_ele
+   23         | var_list COMMA var_list_ele
+
+   24 var_list_ele: VAR
+   25             | VAR ASSIGNMENT_OP exp
+
+   26 function_decl: FUNCTION_KEYWORD VAR OPEN_PAREN param_list CLOSE_PAREN block
+
+   27 param_list: %empty
+   28           | param_list_ele
+   29           | param_list COMMA param_list_ele
+
+   30 param_list_ele: TYPE VAR
+
+   31 function_call: VAR OPEN_PAREN exp_list CLOSE_PAREN
+   32              | VAR OPEN_PAREN exp CLOSE_PAREN
+
+   33 exp_list: %empty
+   34         | exp COMMA exp
+   35         | exp_list COMMA exp
+
+   36 variable: VAR
+   37         | variable OPEN_ARRAY_INDEX exp CLOSE_ARRAY_INDEX
+
+   38 exp: STRING
+   39    | FLOAT
+   40    | variable
+   41    | INT
+   42    | variable ASSIGNMENT_OP exp
+   43    | exp EQUAL exp
+   44    | exp NOTEQUAL exp
+   45    | exp LESSTHAN exp
+   46    | exp LESSTHANEQUAL exp
+   47    | exp GREATERTHAN exp
+   48    | exp GREATERTHANEQUAL exp
+   49    | exp ADD exp
+   50    | NEGATIVE exp
+   51    | NOT exp
+   52    | exp NEGATIVE exp
+   53    | exp DIVIDE exp
+   54    | exp MULTIPLY exp
+   55    | exp POWER exp
+   56    | exp MOD exp
+   57    | exp AND exp
+   58    | exp OR exp
+   59    | UNI_OPERATOR variable
+   60    | variable UNI_OPERATOR
+   61    | function_call
+   62    | OPEN_PAREN exp CLOSE_PAREN
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256) 4
+FLOAT (258) 39
+INT (259) 41
+STRING (260) 38
+ASSIGNMENT_OP (261) 25 42
+VAR (262) 24 25 26 30 31 32 36
+TYPE (263) 8 30
+SEMICOLON (264) 6 7 8 16 17 18 19
+COMMA (265) 23 29 34 35
+ADD (266) 49
+SUBTRACT (267)
+MULTIPLY (268) 54
+DIVIDE (269) 53
+POWER (270) 55
+MOD (271) 56
+NEGATIVE (272) 50 52
+NOT (273) 51
+UNI_OPERATOR (274) 59 60
+OPEN_SCOPE (275) 5
+CLOSE_SCOPE (276) 5
+OPEN_PAREN (277) 10 11 12 13 14 15 16 17 18 19 20 21 26 31 32 62
+CLOSE_PAREN (278) 10 11 12 13 14 15 16 17 18 19 20 21 26 31 32 62
+OPEN_ARRAY_INDEX (279) 37
+CLOSE_ARRAY_INDEX (280) 37
+FUNCTION_KEYWORD (281) 26
+RETURN_KEYWORD (282) 7
+IF_KEYWORD (283) 10 11 12 13 14 15
+ELSE_KEYWORD (284) 11 13 14 15
+WHILE_KEYWORD (285) 18 19 20 21
+DO_KEYWORD (286) 18 19
+FOR_KEYWORD (287) 16 17
+EQUAL (288) 43
+NOTEQUAL (289) 44
+GREATERTHAN (290) 47
+LESSTHAN (291) 45
+GREATERTHANEQUAL (292) 48
+LESSTHANEQUAL (293) 46
+AND (294) 57
+OR (295) 58
+
+
+Nonterminals, with rules where they appear
+
+$accept (41)
+    on left: 0
+input (42)
+    on left: 1 2 3 4, on right: 0 2 3 4 5
+block (43)
+    on left: 5, on right: 3 12 13 14 15 16 18 20 26
+statement (44)
+    on left: 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21, on right:
+    2 10 11 14 15 17 19 21
+var_list (45)
+    on left: 22 23, on right: 8 23
+var_list_ele (46)
+    on left: 24 25, on right: 22 23
+function_decl (47)
+    on left: 26, on right: 9
+param_list (48)
+    on left: 27 28 29, on right: 26 29
+param_list_ele (49)
+    on left: 30, on right: 28 29
+function_call (50)
+    on left: 31 32, on right: 61
+exp_list (51)
+    on left: 33 34 35, on right: 31 35
+variable (52)
+    on left: 36 37, on right: 37 40 42 59 60
+exp (53)
+    on left: 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55
+    56 57 58 59 60 61 62, on right: 6 7 10 11 12 13 14 15 16 17 18
+    19 20 21 25 32 34 35 37 42 43 44 45 46 47 48 49 50 51 52 53 54
+    55 56 57 58 62
+
+
+State 0
+
+    0 $accept: . input $end
+
+    $default  reduce using rule 1 (input)
+
+    input  go to state 1
+
+
+State 1
+
+    0 $accept: input . $end
+    2 input: input . statement
+    3      | input . block
+    4      | input . error
+
+    $end              shift, and go to state 2
+    error             shift, and go to state 3
+    FLOAT             shift, and go to state 4
+    INT               shift, and go to state 5
+    STRING            shift, and go to state 6
+    VAR               shift, and go to state 7
+    TYPE              shift, and go to state 8
+    NEGATIVE          shift, and go to state 9
+    NOT               shift, and go to state 10
+    UNI_OPERATOR      shift, and go to state 11
+    OPEN_SCOPE        shift, and go to state 12
+    OPEN_PAREN        shift, and go to state 13
+    FUNCTION_KEYWORD  shift, and go to state 14
+    RETURN_KEYWORD    shift, and go to state 15
+    IF_KEYWORD        shift, and go to state 16
+    WHILE_KEYWORD     shift, and go to state 17
+    DO_KEYWORD        shift, and go to state 18
+    FOR_KEYWORD       shift, and go to state 19
+
+    block          go to state 20
+    statement      go to state 21
+    function_decl  go to state 22
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 25
+
+
+State 2
+
+    0 $accept: input $end .
+
+    $default  accept
+
+
+State 3
+
+    4 input: input error .
+
+    $default  reduce using rule 4 (input)
+
+
+State 4
+
+   39 exp: FLOAT .
+
+    $default  reduce using rule 39 (exp)
+
+
+State 5
+
+   41 exp: INT .
+
+    $default  reduce using rule 41 (exp)
+
+
+State 6
+
+   38 exp: STRING .
+
+    $default  reduce using rule 38 (exp)
+
+
+State 7
+
+   31 function_call: VAR . OPEN_PAREN exp_list CLOSE_PAREN
+   32              | VAR . OPEN_PAREN exp CLOSE_PAREN
+   36 variable: VAR .
+
+    OPEN_PAREN  shift, and go to state 26
+
+    $default  reduce using rule 36 (variable)
+
+
+State 8
+
+    8 statement: TYPE . var_list SEMICOLON
+
+    VAR  shift, and go to state 27
+
+    var_list      go to state 28
+    var_list_ele  go to state 29
+
+
+State 9
+
+   50 exp: NEGATIVE . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 30
+
+
+State 10
+
+   51 exp: NOT . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 31
+
+
+State 11
+
+   59 exp: UNI_OPERATOR . variable
+
+    VAR  shift, and go to state 32
+
+    variable  go to state 33
+
+
+State 12
+
+    5 block: OPEN_SCOPE . input CLOSE_SCOPE
+
+    $default  reduce using rule 1 (input)
+
+    input  go to state 34
+
+
+State 13
+
+   62 exp: OPEN_PAREN . exp CLOSE_PAREN
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 35
+
+
+State 14
+
+   26 function_decl: FUNCTION_KEYWORD . VAR OPEN_PAREN param_list CLOSE_PAREN block
+
+    VAR  shift, and go to state 36
+
+
+State 15
+
+    7 statement: RETURN_KEYWORD . exp SEMICOLON
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 37
+
+
+State 16
+
+   10 statement: IF_KEYWORD . OPEN_PAREN exp CLOSE_PAREN statement
+   11          | IF_KEYWORD . OPEN_PAREN exp CLOSE_PAREN statement ELSE_KEYWORD statement
+   12          | IF_KEYWORD . OPEN_PAREN exp CLOSE_PAREN block
+   13          | IF_KEYWORD . OPEN_PAREN exp CLOSE_PAREN block ELSE_KEYWORD block
+   14          | IF_KEYWORD . OPEN_PAREN exp CLOSE_PAREN statement ELSE_KEYWORD block
+   15          | IF_KEYWORD . OPEN_PAREN exp CLOSE_PAREN block ELSE_KEYWORD statement
+
+    OPEN_PAREN  shift, and go to state 38
+
+
+State 17
+
+   20 statement: WHILE_KEYWORD . OPEN_PAREN exp CLOSE_PAREN block
+   21          | WHILE_KEYWORD . OPEN_PAREN exp CLOSE_PAREN statement
+
+    OPEN_PAREN  shift, and go to state 39
+
+
+State 18
+
+   18 statement: DO_KEYWORD . block WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN SEMICOLON
+   19          | DO_KEYWORD . statement WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN SEMICOLON
+
+    FLOAT             shift, and go to state 4
+    INT               shift, and go to state 5
+    STRING            shift, and go to state 6
+    VAR               shift, and go to state 7
+    TYPE              shift, and go to state 8
+    NEGATIVE          shift, and go to state 9
+    NOT               shift, and go to state 10
+    UNI_OPERATOR      shift, and go to state 11
+    OPEN_SCOPE        shift, and go to state 12
+    OPEN_PAREN        shift, and go to state 13
+    FUNCTION_KEYWORD  shift, and go to state 14
+    RETURN_KEYWORD    shift, and go to state 15
+    IF_KEYWORD        shift, and go to state 16
+    WHILE_KEYWORD     shift, and go to state 17
+    DO_KEYWORD        shift, and go to state 18
+    FOR_KEYWORD       shift, and go to state 19
+
+    block          go to state 40
+    statement      go to state 41
+    function_decl  go to state 22
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 25
+
+
+State 19
+
+   16 statement: FOR_KEYWORD . OPEN_PAREN exp SEMICOLON exp SEMICOLON exp CLOSE_PAREN block
+   17          | FOR_KEYWORD . OPEN_PAREN exp SEMICOLON exp SEMICOLON exp CLOSE_PAREN statement
+
+    OPEN_PAREN  shift, and go to state 42
+
+
+State 20
+
+    3 input: input block .
+
+    $default  reduce using rule 3 (input)
+
+
+State 21
+
+    2 input: input statement .
+
+    $default  reduce using rule 2 (input)
+
+
+State 22
+
+    9 statement: function_decl .
+
+    $default  reduce using rule 9 (statement)
+
+
+State 23
+
+   61 exp: function_call .
+
+    $default  reduce using rule 61 (exp)
+
+
+State 24
+
+   37 variable: variable . OPEN_ARRAY_INDEX exp CLOSE_ARRAY_INDEX
+   40 exp: variable .
+   42    | variable . ASSIGNMENT_OP exp
+   60    | variable . UNI_OPERATOR
+
+    ASSIGNMENT_OP     shift, and go to state 43
+    UNI_OPERATOR      shift, and go to state 44
+    OPEN_ARRAY_INDEX  shift, and go to state 45
+
+    $default  reduce using rule 40 (exp)
+
+
+State 25
+
+    6 statement: exp . SEMICOLON
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    SEMICOLON         shift, and go to state 46
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+
+State 26
+
+   31 function_call: VAR OPEN_PAREN . exp_list CLOSE_PAREN
+   32              | VAR OPEN_PAREN . exp CLOSE_PAREN
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    $default  reduce using rule 33 (exp_list)
+
+    function_call  go to state 23
+    exp_list       go to state 61
+    variable       go to state 24
+    exp            go to state 62
+
+
+State 27
+
+   24 var_list_ele: VAR .
+   25             | VAR . ASSIGNMENT_OP exp
+
+    ASSIGNMENT_OP  shift, and go to state 63
+
+    $default  reduce using rule 24 (var_list_ele)
+
+
+State 28
+
+    8 statement: TYPE var_list . SEMICOLON
+   23 var_list: var_list . COMMA var_list_ele
+
+    SEMICOLON  shift, and go to state 64
+    COMMA      shift, and go to state 65
+
+
+State 29
+
+   22 var_list: var_list_ele .
+
+    $default  reduce using rule 22 (var_list)
+
+
+State 30
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   50    | NEGATIVE exp .
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 50 (exp)
+
+
+State 31
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   51    | NOT exp .
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 51 (exp)
+
+
+State 32
+
+   36 variable: VAR .
+
+    $default  reduce using rule 36 (variable)
+
+
+State 33
+
+   37 variable: variable . OPEN_ARRAY_INDEX exp CLOSE_ARRAY_INDEX
+   59 exp: UNI_OPERATOR variable .
+
+    OPEN_ARRAY_INDEX  shift, and go to state 45
+
+    $default  reduce using rule 59 (exp)
+
+
+State 34
+
+    2 input: input . statement
+    3      | input . block
+    4      | input . error
+    5 block: OPEN_SCOPE input . CLOSE_SCOPE
+
+    error             shift, and go to state 3
+    FLOAT             shift, and go to state 4
+    INT               shift, and go to state 5
+    STRING            shift, and go to state 6
+    VAR               shift, and go to state 7
+    TYPE              shift, and go to state 8
+    NEGATIVE          shift, and go to state 9
+    NOT               shift, and go to state 10
+    UNI_OPERATOR      shift, and go to state 11
+    OPEN_SCOPE        shift, and go to state 12
+    CLOSE_SCOPE       shift, and go to state 66
+    OPEN_PAREN        shift, and go to state 13
+    FUNCTION_KEYWORD  shift, and go to state 14
+    RETURN_KEYWORD    shift, and go to state 15
+    IF_KEYWORD        shift, and go to state 16
+    WHILE_KEYWORD     shift, and go to state 17
+    DO_KEYWORD        shift, and go to state 18
+    FOR_KEYWORD       shift, and go to state 19
+
+    block          go to state 20
+    statement      go to state 21
+    function_decl  go to state 22
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 25
+
+
+State 35
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+   62    | OPEN_PAREN exp . CLOSE_PAREN
+
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    CLOSE_PAREN       shift, and go to state 67
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+
+State 36
+
+   26 function_decl: FUNCTION_KEYWORD VAR . OPEN_PAREN param_list CLOSE_PAREN block
+
+    OPEN_PAREN  shift, and go to state 68
+
+
+State 37
+
+    7 statement: RETURN_KEYWORD exp . SEMICOLON
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    SEMICOLON         shift, and go to state 69
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+
+State 38
+
+   10 statement: IF_KEYWORD OPEN_PAREN . exp CLOSE_PAREN statement
+   11          | IF_KEYWORD OPEN_PAREN . exp CLOSE_PAREN statement ELSE_KEYWORD statement
+   12          | IF_KEYWORD OPEN_PAREN . exp CLOSE_PAREN block
+   13          | IF_KEYWORD OPEN_PAREN . exp CLOSE_PAREN block ELSE_KEYWORD block
+   14          | IF_KEYWORD OPEN_PAREN . exp CLOSE_PAREN statement ELSE_KEYWORD block
+   15          | IF_KEYWORD OPEN_PAREN . exp CLOSE_PAREN block ELSE_KEYWORD statement
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 70
+
+
+State 39
+
+   20 statement: WHILE_KEYWORD OPEN_PAREN . exp CLOSE_PAREN block
+   21          | WHILE_KEYWORD OPEN_PAREN . exp CLOSE_PAREN statement
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 71
+
+
+State 40
+
+   18 statement: DO_KEYWORD block . WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN SEMICOLON
+
+    WHILE_KEYWORD  shift, and go to state 72
+
+
+State 41
+
+   19 statement: DO_KEYWORD statement . WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN SEMICOLON
+
+    WHILE_KEYWORD  shift, and go to state 73
+
+
+State 42
+
+   16 statement: FOR_KEYWORD OPEN_PAREN . exp SEMICOLON exp SEMICOLON exp CLOSE_PAREN block
+   17          | FOR_KEYWORD OPEN_PAREN . exp SEMICOLON exp SEMICOLON exp CLOSE_PAREN statement
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 74
+
+
+State 43
+
+   42 exp: variable ASSIGNMENT_OP . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 75
+
+
+State 44
+
+   60 exp: variable UNI_OPERATOR .
+
+    $default  reduce using rule 60 (exp)
+
+
+State 45
+
+   37 variable: variable OPEN_ARRAY_INDEX . exp CLOSE_ARRAY_INDEX
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 76
+
+
+State 46
+
+    6 statement: exp SEMICOLON .
+
+    $default  reduce using rule 6 (statement)
+
+
+State 47
+
+   49 exp: exp ADD . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 77
+
+
+State 48
+
+   54 exp: exp MULTIPLY . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 78
+
+
+State 49
+
+   53 exp: exp DIVIDE . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 79
+
+
+State 50
+
+   55 exp: exp POWER . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 80
+
+
+State 51
+
+   56 exp: exp MOD . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 81
+
+
+State 52
+
+   52 exp: exp NEGATIVE . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 82
+
+
+State 53
+
+   43 exp: exp EQUAL . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 83
+
+
+State 54
+
+   44 exp: exp NOTEQUAL . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 84
+
+
+State 55
+
+   47 exp: exp GREATERTHAN . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 85
+
+
+State 56
+
+   45 exp: exp LESSTHAN . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 86
+
+
+State 57
+
+   48 exp: exp GREATERTHANEQUAL . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 87
+
+
+State 58
+
+   46 exp: exp LESSTHANEQUAL . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 88
+
+
+State 59
+
+   57 exp: exp AND . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 89
+
+
+State 60
+
+   58 exp: exp OR . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 90
+
+
+State 61
+
+   31 function_call: VAR OPEN_PAREN exp_list . CLOSE_PAREN
+   35 exp_list: exp_list . COMMA exp
+
+    COMMA        shift, and go to state 91
+    CLOSE_PAREN  shift, and go to state 92
+
+
+State 62
+
+   32 function_call: VAR OPEN_PAREN exp . CLOSE_PAREN
+   34 exp_list: exp . COMMA exp
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    COMMA             shift, and go to state 93
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    CLOSE_PAREN       shift, and go to state 94
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+
+State 63
+
+   25 var_list_ele: VAR ASSIGNMENT_OP . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 95
+
+
+State 64
+
+    8 statement: TYPE var_list SEMICOLON .
+
+    $default  reduce using rule 8 (statement)
+
+
+State 65
+
+   23 var_list: var_list COMMA . var_list_ele
+
+    VAR  shift, and go to state 27
+
+    var_list_ele  go to state 96
+
+
+State 66
+
+    5 block: OPEN_SCOPE input CLOSE_SCOPE .
+
+    $default  reduce using rule 5 (block)
+
+
+State 67
+
+   62 exp: OPEN_PAREN exp CLOSE_PAREN .
+
+    $default  reduce using rule 62 (exp)
+
+
+State 68
+
+   26 function_decl: FUNCTION_KEYWORD VAR OPEN_PAREN . param_list CLOSE_PAREN block
+
+    TYPE  shift, and go to state 97
+
+    $default  reduce using rule 27 (param_list)
+
+    param_list      go to state 98
+    param_list_ele  go to state 99
+
+
+State 69
+
+    7 statement: RETURN_KEYWORD exp SEMICOLON .
+
+    $default  reduce using rule 7 (statement)
+
+
+State 70
+
+   10 statement: IF_KEYWORD OPEN_PAREN exp . CLOSE_PAREN statement
+   11          | IF_KEYWORD OPEN_PAREN exp . CLOSE_PAREN statement ELSE_KEYWORD statement
+   12          | IF_KEYWORD OPEN_PAREN exp . CLOSE_PAREN block
+   13          | IF_KEYWORD OPEN_PAREN exp . CLOSE_PAREN block ELSE_KEYWORD block
+   14          | IF_KEYWORD OPEN_PAREN exp . CLOSE_PAREN statement ELSE_KEYWORD block
+   15          | IF_KEYWORD OPEN_PAREN exp . CLOSE_PAREN block ELSE_KEYWORD statement
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    CLOSE_PAREN       shift, and go to state 100
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+
+State 71
+
+   20 statement: WHILE_KEYWORD OPEN_PAREN exp . CLOSE_PAREN block
+   21          | WHILE_KEYWORD OPEN_PAREN exp . CLOSE_PAREN statement
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    CLOSE_PAREN       shift, and go to state 101
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+
+State 72
+
+   18 statement: DO_KEYWORD block WHILE_KEYWORD . OPEN_PAREN exp CLOSE_PAREN SEMICOLON
+
+    OPEN_PAREN  shift, and go to state 102
+
+
+State 73
+
+   19 statement: DO_KEYWORD statement WHILE_KEYWORD . OPEN_PAREN exp CLOSE_PAREN SEMICOLON
+
+    OPEN_PAREN  shift, and go to state 103
+
+
+State 74
+
+   16 statement: FOR_KEYWORD OPEN_PAREN exp . SEMICOLON exp SEMICOLON exp CLOSE_PAREN block
+   17          | FOR_KEYWORD OPEN_PAREN exp . SEMICOLON exp SEMICOLON exp CLOSE_PAREN statement
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    SEMICOLON         shift, and go to state 104
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+
+State 75
+
+   42 exp: variable ASSIGNMENT_OP exp .
+   43    | exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 42 (exp)
+
+
+State 76
+
+   37 variable: variable OPEN_ARRAY_INDEX exp . CLOSE_ARRAY_INDEX
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    ADD                shift, and go to state 47
+    MULTIPLY           shift, and go to state 48
+    DIVIDE             shift, and go to state 49
+    POWER              shift, and go to state 50
+    MOD                shift, and go to state 51
+    NEGATIVE           shift, and go to state 52
+    CLOSE_ARRAY_INDEX  shift, and go to state 105
+    EQUAL              shift, and go to state 53
+    NOTEQUAL           shift, and go to state 54
+    GREATERTHAN        shift, and go to state 55
+    LESSTHAN           shift, and go to state 56
+    GREATERTHANEQUAL   shift, and go to state 57
+    LESSTHANEQUAL      shift, and go to state 58
+    AND                shift, and go to state 59
+    OR                 shift, and go to state 60
+
+
+State 77
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   49    | exp ADD exp .
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 49 (exp)
+
+
+State 78
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   54    | exp MULTIPLY exp .
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 54 (exp)
+
+
+State 79
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   53    | exp DIVIDE exp .
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 53 (exp)
+
+
+State 80
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   55    | exp POWER exp .
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 55 (exp)
+
+
+State 81
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   56    | exp MOD exp .
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 56 (exp)
+
+
+State 82
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   52    | exp NEGATIVE exp .
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 52 (exp)
+
+
+State 83
+
+   43 exp: exp . EQUAL exp
+   43    | exp EQUAL exp .
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 43 (exp)
+
+
+State 84
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   44    | exp NOTEQUAL exp .
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 44 (exp)
+
+
+State 85
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   47    | exp GREATERTHAN exp .
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 47 (exp)
+
+
+State 86
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   45    | exp LESSTHAN exp .
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 45 (exp)
+
+
+State 87
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   48    | exp GREATERTHANEQUAL exp .
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    LESSTHANEQUAL  shift, and go to state 58
+    AND            shift, and go to state 59
+    OR             shift, and go to state 60
+
+    $default  reduce using rule 48 (exp)
+
+
+State 88
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   46    | exp LESSTHANEQUAL exp .
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    AND  shift, and go to state 59
+    OR   shift, and go to state 60
+
+    $default  reduce using rule 46 (exp)
+
+
+State 89
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   57    | exp AND exp .
+   58    | exp . OR exp
+
+    OR  shift, and go to state 60
+
+    $default  reduce using rule 57 (exp)
+
+
+State 90
+
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+   58    | exp OR exp .
+
+    $default  reduce using rule 58 (exp)
+
+
+State 91
+
+   35 exp_list: exp_list COMMA . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 106
+
+
+State 92
+
+   31 function_call: VAR OPEN_PAREN exp_list CLOSE_PAREN .
+
+    $default  reduce using rule 31 (function_call)
+
+
+State 93
+
+   34 exp_list: exp COMMA . exp
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 107
+
+
+State 94
+
+   32 function_call: VAR OPEN_PAREN exp CLOSE_PAREN .
+
+    $default  reduce using rule 32 (function_call)
+
+
+State 95
+
+   25 var_list_ele: VAR ASSIGNMENT_OP exp .
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 25 (var_list_ele)
+
+
+State 96
+
+   23 var_list: var_list COMMA var_list_ele .
+
+    $default  reduce using rule 23 (var_list)
+
+
+State 97
+
+   30 param_list_ele: TYPE . VAR
+
+    VAR  shift, and go to state 108
+
+
+State 98
+
+   26 function_decl: FUNCTION_KEYWORD VAR OPEN_PAREN param_list . CLOSE_PAREN block
+   29 param_list: param_list . COMMA param_list_ele
+
+    COMMA        shift, and go to state 109
+    CLOSE_PAREN  shift, and go to state 110
+
+
+State 99
+
+   28 param_list: param_list_ele .
+
+    $default  reduce using rule 28 (param_list)
+
+
+State 100
+
+   10 statement: IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN . statement
+   11          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN . statement ELSE_KEYWORD statement
+   12          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN . block
+   13          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN . block ELSE_KEYWORD block
+   14          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN . statement ELSE_KEYWORD block
+   15          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN . block ELSE_KEYWORD statement
+
+    FLOAT             shift, and go to state 4
+    INT               shift, and go to state 5
+    STRING            shift, and go to state 6
+    VAR               shift, and go to state 7
+    TYPE              shift, and go to state 8
+    NEGATIVE          shift, and go to state 9
+    NOT               shift, and go to state 10
+    UNI_OPERATOR      shift, and go to state 11
+    OPEN_SCOPE        shift, and go to state 12
+    OPEN_PAREN        shift, and go to state 13
+    FUNCTION_KEYWORD  shift, and go to state 14
+    RETURN_KEYWORD    shift, and go to state 15
+    IF_KEYWORD        shift, and go to state 16
+    WHILE_KEYWORD     shift, and go to state 17
+    DO_KEYWORD        shift, and go to state 18
+    FOR_KEYWORD       shift, and go to state 19
+
+    block          go to state 111
+    statement      go to state 112
+    function_decl  go to state 22
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 25
+
+
+State 101
+
+   20 statement: WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN . block
+   21          | WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN . statement
+
+    FLOAT             shift, and go to state 4
+    INT               shift, and go to state 5
+    STRING            shift, and go to state 6
+    VAR               shift, and go to state 7
+    TYPE              shift, and go to state 8
+    NEGATIVE          shift, and go to state 9
+    NOT               shift, and go to state 10
+    UNI_OPERATOR      shift, and go to state 11
+    OPEN_SCOPE        shift, and go to state 12
+    OPEN_PAREN        shift, and go to state 13
+    FUNCTION_KEYWORD  shift, and go to state 14
+    RETURN_KEYWORD    shift, and go to state 15
+    IF_KEYWORD        shift, and go to state 16
+    WHILE_KEYWORD     shift, and go to state 17
+    DO_KEYWORD        shift, and go to state 18
+    FOR_KEYWORD       shift, and go to state 19
+
+    block          go to state 113
+    statement      go to state 114
+    function_decl  go to state 22
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 25
+
+
+State 102
+
+   18 statement: DO_KEYWORD block WHILE_KEYWORD OPEN_PAREN . exp CLOSE_PAREN SEMICOLON
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 115
+
+
+State 103
+
+   19 statement: DO_KEYWORD statement WHILE_KEYWORD OPEN_PAREN . exp CLOSE_PAREN SEMICOLON
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 116
+
+
+State 104
+
+   16 statement: FOR_KEYWORD OPEN_PAREN exp SEMICOLON . exp SEMICOLON exp CLOSE_PAREN block
+   17          | FOR_KEYWORD OPEN_PAREN exp SEMICOLON . exp SEMICOLON exp CLOSE_PAREN statement
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 117
+
+
+State 105
+
+   37 variable: variable OPEN_ARRAY_INDEX exp CLOSE_ARRAY_INDEX .
+
+    $default  reduce using rule 37 (variable)
+
+
+State 106
+
+   35 exp_list: exp_list COMMA exp .
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 35 (exp_list)
+
+
+State 107
+
+   34 exp_list: exp COMMA exp .
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+    $default  reduce using rule 34 (exp_list)
+
+
+State 108
+
+   30 param_list_ele: TYPE VAR .
+
+    $default  reduce using rule 30 (param_list_ele)
+
+
+State 109
+
+   29 param_list: param_list COMMA . param_list_ele
+
+    TYPE  shift, and go to state 97
+
+    param_list_ele  go to state 118
+
+
+State 110
+
+   26 function_decl: FUNCTION_KEYWORD VAR OPEN_PAREN param_list CLOSE_PAREN . block
+
+    OPEN_SCOPE  shift, and go to state 12
+
+    block  go to state 119
+
+
+State 111
+
+   12 statement: IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN block .
+   13          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN block . ELSE_KEYWORD block
+   15          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN block . ELSE_KEYWORD statement
+
+    ELSE_KEYWORD  shift, and go to state 120
+
+    ELSE_KEYWORD  [reduce using rule 12 (statement)]
+    $default      reduce using rule 12 (statement)
+
+
+State 112
+
+   10 statement: IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement .
+   11          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement . ELSE_KEYWORD statement
+   14          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement . ELSE_KEYWORD block
+
+    ELSE_KEYWORD  shift, and go to state 121
+
+    ELSE_KEYWORD  [reduce using rule 10 (statement)]
+    $default      reduce using rule 10 (statement)
+
+
+State 113
+
+   20 statement: WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN block .
+
+    $default  reduce using rule 20 (statement)
+
+
+State 114
+
+   21 statement: WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement .
+
+    $default  reduce using rule 21 (statement)
+
+
+State 115
+
+   18 statement: DO_KEYWORD block WHILE_KEYWORD OPEN_PAREN exp . CLOSE_PAREN SEMICOLON
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    CLOSE_PAREN       shift, and go to state 122
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+
+State 116
+
+   19 statement: DO_KEYWORD statement WHILE_KEYWORD OPEN_PAREN exp . CLOSE_PAREN SEMICOLON
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    CLOSE_PAREN       shift, and go to state 123
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+
+State 117
+
+   16 statement: FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp . SEMICOLON exp CLOSE_PAREN block
+   17          | FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp . SEMICOLON exp CLOSE_PAREN statement
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    SEMICOLON         shift, and go to state 124
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+
+State 118
+
+   29 param_list: param_list COMMA param_list_ele .
+
+    $default  reduce using rule 29 (param_list)
+
+
+State 119
+
+   26 function_decl: FUNCTION_KEYWORD VAR OPEN_PAREN param_list CLOSE_PAREN block .
+
+    $default  reduce using rule 26 (function_decl)
+
+
+State 120
+
+   13 statement: IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN block ELSE_KEYWORD . block
+   15          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN block ELSE_KEYWORD . statement
+
+    FLOAT             shift, and go to state 4
+    INT               shift, and go to state 5
+    STRING            shift, and go to state 6
+    VAR               shift, and go to state 7
+    TYPE              shift, and go to state 8
+    NEGATIVE          shift, and go to state 9
+    NOT               shift, and go to state 10
+    UNI_OPERATOR      shift, and go to state 11
+    OPEN_SCOPE        shift, and go to state 12
+    OPEN_PAREN        shift, and go to state 13
+    FUNCTION_KEYWORD  shift, and go to state 14
+    RETURN_KEYWORD    shift, and go to state 15
+    IF_KEYWORD        shift, and go to state 16
+    WHILE_KEYWORD     shift, and go to state 17
+    DO_KEYWORD        shift, and go to state 18
+    FOR_KEYWORD       shift, and go to state 19
+
+    block          go to state 125
+    statement      go to state 126
+    function_decl  go to state 22
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 25
+
+
+State 121
+
+   11 statement: IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement ELSE_KEYWORD . statement
+   14          | IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement ELSE_KEYWORD . block
+
+    FLOAT             shift, and go to state 4
+    INT               shift, and go to state 5
+    STRING            shift, and go to state 6
+    VAR               shift, and go to state 7
+    TYPE              shift, and go to state 8
+    NEGATIVE          shift, and go to state 9
+    NOT               shift, and go to state 10
+    UNI_OPERATOR      shift, and go to state 11
+    OPEN_SCOPE        shift, and go to state 12
+    OPEN_PAREN        shift, and go to state 13
+    FUNCTION_KEYWORD  shift, and go to state 14
+    RETURN_KEYWORD    shift, and go to state 15
+    IF_KEYWORD        shift, and go to state 16
+    WHILE_KEYWORD     shift, and go to state 17
+    DO_KEYWORD        shift, and go to state 18
+    FOR_KEYWORD       shift, and go to state 19
+
+    block          go to state 127
+    statement      go to state 128
+    function_decl  go to state 22
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 25
+
+
+State 122
+
+   18 statement: DO_KEYWORD block WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN . SEMICOLON
+
+    SEMICOLON  shift, and go to state 129
+
+
+State 123
+
+   19 statement: DO_KEYWORD statement WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN . SEMICOLON
+
+    SEMICOLON  shift, and go to state 130
+
+
+State 124
+
+   16 statement: FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp SEMICOLON . exp CLOSE_PAREN block
+   17          | FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp SEMICOLON . exp CLOSE_PAREN statement
+
+    FLOAT         shift, and go to state 4
+    INT           shift, and go to state 5
+    STRING        shift, and go to state 6
+    VAR           shift, and go to state 7
+    NEGATIVE      shift, and go to state 9
+    NOT           shift, and go to state 10
+    UNI_OPERATOR  shift, and go to state 11
+    OPEN_PAREN    shift, and go to state 13
+
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 131
+
+
+State 125
+
+   13 statement: IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN block ELSE_KEYWORD block .
+
+    $default  reduce using rule 13 (statement)
+
+
+State 126
+
+   15 statement: IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN block ELSE_KEYWORD statement .
+
+    $default  reduce using rule 15 (statement)
+
+
+State 127
+
+   14 statement: IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement ELSE_KEYWORD block .
+
+    $default  reduce using rule 14 (statement)
+
+
+State 128
+
+   11 statement: IF_KEYWORD OPEN_PAREN exp CLOSE_PAREN statement ELSE_KEYWORD statement .
+
+    $default  reduce using rule 11 (statement)
+
+
+State 129
+
+   18 statement: DO_KEYWORD block WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN SEMICOLON .
+
+    $default  reduce using rule 18 (statement)
+
+
+State 130
+
+   19 statement: DO_KEYWORD statement WHILE_KEYWORD OPEN_PAREN exp CLOSE_PAREN SEMICOLON .
+
+    $default  reduce using rule 19 (statement)
+
+
+State 131
+
+   16 statement: FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp SEMICOLON exp . CLOSE_PAREN block
+   17          | FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp SEMICOLON exp . CLOSE_PAREN statement
+   43 exp: exp . EQUAL exp
+   44    | exp . NOTEQUAL exp
+   45    | exp . LESSTHAN exp
+   46    | exp . LESSTHANEQUAL exp
+   47    | exp . GREATERTHAN exp
+   48    | exp . GREATERTHANEQUAL exp
+   49    | exp . ADD exp
+   52    | exp . NEGATIVE exp
+   53    | exp . DIVIDE exp
+   54    | exp . MULTIPLY exp
+   55    | exp . POWER exp
+   56    | exp . MOD exp
+   57    | exp . AND exp
+   58    | exp . OR exp
+
+    ADD               shift, and go to state 47
+    MULTIPLY          shift, and go to state 48
+    DIVIDE            shift, and go to state 49
+    POWER             shift, and go to state 50
+    MOD               shift, and go to state 51
+    NEGATIVE          shift, and go to state 52
+    CLOSE_PAREN       shift, and go to state 132
+    EQUAL             shift, and go to state 53
+    NOTEQUAL          shift, and go to state 54
+    GREATERTHAN       shift, and go to state 55
+    LESSTHAN          shift, and go to state 56
+    GREATERTHANEQUAL  shift, and go to state 57
+    LESSTHANEQUAL     shift, and go to state 58
+    AND               shift, and go to state 59
+    OR                shift, and go to state 60
+
+
+State 132
+
+   16 statement: FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp SEMICOLON exp CLOSE_PAREN . block
+   17          | FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp SEMICOLON exp CLOSE_PAREN . statement
+
+    FLOAT             shift, and go to state 4
+    INT               shift, and go to state 5
+    STRING            shift, and go to state 6
+    VAR               shift, and go to state 7
+    TYPE              shift, and go to state 8
+    NEGATIVE          shift, and go to state 9
+    NOT               shift, and go to state 10
+    UNI_OPERATOR      shift, and go to state 11
+    OPEN_SCOPE        shift, and go to state 12
+    OPEN_PAREN        shift, and go to state 13
+    FUNCTION_KEYWORD  shift, and go to state 14
+    RETURN_KEYWORD    shift, and go to state 15
+    IF_KEYWORD        shift, and go to state 16
+    WHILE_KEYWORD     shift, and go to state 17
+    DO_KEYWORD        shift, and go to state 18
+    FOR_KEYWORD       shift, and go to state 19
+
+    block          go to state 133
+    statement      go to state 134
+    function_decl  go to state 22
+    function_call  go to state 23
+    variable       go to state 24
+    exp            go to state 25
+
+
+State 133
+
+   16 statement: FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp SEMICOLON exp CLOSE_PAREN block .
+
+    $default  reduce using rule 16 (statement)
+
+
+State 134
+
+   17 statement: FOR_KEYWORD OPEN_PAREN exp SEMICOLON exp SEMICOLON exp CLOSE_PAREN statement .
+
+    $default  reduce using rule 17 (statement)

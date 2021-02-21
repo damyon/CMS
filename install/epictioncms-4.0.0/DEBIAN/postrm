@@ -1,0 +1,34 @@
+#!/bin/sh
+
+#DEBHELPER#
+
+case "$1" in
+    purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+
+# Clean up the repository files
+/etc/init.d/apache2 restart
+
+# Clean up the repository files
+rm -rf /var/lib/cms
+
+# Delete the cms user
+userdel cms
+
+# delete a database without the root password
+/usr/bin/mysql -u root -e "drop database cms"
+
+/usr/bin/mysql -u root -e "DELETE FROM mysql.user WHERE User='cms'"
+
+# Remove from startup
+
+if [ "$1" = purge ]; then
+	update-rc.d epictioncms remove
+fi
+
+        ;;
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        ;;
+esac
+
+

@@ -1,0 +1,9 @@
+# An Example CGI Configuration File
+
+[IP SETTINGS]
+# The port number the cgi should connect to.
+serverPort=1234
+# The ip address the cgi should connect to.
+serverIPAddress=127.0.0.1
+# The page to redirect to when an error occurs
+errorPageURL=/error.html

@@ -1,0 +1,35 @@
+<?cms
+	int public;
+	string groupname;
+	int err;
+	
+	groupname = get("groupname");
+	public = get("public");
+
+	// validate the inputs
+	set("error", "");
+	
+	if ((groupname == "")) {
+		set("error", "Group name is required.");
+	}
+
+	if ((isValidFilename(groupname) == 0)) {
+		set("error", "Group name can only contain letters numbers and spaces.");
+	}
+	
+	if (get("error") == "") {
+		// create the group
+
+		err = createNewGroup(groupname, public);
+
+		if (err == 0) {
+			set("message", "The group <em>" + xmlEscape(groupname) + "</em> has been created.");
+		} else {
+			set("message", "The group <em>" + xmlEscape(groupname) + "</em> has been created. The error was " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/newgroup.cms");
+	}
+
+?>

@@ -1,0 +1,15 @@
+<?cms
+  string content;
+  string path;
+
+  path = get("path");
+
+  content = exportPackage(path);
+
+  if (content == "") {
+    write("Could not export the package.");
+  } else {
+    set("SAVEASFILENAME", "website-backup.xml");
+    write(content);
+  }
+?>

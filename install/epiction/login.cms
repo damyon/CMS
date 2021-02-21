@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Login</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/login.css"); ?>"></link>
+<?cms
+	/* kill any active sessions */
+	logout();
+?>
+</head>
+<body>
+  <div id="titlebar">
+	<h1><a href="http://www.epiction.com" title="Epiction"><img src="<?cms urlRewrite("/cms/epiction/images/logo.png"); ?>" alt="Epiction"/></a></h1>
+  </div>
+  <div id="loginform">
+    <h2>Login</h2>
+    <form action="<?cms urlRewrite("/cms/epiction/loginaction.cms"); ?>">
+	<fieldset>
+	<p>Enter your username and password to continue.</p>
+	<p class="input"><span>Username:</span>
+	<input type="text" class="forminput" name="username" size="16" value=""/>
+	</p>
+	<p class="input"><span>Password:</span>
+	<input type="password" class="forminput" name="password" size="16" value=""/>
+	</p>
+	<p class="error"><?cms write(get("error-message")); ?>&nbsp;
+	</p>
+	<p class="submit">
+	<input type="submit" class="button" name="submit-action" value="Login"/>
+	</p>
+	</fieldset>
+    </form>
+  </div>
+</body>
+</html>

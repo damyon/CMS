@@ -1,0 +1,61 @@
+<?cms
+	string path;
+	string title;
+	string filename;
+	string description;
+	string keywords;
+	int public;
+	int order;
+	int parentid;
+	int err;
+	
+
+	path = get("path");
+	title = get("title");
+	filename = get("filename");
+	description = get("description");
+	keywords = get("keywords");
+	public = get("public");
+	order = get("order");
+
+	// validate the inputs
+	set("error", "");
+	
+	if (title == "") {
+		title = filename;
+	}
+
+	if (filename == "") {
+		set("error", "Filename is a required field.");
+	}
+
+	if (isValidFilename(filename) == 0) {
+		set("error", "Filename can only contain numbers, letters and the characters '-', '_' and '.'.");
+	}
+
+	if ( uploadFileExists("upload") == 0) {
+    		set("error", "You must select a file to upload.");
+	}
+
+	if (get("error") == "") {
+		// create the folder
+		err = createNewFile(path, filename, public, "RESOURCE", 1, "", order, "upload");
+	
+		// set the metadata
+		if (err == 0) {
+			setFileMetadata((path + "/" + filename), "dc:title", title);
+			setFileMetadata((path + "/" + filename), "dc:description", description);
+			setFileMetadata((path + "/" + filename), "dc:subject", keywords);
+		}
+
+		if (err == 0) {
+			set("message", "The file <em>" + xmlEscape(filename) + "</em> was uploaded.");
+		} else {
+			set("message", "The file <em>" + xmlEscape(filename) + "</em> was not uploaded. The error was: " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/newresource.cms");
+	}
+
+?>

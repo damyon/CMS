@@ -1,0 +1,121 @@
+#!/bin/sh
+#
+# The exit codes returned are:
+#	0 - operation completed successfully
+#	1 - 
+#	2 - usage error
+#	3 - cms could not be started
+#	4 - cms could not be stopped
+#	5 - cms could not be restarted
+#
+# When multiple arguments are given, only the error from the _last_
+# one is reported.  Run "cmsctl help" for usage info
+#
+#
+# |||||||||||||||||||| START CONFIGURATION SECTION  ||||||||||||||||||||
+# --------------------                              --------------------
+# 
+# the path to your Dhufish installation
+CMSSERVER=/usr/bin/cms
+CMSUSER=cms
+# the path to the process id file
+PIDFILE=/var/lib/cms/cms.pid
+#
+# --------------------                              --------------------
+# ||||||||||||||||||||   END CONFIGURATION SECTION  ||||||||||||||||||||
+
+ERROR=0
+ARGV="$@"
+if [ "x$ARGV" = "x" ] ; then 
+    ARGS="help"
+fi
+
+for ARG in $@ $ARGS
+do
+    # check for pidfile
+    if [ -f $PIDFILE ] ; then
+	PID=`cat $PIDFILE`
+	if [ "x$PID" != "x" ] && kill -0 $PID 2>/dev/null ; then
+	    STATUS="cms (pid $PID) running"
+	    RUNNING=1
+	else
+	    STATUS="cms (pid $PID?) not running"
+	    RUNNING=0
+	fi
+    else
+	STATUS="cms (no pid file) not running"
+	RUNNING=0
+    fi
+
+    case $ARG in
+    start)
+	if [ $RUNNING -eq 1 ]; then
+	    echo "$0 $ARG: cms (pid $PID) already running"
+	    continue
+	fi
+	if /bin/su $CMSUSER -c $CMSSERVER >/dev/null ; then
+	    echo "$0 $ARG: cms started"
+	else
+	    echo "$0 $ARG: cms could not be started"
+	    ERROR=3
+	fi
+	;;
+    force-reload)
+	if [ $RUNNING -eq 0 ]; then
+	    echo "$0 $ARG: $STATUS"
+	    continue
+	fi
+	if kill -HUP $PID ; then
+	    echo "$0 $ARG: cms restarted"
+	else
+	    echo "$0 $ARG: cms could not be restarted"
+	    ERROR=5
+	fi
+	;;
+    restart)
+	if [ $RUNNING -eq 0 ]; then
+	    echo "$0 $ARG: $STATUS"
+	    continue
+	fi
+	if kill -HUP $PID ; then
+	    echo "$0 $ARG: cms restarted"
+	else
+	    echo "$0 $ARG: cms could not be restarted"
+	    ERROR=5
+	fi
+	;;
+    stop)
+	if [ $RUNNING -eq 0 ]; then
+	    echo "$0 $ARG: $STATUS"
+	    continue
+	fi
+	if kill $PID ; then
+	    echo "$0 $ARG: cms stopped"
+	else
+	    echo "$0 $ARG: cms could not be stopped"
+	    ERROR=4
+	fi
+	;;
+    status)
+	echo $STATUS
+	;;
+    *)
+	echo "usage: $0 (start|stop|restart|force-reload|status|help)"
+	cat <<EOF
+
+start      	- start cms
+stop       	- stop cms
+restart    	- restart.
+force-reload    - soft restart (reload conf settings).
+status     	- dump a short status screen
+help       	- this screen
+
+EOF
+	ERROR=2
+    ;;
+
+    esac
+
+done
+
+exit $ERROR

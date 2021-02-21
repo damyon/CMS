@@ -1,0 +1,23 @@
+<?cms
+
+	string username;
+	string password;
+
+	username = get("username");
+	password = get("password");
+
+	if (login(username, password) == 0) {
+		if (fileExists("package") == 0) {
+			writeln("Error: Package file was missing from request.");
+		} else {
+			if (importPackage((0 - 1), "package") == 0) {
+				writeln("Success: The package was imported.");
+			} else {
+				writeln("Error: The package could not be imported.");
+			}
+		}
+	} else {
+		writeln("Error: Username or password was not correct.");
+	}
+
+?>

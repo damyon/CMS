@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Edit User Metadata Field </title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/epiction/js/popup.js"); ?>"></script>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	function actionCancel() {
+		window.close();
+	}
+
+	function showLoading() {
+		var ele = document.getElementById("loading");
+		ele.style.display = "block";
+	}
+
+	function actionOK() {
+		showLoading();
+	}
+
+	function setFocus(ele) {
+		var ele = document.getElementById(ele);
+		ele.focus();
+	}
+
+	function setDefaultFocus() {
+		setFocus("ok");
+	}
+
+	window.onload = setDefaultFocus;
+  //-->
+  </script>
+  <?cms
+	map details;
+	int userid;
+	userid = get("user");
+	details = getUserDetails(userid);
+  ?>
+</head>
+<body>
+  <div id="popupform">
+    <form action="<?cms urlRewrite("/cms/epiction/usermetadataaddaction.cms"); ?>" method="POST">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Edit User Metadata Field </legend>
+	<p>Edit the metadata field and click OK.</p>
+	<p><span>User:</span>
+	<?cms write(xmlEscape(details[4])); ?>
+	</p>
+	<?cms
+		string fullname;
+		string fieldname;
+		string fieldvalue;
+		string namespace;
+		string namespaceuri;
+		int userid;
+		array parts;
+
+		fieldname = get("fieldname");
+		userid = get("user");
+		fieldvalue = getUserMetadata(userid, fieldname);
+		parts = split(fieldname, ":");
+		if (parts[0] == "dc") {
+			namespace = "Dublin Core v1.1";
+			namespaceuri = "http://purl.org/dc/elements/1.1/";
+			fieldname = parts[1];
+		} else {
+			parts = split(fieldname, "[");
+			if (arrayLength(parts) > 1) {
+				fieldname = parts[0];
+				namespace = parts[1];
+				parts = split(fieldname, "]");
+				namespace = parts[0];
+			} else {
+				namespace = "urn:unknown";
+				namespaceuri = "urn:unknown";
+			}
+
+			if (namespace == "http://www.naa.gov.au/recordkeeping/gov_online/agls/1.3") {
+				namespace = "AGLS v1.3";
+				namespaceuri = "http://www.naa.gov.au/recordkeeping/gov_online/agls/1.3";
+			}
+		}
+
+	?>
+	<p><span>User Metadata Format:</span>
+	<?cms
+		write(xmlEscape(namespace));
+	?>
+	</p>
+	<p><span>Field Name:</span>
+	<?cms
+		write(xmlEscape(capitalise(fieldname)));
+	?>
+	</p>
+	<p><span>Value:</span><input type="text" class="forminput" name="fieldvalue" size="30" value="<?cms write(xmlEscape(fieldvalue)); ?>" maxlength="250"/> </p>	
+	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	</fieldset>
+	</div>
+	<div id="actions">
+	<p>
+	<input type="hidden" name="user" value="<?cms write(xmlEscape(get("user"))); ?>"/>
+	<input type="hidden" name="fieldname" value="<?cms write(xmlEscape(fieldname)); ?>"/>
+	<input type="hidden" name="namespace" value="<?cms write(xmlEscape(namespaceuri)); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK();" id="ok"/>
+	</p>
+	</div>
+    </form>
+  </div>
+  <div id="loading"> <span>Please Wait...</span> </div>
+</body>
+</html>

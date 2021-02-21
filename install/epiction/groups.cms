@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Groups</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	var issuper = "<?cms write(get("isSuperUser")); ?>";
+	var lastColor = "";
+
+	function actionOK() {
+                window.opener.document.location.reload();
+		window.close();
+	}
+	
+	function actionAdd() {
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
+
+		window.open("<?cms urlRewrite("/cms/epiction/newgroup.cms"); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
+	}
+	
+	function actionEdit() {
+		var ele = document.getElementById("groupID");
+		groupID = ele.value;
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
+
+		if ((groupID != '')) {
+		window.open("<?cms urlRewrite("/cms/epiction/groupedit.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		} else {
+		return false;
+		}
+	}
+	
+	function actionUsers() {
+		var ele = document.getElementById("groupID");
+		groupID = ele.value;
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
+		var ele = document.getElementById("groupPublic");
+		groupPublic = ele.value;
+
+		if ((issuper == 'y') || (groupPublic == '1')) {
+			window.open("<?cms urlRewrite("/cms/epiction/groupsusers.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=800,height=400,screenX=160,screenY=160");
+		} else {
+			return false;
+		}
+	}
+	
+	function actionDelete() {
+		var ele = document.getElementById("groupID");
+		groupID = ele.value;
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
+
+		if (groupID != "") {
+		window.open("<?cms urlRewrite("/cms/epiction/groupdelete.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		} else {
+		return false;
+		}
+	}
+
+	function selectGroup(groupID, ispublic) {
+		var ele = document.getElementById("groupID");
+
+		if (ele != null) {
+			ele = document.getElementById("group" + ele.value);
+			if (ele != null) {
+				ele.style.backgroundColor = lastColor;
+				ele.style.color = "#000";
+			}
+		}
+		
+		ele = document.getElementById("group" + groupID);
+
+		if (ele != null) {
+			lastColor = ele.style.backgroundColor;
+			ele.style.backgroundColor = "#479";
+			ele.style.color = "#fff";
+		}
+
+		ele = document.getElementById("editbutton");
+		if (ele != null) {
+			ele.style.color = "#000";
+		}
+		ele = document.getElementById("deletebutton");
+		if (ele != null) {
+			ele.style.color = "#000";
+		}
+		ele = document.getElementById("groupID");
+		if (ele != null) {
+			ele.value = groupID;
+		}
+		ele = document.getElementById("usersbutton");
+		if ((ispublic == '1') || (issuper == 'y')) {
+			if (ele != null) {
+				ele.style.color = "#000";
+			}
+		} else {
+			if (ele != null) {
+				ele.style.color = "#999";
+			}
+		}
+		ele = document.getElementById("groupPublic");
+		if (ele != null) {
+			ele.value = ispublic;
+		}
+	}
+  -->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Groups </legend>
+	<div id="info">
+	<table width="100%" cellpadding="0" cellspacing="0" id="userstable">
+	<tr><th>Group Name</th><th>Public</th></tr>
+	<?cms
+		int i;
+		array groups;
+		map details;
+		int err;
+	
+		groups = getGroupList("", 0, 2048);
+
+		for (i = 0; i < arrayLength(groups); i++) {
+		 	details = getGroupDetails(groups[i]["groupID"]);
+		 	write("<tr ");
+			if (i % 2) {
+				write(" class=\"odd\" ");
+			}
+			write("id=\"group" + groups[i]["groupID"] + "\" onclick=\"selectGroup(" + groups[i]["groupID"] + ", '" + details["isPublic"] + "');\" style=\"cursor: pointer;\"><td>" + xmlEscape(details["groupName"]) + "</td><td>");
+		 	if (details["isPublic"]) {
+				write("True");
+		 	} else {
+				write("False");
+		 	}
+		 	writeln("</td></tr>");
+		}
+		
+		while (i < 5) {
+			if (i % 2) {
+				writeln("<tr class=\"odd\"><td>&nbsp;</td><td>&nbsp;</td></tr>");
+			} else {
+				writeln("<tr><td>&nbsp;</td><td>&nbsp;</td></tr>");
+			}
+			i++;
+		}
+
+	?>
+	</table>
+	</div>
+	<div id="leftmenu">
+	<form action="#">
+	<input type="hidden" name="groupID" id="groupID" value=""/>
+	<input type="hidden" name="groupPublic" id="groupPublic" value=""/>
+	<?cms
+		string super;
+
+		super = get("isSuperUser");
+
+		if (super == "y") {
+			writeln("<input type=\"button\" onclick=\"actionAdd();\" id=\"addbutton\" name=\"addgroup\" class=\"button\" value=\"Add\"/><br/><br/>");
+			writeln("<input type=\"button\" onclick=\"actionEdit();\" id=\"editbutton\" name=\"editgroup\" class=\"button\" value=\"Edit\" style=\"color: #999;\"/><br/><br/>");
+			writeln("<input type=\"button\" onclick=\"actionDelete();\" id=\"deletebutton\" name=\"deletegroup\" class=\"button\" value=\"Delete\" style=\"color: #999;\"/><br/><br/>");
+		}
+		writeln("<input type=\"button\" onclick=\"actionUsers();\" id=\"usersbutton\" name=\"groupsuser\" class=\"button\" value=\"Users\" style=\"color: #999;\"/>");
+	?>
+	</form>
+	</div>
+	</fieldset>
+  </div>
+  <div id="actions">
+  <p>
+  <input type="button" onclick="actionOK();" class="button" name="submit-action" value="Close"/>
+  </p>
+  </div>
+</body>
+</html>

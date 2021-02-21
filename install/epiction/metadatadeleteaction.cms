@@ -1,0 +1,32 @@
+<?cms
+	string path;
+	string fieldname;
+	int err;
+	
+	path = get("path");
+	fieldname = get("fieldname");
+
+	// validate the inputs
+	set("error", "");
+	
+	if ((path == "") || (path == "/")) {
+		set("error", "Cannot set metadata for root folder.");
+	}
+	
+	if (get("error") == "") {
+		// remove the metadata
+
+		err = removeFileMetadata(path, fieldname);
+
+		// set the metadata
+		if (err == 0) {
+			set("message", "The metadata was removed from the file " + xmlEscape(path) + ".");
+		} else {
+			set("message", "The metadata was not removed from the file " + xmlEscape(path) + ". The error was " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/metadatadelete.cms");
+	}
+
+?>

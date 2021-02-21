@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Go To Page</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	function actionCancel() {
+		window.close();
+	}
+
+	function actionOK() {
+		var ele = document.getElementById("skip");
+		window.opener.document.location = "<?cms urlRewrite("/cms/epiction/content.cms?path=" + xmlEscape(get("path")) + "&filter=" + xmlEscape(get("filter")) + "&pagination=" + xmlEscape(get("pagination"))); ?>" + "&skip=" + ele.value;
+		window.close();
+	}
+
+	function setFocus(ele) {
+		var ele = document.getElementById(ele);
+		ele.focus();
+	}
+
+	function setDefaultFocus() {
+		setFocus("skip");
+	}
+
+	window.onload = setDefaultFocus;
+  //-->
+  </script>
+</head>
+<body>
+  <div id="popupform">
+    <form action="#">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Go To Page </legend>
+	<p><span>Page Number: </span>
+	<select name="skip" id="skip">
+	<?cms
+		int total;
+		int page;
+		int i;
+
+		total = get("total");
+		page = get("pagination");
+		for (i = 0; ((i * page) < total); i += 1) {
+			writeln("<option value=\"" + (i * page) + "\">" + (i + 1) + "</option>");
+		}
+	?>
+	</select>
+	</p>
+	</fieldset>
+	</div>
+	<div id="actions">
+	<p>
+	<input type="button" class="button" name="submit-action" value="Cancel" onclick="actionCancel();"/>
+	<input type="submit" class="button" name="submit-action" value="OK" onclick="actionOK();"/>
+	</p>
+	</div>
+    </form>
+  </div>
+</body>
+</html>

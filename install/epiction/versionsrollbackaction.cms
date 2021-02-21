@@ -1,0 +1,38 @@
+<?cms
+	string path;
+	array parts;
+	int versionID;
+	int err;
+	
+	path = get("path");
+	versionID = get("versionID");
+
+	// validate the inputs
+	set("error", "");
+	
+	if ((path == "") || (path == "/")) {
+		set("error", "Cannot rollback root folder.");
+	}
+
+	parts = split(path, "/");
+	
+	if (parts[0] == "epiction") {
+		set("error", "Cannot rollback from epiction folder.");
+	}
+	
+	if (get("error") == "") {
+		// do the copy
+		err = rollbackFileVersion(path, versionID, 1);
+	
+		// all done
+		if (err == 0) {
+			set("message", "The file <em>" + xmlEscape(path) + "</em> was rolled back.");
+		} else {
+			set("message", "The file <em>" + xmlEscape(path) + "</em> was not rolled back. The error was: " + getErrorMessage(err));
+		}
+		include("epiction/receipt.cms");
+	} else {
+		include("epiction/versionsrollback.cms");
+	}
+
+?>

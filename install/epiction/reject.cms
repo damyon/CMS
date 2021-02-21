@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Epiction CMS - Reject (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <script type="text/javascript" language="Javascript">
+  <!--
+	function actionCancel() {
+		window.close();
+	}
+
+	function showLoading() {
+		var ele = document.getElementById("loading");
+		ele.style.display = "block";
+	}
+
+	function actionOK() {
+		showLoading();
+	}
+
+	function setFocus(ele) {
+		var ele = document.getElementById(ele);
+		ele.focus();
+	}
+
+	function setDefaultFocus() {
+		setFocus("cancel");
+	}
+
+	window.onload = setDefaultFocus;
+  //-->
+  </script>
+  <?cms
+	string path;
+
+	path = get("path");
+
+  ?>
+</head>
+<body>
+  <div id="popupform">
+    <form action="<?cms urlRewrite("/cms/epiction/rejectaction.cms"); ?>" method="POST">
+	<div id="fields">
+	<fieldset id="outer">
+	<legend> Reject </legend>
+	<p>Are you sure you want to reject this file?</p>
+	<p><span>Reject file:</span><?cms write(xmlEscape(path)); ?></p>
+	<p><span>Comment:</span><input type="text" name="comment" size="30" maxlength="250" value="<?cms write(xmlEscape(get("comment"))); ?>"/></p>
+	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	</fieldset>
+	</div>
+	<div id="actions">
+	<p>
+	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel();" id="cancel"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
+	</p>
+	</div>
+    </form>
+  </div>
+  <div id="loading"> <span>Please Wait...</span> </div>
+</body>
+</html>

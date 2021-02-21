@@ -1,0 +1,100 @@
+#!/usr/bin/php
+<?php
+
+parse_str(implode('&', array_slice($argv, 1)), $_GET);
+
+$sourcedir = $_GET['-i'];
+
+$domtree = new DOMDocument('1.0', 'UTF-8');
+$domtree->preserveWhiteSpace = false;
+$domtree->formatOutput = true;
+
+$xmlroot = $domtree->createElement("package");
+
+$xmlroot = $domtree->appendChild($xmlroot);
+
+$details = $domtree->createElement("details");
+$details = $xmlroot->appendChild($details);
+
+$created = $domtree->createElement("created", date(DATE_ISO8601));
+$created = $details->appendChild($created);
+
+$root = $domtree->createElement("root");
+$root = $details->appendChild($root);
+
+$crc = $domtree->createElement("crc", '');
+$crc = $details->appendChild($crc);
+
+$objects = $domtree->createElement("objects");
+$objects = $xmlroot->appendChild($objects);
+
+$filepattern = '{' . $sourcedir . '/*,' . $sourcedir . '/*/*}';
+$source = glob($filepattern, GLOB_BRACE);
+
+// Add the root dir
+$object = $domtree->createElement("object");
+$object = $objects->appendChild($object);
+$path = $domtree->createElement("path", $sourcedir);
+$path = $object->appendChild($path);
+$mimetype = $domtree->createElement("mimetype", 'text/html');
+$mimetype = $object->appendChild($mimetype);
+$public = $domtree->createElement("public", 'y');
+$public = $object->appendChild($public);
+$online = $domtree->createElement("online", 'y');
+$online = $object->appendChild($online);
+$type = $domtree->createElement("type", 'FOLDER');
+$type = $object->appendChild($type);
+$template = $domtree->createElement("template");
+$template = $object->appendChild($template);
+$version = $domtree->createElement("version", time());
+$version = $object->appendChild($version);
+$relativeOrder = $domtree->createElement("relativeOrder", 0);
+$relativeOrder = $object->appendChild($relativeOrder);
+$data = $domtree->createElement("data");
+$data = $object->appendChild($data);
+
+foreach ($source as $one) {
+  $object = $domtree->createElement("object");
+  $object = $objects->appendChild($object);
+  $path = $domtree->createElement("path", $one);
+  $path = $object->appendChild($path);
+  
+  $public = $domtree->createElement("public", 'y');
+  $public = $object->appendChild($public);
+  $online = $domtree->createElement("online", 'y');
+  $online = $object->appendChild($online);
+  $template = $domtree->createElement("template");
+  $template = $object->appendChild($template);
+  $version = $domtree->createElement("version", time());
+  $version = $object->appendChild($version);
+  $relativeOrder = $domtree->createElement("relativeOrder", 0);
+  $relativeOrder = $object->appendChild($relativeOrder);
+  
+
+  if (is_dir($one)) {
+    $type = $domtree->createElement("type", 'FOLDER');
+    $type = $object->appendChild($type);
+    $data = $domtree->createElement("data");
+    $data = $object->appendChild($data);
+    $mimetype = $domtree->createElement("mimetype", 'text/html');
+    $mimetype = $object->appendChild($mimetype);
+  } else {
+    $type = $domtree->createElement("type", 'RESOURCE');
+    $type = $object->appendChild($type);
+    $data = $domtree->createElement("data", base64_encode(file_get_contents($one)));
+    $data = $object->appendChild($data);
+    if (strstr($one, '.cms')) {
+      $mimetype = $domtree->createElement("mimetype", 'text/html');
+    } else if (strstr($one, '.css')) {
+      $mimetype = $domtree->createElement("mimetype", 'text/css');
+    } else if (strstr($one, '.js')) {
+      $mimetype = $domtree->createElement("mimetype", 'application/javascript');
+    } else {
+      $mimetype = $domtree->createElement("mimetype", mime_content_type($one));
+    }
+    $mimetype = $object->appendChild($mimetype);
+  }
+}
+
+
+echo $domtree->saveXML();

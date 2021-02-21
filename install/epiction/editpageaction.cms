@@ -1,0 +1,69 @@
+<?cms
+	string path;
+	string title;
+	string description;
+	string content;
+	string template;
+	string filename;
+	string tool;
+	string keywords;
+	int public;
+	array parts;
+	int order;
+	int err;
+	
+
+	path = get("path");
+	title = get("title");
+	description = get("description");
+	content = get("content");
+	template = get("template");
+	tool = get("tool");
+	keywords = get("keywords");
+	public = get("public");
+	order = get("order");
+	parts = split(path, "/");
+	filename = parts[arrayLength(parts) - 1];
+
+	// validate the inputs
+	set("error", "");
+	
+	if (template == "") {
+		set("error", "Template is a required field.");
+	}
+	
+	if (filename == "") {
+		set("error", "Filename is a required field.");
+	}
+	
+	if (tool == "") {
+		set("error", "Tool is a required field.");
+	}
+
+	if (get("error") == "") {
+		if (tool == "CONTENT") {
+			// replace the current page
+			err = replaceFileText(path, 1, template, content);
+		
+			// set the metadata
+			if (err == 0) {
+				err = editFileDetails(path, filename, public, order);
+				setFileMetadata((path), "dc:title", title);
+				setFileMetadata((path), "dc:description", description);
+				setFileMetadata((path), "dc:subject", keywords);
+			}
+
+			if (err == 0) {
+				set("message", "The page <em>" + xmlEscape(filename) + "</em> was updated.");
+			} else {
+				set("message", "The page <em>" + xmlEscape(filename) + "</em> was not updated. The error was: " + getErrorMessage(err));
+			}
+			include("epiction/receipt.cms");
+		} else {
+			include("epiction/extensions/" + xmlEscape(tool) + "/edit.cms");
+		}
+	} else {
+		include("epiction/editpage.cms");
+	}
+
+?>
