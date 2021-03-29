@@ -49,9 +49,9 @@
 		} else {
 			set("message", "The permissions for the group <em>" + xmlEscape(groupdetails["groupName"]) + "</em> were not added to the file " + xmlEscape(path) + ". The error was " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/permissionsadd.cms");
+		include("dhufish/permissionsadd.cms");
 	}
 
 ?>

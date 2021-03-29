@@ -47,9 +47,9 @@
 		} else {
 			set("message", "The page <em>" + xmlEscape(filename) + "</em> was not updated. The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/editpage.cms");
+		include("dhufish/editpage.cms");
 	}
 
 ?>

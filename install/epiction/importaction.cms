@@ -21,9 +21,9 @@
 		} else {
 			set("message", "The package was not imported. The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/import.cms");
+		include("dhufish/import.cms");
 	}
 
 ?>

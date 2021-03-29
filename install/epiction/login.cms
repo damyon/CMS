@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Login</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/login.css"); ?>"></link>
+  <title>Dhufish CMS - Login</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/login.css"); ?>"></link>
 <?cms
 	/* kill any active sessions */
 	logout();
@@ -10,11 +10,11 @@
 </head>
 <body>
   <div id="titlebar">
-	<h1><a href="http://www.epiction.com" title="Epiction"><img src="<?cms urlRewrite("/cms/epiction/images/logo.png"); ?>" alt="Epiction"/></a></h1>
+	<h1><a href="http://www.dhufish.com" title="Dhufish"><img src="<?cms urlRewrite("/cms/dhufish/images/logo.png"); ?>" alt="Dhufish"/></a></h1>
   </div>
   <div id="loginform">
     <h2>Login</h2>
-    <form action="<?cms urlRewrite("/cms/epiction/loginaction.cms"); ?>">
+    <form action="<?cms urlRewrite("/cms/dhufish/loginaction.cms"); ?>">
 	<fieldset>
 	<p>Enter your username and password to continue.</p>
 	<p class="input"><span>Username:</span>

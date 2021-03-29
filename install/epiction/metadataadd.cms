@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Add Metadata Field (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Add Metadata Field (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
-  <!--
+  
 	var descriptions = new Array();
 	var comments = new Array();
 
@@ -215,7 +215,7 @@
 	}
 
 	window.onload = setDefaultFocus;
-  //-->
+  
   <?cms
 
   if (get("fieldname") == "") {
@@ -229,7 +229,7 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/epiction/metadataaddaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite("/cms/dhufish/metadataaddaction.cms"); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Add Metadata Field </legend>

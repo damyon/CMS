@@ -22,9 +22,9 @@
 		} else {
 			set("message", "The notification settings were not removed from the file " + xmlEscape(path) + ". The error was " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/notificationsdelete.cms");
+		include("dhufish/notificationsdelete.cms");
 	}
 
 ?>

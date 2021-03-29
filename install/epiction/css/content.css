@@ -17,9 +17,6 @@ body {
 	min-height: 100%;
 	position: relative;
 	height: 100%;
-	voice-family: "\"}\"";
-	voice-family: inherit;
-	height: 100%;
 	overflow: hidden;
 }
 
@@ -177,7 +174,7 @@ a {
 	color: white;
 	font-weight: bold;
 	text-transform: uppercase;
-	background-image: url(<?cms urlRewrite("/cms/epiction/images/titlebg.png"); ?>);
+	background-image: url('<?cms urlRewrite("/cms/epiction/images/titlebg.png"); ?>');
 	background-repeat: repeat-x;
 	background-color: #fff;
 }
@@ -247,7 +244,7 @@ a {
 	height: 1.8em;
 	background-color: #900;
 	background-repeat: no-repeat;
-	background-image: url(<?cms urlRewrite("/cms/epiction/images/texture-red.jpg"); ?>);
+	background-image: url('<?cms urlRewrite("/cms/epiction/images/texture-red.jpg"); ?>');
 	border-top: 1px solid #300;
 	border-bottom: 1px solid #300;
 	padding-bottom: 0px;
@@ -451,7 +448,7 @@ img {
 .info {
 	background-color: #900;
 	background-repeat: no-repeat;
-	background-image: url(<?cms urlRewrite("/cms/epiction/images/texture-red.jpg"); ?>);
+	background-image: url('<?cms urlRewrite("/cms/epiction/images/texture-red.jpg"); ?>');
 	color: white;
 	font-weight: bold;
 	cursor: default;

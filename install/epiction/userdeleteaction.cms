@@ -18,9 +18,9 @@
 		} else {
 			set("message", "The user " + xmlEscape(details["userName"]) + " was not deleted. The error was " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/userdelete.cms");
+		include("dhufish/userdelete.cms");
 	}
 
 ?>

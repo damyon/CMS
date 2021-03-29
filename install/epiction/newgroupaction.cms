@@ -27,9 +27,9 @@
 		} else {
 			set("message", "The group <em>" + xmlEscape(groupname) + "</em> has been created. The error was " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/newgroup.cms");
+		include("dhufish/newgroup.cms");
 	}
 
 ?>

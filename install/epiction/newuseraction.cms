@@ -41,9 +41,9 @@
 		} else {
 			set("message", "The user <em>" + xmlEscape(username) + "</em> was not created. The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/newuser.cms");
+		include("dhufish/newuser.cms");
 	}
 
 ?>

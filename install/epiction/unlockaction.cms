@@ -14,8 +14,8 @@
 
 	parts = split(path, "/");
 	
-	if (parts[0] == "epiction") {
-		set("error", "Cannot unlock from epiction folder.");
+	if (parts[0] == "dhufish") {
+		set("error", "Cannot unlock from dhufish folder.");
 	}
 	
 	if (get("error") == "") {
@@ -28,9 +28,9 @@
 		} else {
 			set("message", "The file <em>" + xmlEscape(path) + "</em> was not unlocked for editing. The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/unlock.cms");
+		include("dhufish/unlock.cms");
 	}
 
 ?>

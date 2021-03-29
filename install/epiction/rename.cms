@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Rename (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Rename (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
   <?cms
 	string path;
 	string tools;
@@ -21,7 +21,7 @@
 	}
   ?>
   <script type="text/javascript" language="Javascript">
-  <!--
+  
 	function actionCancel() {
 		window.close();
 	}
@@ -56,12 +56,12 @@
 	}
 
 	window.onload = setDefaultFocus;
-  //-->
+  
   </script>
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/epiction/renameaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite("/cms/dhufish/renameaction.cms"); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Rename </legend>

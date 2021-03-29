@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - About</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - About</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/dhufish/css/popup.css'); ?>"/>
 </head>
 <body>
   <div>
@@ -10,14 +10,11 @@
 	<fieldset id="outer">
 	<legend> About </legend>
 	<div style="background-color: white; text-align: center; border: 1px solid black;">
-	<img src="<?cms urlRewrite("/cms/epiction/images/background.png?image-size=150x150"); ?>" alt="Epiction" style="padding: 2em;"/>
-	<h1>Epiction Content Management System</h1>
+	<img src="<?cms urlRewrite('/cms/dhufish/images/background.png?image-size=150x150'); ?>" alt="Dhufish" style="padding: 2em;"/>
+	<h1>Dhufish Content Management System</h1>
 	<p><?cms write(getVersion()); ?></p>
 	</div>
-	<p>The copyright for this software is owned by Epiction. <a href="http://www.epiction.com/" title="Epiction">http://www.epiction.com/</a></p>
-	<p>This software uses the TinyMCE Editor from Moxiecode.
-	The TinyMCE Editor is distributed under the GNU Library General Public License. The full license can be viewed here: <a href="<?cms urlRewrite("/cms/epiction/editors/tiny_mce/license.txt"); ?>" title="LGPL">GNU Library General Public License</a>.</p>
-	<p>The copyright for the source code to the TinyMCE Editor is owned by Moxiecode. <a href="http://www.moxiecode.com/" title="Moxiecode">http://www.moxiecode.com/</a></p>
+	<p></p>
 	</fieldset>
 	</div>
   </div>

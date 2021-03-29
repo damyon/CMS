@@ -1,11 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Remove User From Group </title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
-  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/epiction/js/popup.js"); ?>"></script>
+  <title>Dhufish CMS - Remove User From Group </title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/dhufish/js/popup.js"); ?>"></script>
   <script type="text/javascript" language="Javascript">
-  <!--
+  
 	function actionCancel() {
 		window.close();
 	}
@@ -29,7 +29,7 @@
 	}
 
 	window.onload = setDefaultFocus;
-  //-->
+  
   </script>
   <?cms
 	string username;
@@ -49,7 +49,7 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/epiction/usersgroupsdeleteaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite("/cms/dhufish/usersgroupsdeleteaction.cms"); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Remove User From Group </legend>

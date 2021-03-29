@@ -16,8 +16,8 @@
 
 	parts = split(path, "/");
 	
-	if (parts[0] == "epiction") {
-		set("error", "Cannot rollback from epiction folder.");
+	if (parts[0] == "dhufish") {
+		set("error", "Cannot rollback from dhufish folder.");
 	}
 	
 	if (get("error") == "") {
@@ -30,9 +30,9 @@
 		} else {
 			set("message", "The file <em>" + xmlEscape(path) + "</em> was not rolled back. The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/versionsrollback.cms");
+		include("dhufish/versionsrollback.cms");
 	}
 
 ?>

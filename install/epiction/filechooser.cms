@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - File Chooser</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - File Chooser</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
-  <!--
+  
 	var lastColor = "";
 
 	function actionOK() {
@@ -21,12 +21,12 @@
 		var ele = document.getElementById("mimeType");
 		if (ele.value == "application/folder") {
 			ele = document.getElementById("filePath");
-			document.location = "<?cms urlRewrite("/cms/epiction/filechooser.cms?onlyfolders=" + xmlEscape(get("onlyfolders"))); ?>&fileelement=<?cms write(xmlEscape(get("fileelement"))); ?>&path=" + ele.value;
+			document.location = "<?cms urlRewrite("/cms/dhufish/filechooser.cms?onlyfolders=" + xmlEscape(get("onlyfolders"))); ?>&fileelement=<?cms write(xmlEscape(get("fileelement"))); ?>&path=" + ele.value;
 		}
 	}
 	
 	function openFolder(path) {
-		document.location = "<?cms urlRewrite("/cms/epiction/filechooser.cms?onlyfolders=" + xmlEscape(get("onlyfolders"))); ?>&fileelement=<?cms write(xmlEscape(get("fileelement"))); ?>&path=" + path;
+		document.location = "<?cms urlRewrite("/cms/dhufish/filechooser.cms?onlyfolders=" + xmlEscape(get("onlyfolders"))); ?>&fileelement=<?cms write(xmlEscape(get("fileelement"))); ?>&path=" + path;
 	}
 
 	function actionCancel() {
@@ -97,12 +97,12 @@
 			int i;
 			string filepath;
 
-			writeln("<a href=\"" + urlBase("/cms/epiction/filechooser.cms?path=&onlyfolders=" + get("onlyfolders")) + "&fileelement=" + xmlEscape(get("fileelement")) + "\" title=\"/cms/\">cms</a>");
+			writeln("<a href=\"" + urlBase("/cms/dhufish/filechooser.cms?path=&onlyfolders=" + get("onlyfolders")) + "&fileelement=" + xmlEscape(get("fileelement")) + "\" title=\"/cms/\">cms</a>");
 			parts = split(get("path"), "/");
 			for (i = 0; i < arrayLength(parts); i++) {
 				if (parts[i] != "") {
 					filepath += "/" + parts[i];	
-					write("/ <a href=\"" + urlBase("/cms/epiction/filechooser.cms?path=" + xmlEscape(filepath) + "&onlyfolders=" + get("onlyfolders")) + "&fileelement=" + xmlEscape(get("fileelement")) + "\" title=\"" + xmlEscape(filepath) + "\"> " + xmlEscape(parts[i]) + "</a>");
+					write("/ <a href=\"" + urlBase("/cms/dhufish/filechooser.cms?path=" + xmlEscape(filepath) + "&onlyfolders=" + get("onlyfolders")) + "&fileelement=" + xmlEscape(get("fileelement")) + "\" title=\"" + xmlEscape(filepath) + "\"> " + xmlEscape(parts[i]) + "</a>");
 				}
 			}
 
@@ -133,7 +133,7 @@
 			for (i = 0; i < arrayLength(files); i++) {
 				details = getFileDetails(files[i]["path"]);
 				title = getFileMetadata(files[i]["path"], "dc:title");
-				if ((((get("onlyfolders") == "false") || (details["mimeType"] == "application/folder")) && (details["path"] != "epiction"))) {
+				if ((((get("onlyfolders") == "false") || (details["mimeType"] == "application/folder")) && (details["path"] != "dhufish"))) {
 					if (count >= skip) {
 						write("<tr style=\"cursor: pointer;\" ");
 
@@ -177,9 +177,9 @@
 		skip = get("skip");
 
 		if (skip > 0) {
-			write("<a href=\"" + urlBase("/cms/epiction/filechooser.cms?path=" + get("path") + "&onlyfolders=" + get("onlyfolders") + "&fileelement=" + get("fileelement") + "&skip=" + (skip - 15)) + "\">Previous</a>&nbsp;");
+			write("<a href=\"" + urlBase("/cms/dhufish/filechooser.cms?path=" + get("path") + "&onlyfolders=" + get("onlyfolders") + "&fileelement=" + get("fileelement") + "&skip=" + (skip - 15)) + "\">Previous</a>&nbsp;");
 		} else if (numwritten == topmax) {
-			write("<a href=\"" + urlBase("/cms/epiction/filechooser.cms?path=" + get("path") + "&onlyfolders=" + get("onlyfolders") + "&fileelement=" + get("fileelement") + "&skip=" + (skip + 15)) + "\">Next</a>&nbsp;");		
+			write("<a href=\"" + urlBase("/cms/dhufish/filechooser.cms?path=" + get("path") + "&onlyfolders=" + get("onlyfolders") + "&fileelement=" + get("fileelement") + "&skip=" + (skip + 15)) + "\">Next</a>&nbsp;");		
 		}
 	?></p>
 	</div>

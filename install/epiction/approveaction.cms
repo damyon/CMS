@@ -14,8 +14,8 @@
 
 	parts = split(path, "/");
 	
-	if (parts[0] == "epiction") {
-		set("error", "Cannot approve from epiction folder.");
+	if (parts[0] == "dhufish") {
+		set("error", "Cannot approve from dhufish folder.");
 	}
 	
 	if (get("error") == "") {
@@ -31,9 +31,9 @@
 		} else {
 			set("message", "The file <em>" + xmlEscape(path) + "</em> was not approved. The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/approve.cms");
+		include("dhufish/approve.cms");
 	}
 
 ?>

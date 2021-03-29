@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Help </title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Help </title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
 </head>
 <body>
   <div>
@@ -31,14 +31,14 @@
 						writeHelpMenu(details["path"]);
 					} else {
 						write("<li>");
-						write("<a href=\"" + urlBase("/cms/epiction/help.cms?path=" + xmlEscape(details["path"])) + "\" title=\"" + xmlEscape(title) + "\">" + xmlEscape(title) + "</a>");
+						write("<a href=\"" + urlBase("/cms/dhufish/help.cms?path=" + xmlEscape(details["path"])) + "\" title=\"" + xmlEscape(title) + "\">" + xmlEscape(title) + "</a>");
 						writeln("</li>");
 					}
 				}
 				writeln("</ul>");
 			}
 
-			writeHelpMenu("epiction/help");
+			writeHelpMenu("dhufish/help");
 		?>
 	</div>
 	<div style="background: white; width: 40em; height: 39em; border: 1px solid black; padding: 0.5em; float: left;">
@@ -47,7 +47,7 @@
 		helpfile = get("path");
 
 		if (helpfile == "") {
-			helpfile = "epiction/help/about.html";
+			helpfile = "dhufish/help/about.html";
 		}
 
 		include(helpfile);

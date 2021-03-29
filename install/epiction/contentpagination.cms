@@ -1,17 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Go To Page</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Go To Page</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
-  <!--
+  
 	function actionCancel() {
 		window.close();
 	}
 
 	function actionOK() {
 		var ele = document.getElementById("skip");
-		window.opener.document.location = "<?cms urlRewrite("/cms/epiction/content.cms?path=" + xmlEscape(get("path")) + "&filter=" + xmlEscape(get("filter")) + "&pagination=" + xmlEscape(get("pagination"))); ?>" + "&skip=" + ele.value;
+		window.opener.document.location = "<?cms urlRewrite("/cms/dhufish/content.cms?path=" + xmlEscape(get("path")) + "&filter=" + xmlEscape(get("filter")) + "&pagination=" + xmlEscape(get("pagination"))); ?>" + "&skip=" + ele.value;
 		window.close();
 	}
 
@@ -25,7 +25,7 @@
 	}
 
 	window.onload = setDefaultFocus;
-  //-->
+  
   </script>
 </head>
 <body>

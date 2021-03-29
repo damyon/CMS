@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Workflow Settings (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Workflow Settings (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
-  <!--
+  
 	function actionCancel() {
 		window.close();
 	}
@@ -13,14 +13,14 @@
                 r = Math.round(Math.random() * 1024);
                 id = "win" + r;
 
-                window.open("<?cms urlRewrite("/cms/epiction/workflowadd.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
+                window.open("<?cms urlRewrite("/cms/dhufish/workflowadd.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
         }
 
 	function actionRemove(groupID, requiresAll) {
                 r = Math.round(Math.random() * 1024);
                 id = "win" + r;
 
-                window.open("<?cms urlRewrite("/cms/epiction/workflowdelete.cms?path=" + xmlEscape(get("path"))); ?>&group=" + groupID + "&requiresall=" + requiresAll, id, "menubar=no,width=640,height=240,screenX=160,screenY=160");
+                window.open("<?cms urlRewrite("/cms/dhufish/workflowdelete.cms?path=" + xmlEscape(get("path"))); ?>&group=" + groupID + "&requiresall=" + requiresAll, id, "menubar=no,width=640,height=240,screenX=160,screenY=160");
         }
 
 	function setFocus(ele) {
@@ -33,7 +33,7 @@
 	}
 
 	window.onload = setDefaultFocus;
-  //-->
+  
   </script>
   <?cms
 	string path;
@@ -46,7 +46,7 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/epiction/workflowaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite("/cms/dhufish/workflowaction.cms"); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Workflow Settings </legend>

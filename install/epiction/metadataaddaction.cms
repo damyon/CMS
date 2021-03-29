@@ -37,9 +37,9 @@
 		} else {
 			set("message", "The metadata field <em>" + xmlEscape(fieldname) + "</em> was not set for the file " + xmlEscape(path) + ". The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/metadataadd.cms");
+		include("dhufish/metadataadd.cms");
 	}
 
 ?>

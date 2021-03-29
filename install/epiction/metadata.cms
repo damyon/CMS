@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Metadata</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Metadata</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
-  <!--
+  
 	var lastColor = "";
 
 	function actionOK() {
@@ -14,7 +14,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/epiction/metadataadd.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=680,height=400,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/dhufish/metadataadd.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=680,height=400,screenX=160,screenY=160");
 	}
 	
 	function actionEdit() {
@@ -23,7 +23,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/epiction/metadataedit.cms?path=" + xmlEscape(get("path"))); ?>&fieldname=" + escape(fieldName), id, "menubar=no,width=480,height=320,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/dhufish/metadataedit.cms?path=" + xmlEscape(get("path"))); ?>&fieldname=" + escape(fieldName), id, "menubar=no,width=480,height=320,screenX=160,screenY=160");
 	}
 
 	function actionDelete() {
@@ -32,7 +32,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/epiction/metadatadelete.cms?path=" + xmlEscape(get("path"))); ?>&fieldname=" + escape(fieldName), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/dhufish/metadatadelete.cms?path=" + xmlEscape(get("path"))); ?>&fieldname=" + escape(fieldName), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 	}
 
 	function selectRow(index, name) {

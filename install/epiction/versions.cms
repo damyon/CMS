@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Versions</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Versions</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
-  <!--
+  
 
 	var lastColor = "";
 	function actionOK() {
@@ -37,7 +37,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/epiction/versionsrollback.cms?path=" + xmlEscape(get("path"))); ?>&versionID=" + versionID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/dhufish/versionsrollback.cms?path=" + xmlEscape(get("path"))); ?>&versionID=" + versionID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 	}
 
 	function selectVersion(versionID, timestamp, mimetype) {

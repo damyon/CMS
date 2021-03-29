@@ -22,9 +22,9 @@
 		} else {
 			set("message", "The metadata was not removed from the user " + xmlEscape(details["fullName"]) + ". The error was " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/usermetadatadelete.cms");
+		include("dhufish/usermetadatadelete.cms");
 	}
 
 ?>

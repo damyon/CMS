@@ -35,7 +35,7 @@ h1 {
 	padding: 0px;
 	letter-spacing: 0.2em; 
 	text-transform: uppercase; 
-	background-image: url(<?cms urlRewrite("/cms/epiction/images/titlebg.png"); ?> ); 
+	background-image: url('<?cms urlRewrite("/cms/epiction/images/titlebg.png"); ?>' ); 
 }
 
 /* This removes borders from all images */
@@ -95,7 +95,7 @@ fieldset {
 	border-bottom: 1px solid black;
 	width: 440px;
 	background-color: #900;
-	background-image: url(<?cms urlRewrite("/cms/epiction/images/texture-red.jpg"); ?>);
+	background-image: url('<?cms urlRewrite("/cms/epiction/images/texture-red.jpg"); ?>');
 	background-repeat: no-repeat;
 }
 

@@ -16,8 +16,8 @@
 
 	parts = split(path, "/");
 	
-	if (parts[0] == "epiction") {
-		set("error", "Cannot delete from epiction folder.");
+	if (parts[0] == "dhufish") {
+		set("error", "Cannot delete from dhufish folder.");
 	}
 	
 	if (get("error") == "") {
@@ -32,12 +32,12 @@
 			} else {
 				set("message", "The file <em>" + xmlEscape(path) + "</em> was not deleted. The error was: " + getErrorMessage(err));
 			}
-			include("epiction/receipt.cms");
+			include("dhufish/receipt.cms");
 		} else {
-			include("epiction/extensions/" + xmlEscape(tool) + "/deleteaction.cms");
+			include("dhufish/extensions/" + xmlEscape(tool) + "/deleteaction.cms");
 		}
 	} else {
-		include("epiction/delete.cms");
+		include("dhufish/delete.cms");
 	}
 
 ?>

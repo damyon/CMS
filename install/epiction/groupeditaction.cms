@@ -25,9 +25,9 @@
 		} else {
 			set("message", "The group <em>" + xmlEscape(groupname) + "</em> was not updated. The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/groupedit.cms");
+		include("dhufish/groupedit.cms");
 	}
 
 ?>

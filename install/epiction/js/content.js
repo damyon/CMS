@@ -1,8 +1,11 @@
-/* content.js 
+/** 
+ * content.js 
+ * 
  * This file contains the javascript to drive the css menus on the content page of the cms
  */
 
-/* Hide all ul elements with 'menu' in the id
+/**
+ * Hide all ul elements with 'menu' in the id
  */
 function closeAllMenus() {
 	var eles = document.getElementsByTagName('ul');
@@ -15,7 +18,8 @@ function closeAllMenus() {
 	}
 }
 
-/* Revert all table rows to unselected and hide context menus
+/** 
+ * Revert all table rows to unselected and hide context menus
  */
 function unselectAll() {
 	var eles = document.getElementsByTagName('tr');
@@ -40,7 +44,12 @@ function unselectAll() {
 	}
 }
 
-/* set white on blue for table row and show context menu */
+/**
+ * Set white on blue for table row and show context menu
+ * 
+ * @param {*} id 
+ * @returns  
+ */
 function setSelection(id) {
 	unselectAll();
 	var ele = document.getElementById(id);
@@ -51,20 +60,35 @@ function setSelection(id) {
 	ele.style.display = "block";
 } 
 
-/* open nav menu */
+/**
+ * Open nav menu 
+ * 
+ * @param {*} id 
+ * @returns  
+ */
 function setActive(id) {
 	closeAllMenus();
 	var ele = document.getElementById(id);
 	ele.style.display = "block";
 } 
 
-/* close nav menu */
+/** 
+ * Close nav menu 
+ * 
+ * @param {*} id 
+ * @returns  
+ */
 function setInactive(id) {
 	var ele = document.getElementById(id);
 	ele.style.display = "none";
 } 
 
-/* if menu is open - close it - else - open menu */
+/**
+ * If menu is open - close it - else - open menu
+ * 
+ * @param {*} id 
+ * @returns 
+ */
 function setToggle(id) {
 	var ele = document.getElementById(id);
 	if (ele.style.display == "block") {
@@ -75,11 +99,23 @@ function setToggle(id) {
 	}
 } 
 
+/**
+ * Set the page URL.
+ * 
+ * @param {*} url 
+ * @returns 
+ */
 function setLocation(url) {
 	document.location = url;
 	return false;
 }
 
+/**
+ * Open a new window with this url.
+ * 
+ * @param {*} url 
+ * @returns 
+ */
 function openWindow(url) {
 	var windowname = "popup" + Math.round(Math.random() * 10000, 10000);
 	var features = "titlebar=yes,menubar=yes,location=yes,screenX=80,screenY=80";
@@ -88,6 +124,14 @@ function openWindow(url) {
 	return false;
 }
 
+/**
+ * Open a popup window with this size.
+ * 
+ * @param {*} url 
+ * @param {*} width 
+ * @param {*} height 
+ * @returns 
+ */
 function popupWindow(url, width, height) {
 	var windowname = "popup" + Math.round(Math.random() * 10000, 10000);
 	var features = "menubar=no,width=" + width + ",height=" + height + ",screenX=80,screenY=80";

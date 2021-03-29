@@ -50,9 +50,9 @@
 		} else {
 			set("message", "The folder <em>" + xmlEscape(filename) + "</em> was not created. The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/newfolder.cms");
+		include("dhufish/newfolder.cms");
 	}
 
 ?>

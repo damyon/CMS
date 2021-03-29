@@ -63,12 +63,12 @@
 			} else {
 				set("message", "The page <em>" + xmlEscape(filename) + "</em> was not created. The error was: " + getErrorMessage(err));
 			}
-			include("epiction/receipt.cms");
+			include("dhufish/receipt.cms");
 		} else {
-			include("epiction/extensions/" + xmlEscape(tool) + "/new.cms");
+			include("dhufish/extensions/" + xmlEscape(tool) + "/new.cms");
 		}
 	} else {
-		include("epiction/newpage.cms");
+		include("dhufish/newpage.cms");
 	}
 
 ?>

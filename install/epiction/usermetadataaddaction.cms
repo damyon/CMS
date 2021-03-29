@@ -35,9 +35,9 @@
 		} else {
 			set("message", "The user metadata field <em>" + xmlEscape(fieldname) + "</em> was not set for the user " + xmlEscape(details[4]) + ". The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/usermetadataadd.cms");
+		include("dhufish/usermetadataadd.cms");
 	}
 
 ?>

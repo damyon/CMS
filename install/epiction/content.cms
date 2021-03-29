@@ -49,22 +49,22 @@
 			parent += parts[i];
 		}
 		?> - Content Management System </title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/content.css"); ?>"></link>
-  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/epiction/js/content.js"); ?>"></script>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/content.css"); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite('/cms/dhufish/js/content.js'); ?>"></script>
 <?cms 
 	int userid;
 
 	/* Check we are still logged in - otherwise refresh to the login page */
 	userid = get("userID");
 	if (userid == 0) {
-		writeln("<meta http-equiv=\"refresh\" content=\"0,url=" + urlBase("/cms/epiction/login.cms") + "\"></meta>");
+		writeln("<meta http-equiv=\"refresh\" content=\"0,url=" + urlBase("/cms/dhufish/login.cms") + "\"></meta>");
 	}
 ?>
 </head>
 <body>
   <div id="container">
   <div id="titlebar">
-	<h1><img width="356" height="70" src="<?cms urlRewrite("/cms/epiction/images/logo.png"); ?>" alt="Epiction Pty Ltd" /></h1>
+	<h1><img width="356" height="70" src="<?cms urlRewrite("/cms/dhufish/images/logo.png"); ?>" alt="Dhufish Pty Ltd" /></h1>
   </div>
   <div id="navigation">
   <ul>
@@ -82,9 +82,9 @@
 
 	if ((super == "y") || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
 		// user has write access to this folder
-		writeln("<li><a accesskey=\"c\" title=\"Create Folder\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newfolder.cms?path=" + xmlEscape(path)) + "', 640, 300);\"><em>C</em>reate Folder...</a></li>");		
-		writeln("<li><a accesskey=\"g\" title=\"Create Page\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newpage.cms?path=" + xmlEscape(path)) + "', 680, 640);\">Create Pa<em>g</em>e...</a></li>");		
-		writeln("<li><a accesskey=\"r\" title=\"Create Resource\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newresource.cms?path=" + xmlEscape(path)) + "', 640, 380);\">Create <em>R</em>esource...</a></li>");		
+		writeln("<li><a accesskey=\"c\" title=\"Create Folder\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/newfolder.cms?path=" + xmlEscape(path)) + "', 640, 300);\"><em>C</em>reate Folder...</a></li>");		
+		writeln("<li><a accesskey=\"g\" title=\"Create Page\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/newpage.cms?path=" + xmlEscape(path)) + "', 680, 640);\">Create Pa<em>g</em>e...</a></li>");		
+		writeln("<li><a accesskey=\"r\" title=\"Create Resource\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/newresource.cms?path=" + xmlEscape(path)) + "', 640, 380);\">Create <em>R</em>esource...</a></li>");		
 	} else {
       		writeln("<li><span class=\"disabled\"><em>C</em>reate Folder...</span></li>");
       		writeln("<li><span class=\"disabled\">Create Pa<em>g</em>e...</span></li>");
@@ -95,9 +95,9 @@
 	
       ?>
       <li><hr/></li>
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/properties.cms?path=" + xmlEscape(path)); ?>', 480, 420);" accesskey="o" title="Properties"><em>P</em>roperties...</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/properties.cms?path=" + xmlEscape(path)); ?>', 480, 420);" accesskey="o" title="Properties"><em>P</em>roperties...</a></li>
       <li><hr/></li>
-      <li><a href="<?cms urlRewrite("/cms/epiction/login.cms"); ?>" accesskey="l" title="Logout"><em>L</em>ogout (<?cms write(xmlEscape(get("FULLNAME"))); ?>)</a></li>
+      <li><a href="<?cms urlRewrite("/cms/dhufish/login.cms"); ?>" accesskey="l" title="Logout"><em>L</em>ogout (<?cms write(xmlEscape(get("FULLNAME"))); ?>)</a></li>
     </ul>
     </li>
     <li class="menu"><a accesskey="e" href="#" onclick="setToggle('editmenu');" title="Edit"><em>E</em>dit</a>
@@ -120,13 +120,13 @@
 	}
 	
 	if (((super == "y") && (mapLength(details) > 0)) || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
-      		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(filter) + "&pagination=" + xmlEscape(page) + "&skip=" + xmlEscape(skip) + "&buffer-cut=" + xmlEscape(path)) + "\" accesskey=\"t\" title=\"Cut\">Cu<em>t</em></a></li>");
+      		writeln("<li><a href=\"" + urlBase("/cms/dhufish/content.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(filter) + "&pagination=" + xmlEscape(page) + "&skip=" + xmlEscape(skip) + "&buffer-cut=" + xmlEscape(path)) + "\" accesskey=\"t\" title=\"Cut\">Cu<em>t</em></a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\">Cu<em>t</em></span></li>");
 	}
 	
 	if (mapLength(details) > 0) {
-        	writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(filter) + "&pagination=" + xmlEscape(page) + "&skip=" + xmlEscape(skip) + "&buffer-copy=" + xmlEscape(path)) + "\" accesskey=\"y\" title=\"Copy\">Cop<em>y</em></a></li>");
+        	writeln("<li><a href=\"" + urlBase("/cms/dhufish/content.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(filter) + "&pagination=" + xmlEscape(page) + "&skip=" + xmlEscape(skip) + "&buffer-copy=" + xmlEscape(path)) + "\" accesskey=\"y\" title=\"Copy\">Cop<em>y</em></a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\">Cop<em>y</em></span></li>");
 	}
@@ -136,7 +136,7 @@
 		source = getSessionData("session:cut");
 	}
 	if (source != "") {
-      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/paste.cms?path=" + xmlEscape(path)) + "', 480, 420);\" accesskey=\"s\" title=\"Paste\">Pa<em>s</em>te</a></li>");
+      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/paste.cms?path=" + xmlEscape(path)) + "', 480, 420);\" accesskey=\"s\" title=\"Paste\">Pa<em>s</em>te</a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\">Pa<em>s</em>te</span></li>");
 	}
@@ -145,11 +145,11 @@
 
 	if (((super == "y") && (mapLength(details) > 0)) || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
 		if ((details["type"] != "RESOURCE") && (details["type"] != "FOLDER") && (details["type"] != "CONTENT")) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/extensions/" + details["type"] + "/delete.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"d\" title=\"Delete\"><em>D</em>elete</a></li>");
-      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/extensions/" + details["type"] + "/rename.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"n\" title=\"Rename\">Re<em>n</em>ame...</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/extensions/" + details["type"] + "/delete.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"d\" title=\"Delete\"><em>D</em>elete</a></li>");
+      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/extensions/" + details["type"] + "/rename.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"n\" title=\"Rename\">Re<em>n</em>ame...</a></li>");
 		} else {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/delete.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"d\" title=\"Delete\"><em>D</em>elete</a></li>");
-      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/rename.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"n\" title=\"Rename\">Re<em>n</em>ame...</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/delete.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"d\" title=\"Delete\"><em>D</em>elete</a></li>");
+      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/rename.cms?path=" + xmlEscape(path)) + "', 480, 240);\" accesskey=\"n\" title=\"Rename\">Re<em>n</em>ame...</a></li>");
 		}
 	} else {
 		writeln("<li><span class=\"disabled\"><em>D</em>elete</span></li>");
@@ -157,7 +157,7 @@
 	}
 	
 	if ((super == "y") || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
-      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/import.cms?path=" + xmlEscape(path)) + "', 540, 180);\" accesskey=\"i\" title=\"Restore\"><em>R</em>estore...</a></li>");
+      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/import.cms?path=" + xmlEscape(path)) + "', 540, 180);\" accesskey=\"i\" title=\"Restore\"><em>R</em>estore...</a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\"><em>R</em>estore...</span></li>");
 	}
@@ -165,19 +165,19 @@
 	writeln("<li><hr/></li>");
 
 	if ((super == "y") || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
-      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/permissions.cms?path=" + xmlEscape(path)) + "', 640, 480);\" accesskey=\"m\" title=\"Permissions\">Per<em>m</em>issions...</a></li>");
+      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/permissions.cms?path=" + xmlEscape(path)) + "', 640, 480);\" accesskey=\"m\" title=\"Permissions\">Per<em>m</em>issions...</a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\">Per<em>m</em>issions...</span></li>");
 	}
 
 	if ((super == "y") && (mapLength(details) > 0)) {
-      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/workflow.cms?path=" + xmlEscape(path)) + "', 640, 200);\" accesskey=\"w\" title=\"Workflow Settings\"><em>W</em>orkflow Settings...</a></li>");
+      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/workflow.cms?path=" + xmlEscape(path)) + "', 640, 200);\" accesskey=\"w\" title=\"Workflow Settings\"><em>W</em>orkflow Settings...</a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\"><em>W</em>orkflow Settings...</span></li>");
 	}
 	writeln("<li><hr/></li>");
 	if ((super == "y") && (mapLength(details) > 0)) {
-      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/recover.cms?path=" + xmlEscape(path)) + "', 800, 600);\" accesskey=\"c\" title=\"Recover Deleted Items\">Re<em>c</em>over Deleted Items...</a></li>");
+      		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/recover.cms?path=" + xmlEscape(path)) + "', 800, 600);\" accesskey=\"c\" title=\"Recover Deleted Items\">Re<em>c</em>over Deleted Items...</a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\">Re<em>c</em>over Deleted Items...</span></li>");
 	}
@@ -186,69 +186,69 @@
     </li>
     <li class="menu"><a accesskey="v" href="#" onclick="setToggle('viewmenu');" title="View"><em>V</em>iew</a>
     <ul id="viewmenu">
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/contentfilter.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter)); ?>', 350, 200);" title="Filter">Filter...</a></li>
-      <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&pagination=" + page + "&filter=" + filter + "&skip=" + skip); ?>" accesskey="r" title="Reload"><em>R</em>eload</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/contentfilter.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter)); ?>', 350, 200);" title="Filter">Filter...</a></li>
+      <li><a href="<?cms urlRewrite("/cms/dhufish/content.cms?path=" + xmlEscape(path) + "&pagination=" + page + "&filter=" + filter + "&skip=" + skip); ?>" accesskey="r" title="Reload"><em>R</em>eload</a></li>
     </ul>
     </li>
     <li class="menu"><a accesskey="t" href="#" onclick="setToggle('toolmenu');" title="Tools"><em>T</em>ools</a>
     <ul id="toolmenu">
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/accountdetails.cms"); ?>', 480, 340);" accesskey="m" title="My Details"><em>M</em>y Details</a></li>
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/changepassword.cms"); ?>', 480, 240);" accesskey="c" title="Change Password"><em>C</em>hange Password</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/accountdetails.cms"); ?>', 480, 340);" accesskey="m" title="My Details"><em>M</em>y Details</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/changepassword.cms"); ?>', 480, 240);" accesskey="c" title="Change Password"><em>C</em>hange Password</a></li>
       <li><hr/></li>
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/users.cms"); ?>', 800, 480);" accesskey="u" title="Users"><em>U</em>sers</a></li>
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/groups.cms"); ?>', 800, 480);" accesskey="g" title="Groups"><em>G</em>roups</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/users.cms"); ?>', 800, 480);" accesskey="u" title="Users"><em>U</em>sers</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/groups.cms"); ?>', 800, 480);" accesskey="g" title="Groups"><em>G</em>roups</a></li>
       <li><hr/></li>
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/myworkflow.cms"); ?>', 800, 480);" accesskey="w" title="My Workflow Items">My <em>W</em>orkflow Items</a></li>
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/search.cms?path=" + xmlEscape(path)); ?>', 800, 480);" accesskey="s" title="Search"><em>S</em>earch</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/myworkflow.cms"); ?>', 800, 480);" accesskey="w" title="My Workflow Items">My <em>W</em>orkflow Items</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/search.cms?path=" + xmlEscape(path)); ?>', 800, 480);" accesskey="s" title="Search"><em>S</em>earch</a></li>
     </ul>
     </li>
     <li class="menu"><a accesskey="g" href="#" onclick="setToggle('gomenu');" title="Go"><em>G</em>o</a>
     <ul id="gomenu">
-      <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=" + xmlEscape(parent) + "&pagination=" + page); ?>" title="Open Parent Folder">Open Parent Folder</a></li>
-      <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=/&pagination=" + page); ?>" title="Open Parent">Open Top Folder</a></li>
+      <li><a href="<?cms urlRewrite("/cms/dhufish/content.cms?path=" + xmlEscape(parent) + "&pagination=" + page); ?>" title="Open Parent Folder">Open Parent Folder</a></li>
+      <li><a href="<?cms urlRewrite("/cms/dhufish/content.cms?path=/&pagination=" + page); ?>" title="Open Parent">Open Top Folder</a></li>
       <li><hr/></li>
 <?cms
 	int last;
 	if (skip > 0) {
-		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=" + (skip - page)) + "\" title=\"Previous Page\">Previous Page</a></li>");
+		writeln("<li><a href=\"" + urlBase("/cms/dhufish/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=" + (skip - page)) + "\" title=\"Previous Page\">Previous Page</a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\">Previous Page</span></li>");
 	}
 
 	if ((skip + page) < total) {
-		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=" + (skip + page)) + "\" title=\"Next Page\">Next Page</a></li>");
+		writeln("<li><a href=\"" + urlBase("/cms/dhufish/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=" + (skip + page)) + "\" title=\"Next Page\">Next Page</a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\">Next Page</span></li>");
 	}
 
 	if (total > page) {
-		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/contentpagination.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(filter) + "&pagination=" + xmlEscape(page) + "&total=" + xmlEscape(total)) + "', 300, 150);\" title=\"Go to Page\">Go to Page...</a></li>");
+		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/contentpagination.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(filter) + "&pagination=" + xmlEscape(page) + "&total=" + xmlEscape(total)) + "', 300, 150);\" title=\"Go to Page\">Go to Page...</a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\">Go to Page...</span></li>");
 	}
 
 	if (skip > 0) {
-		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=0") + "\" title=\"First Page\">First Page</a></li>");
+		writeln("<li><a href=\"" + urlBase("/cms/dhufish/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=0") + "\" title=\"First Page\">First Page</a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\">First Page</span></li>");
 	}
 
 	if ((skip + page) < total) {
 		last = (total / page) * page;
-		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=" + last) + "\" title=\"Last Page\">Last Page</a></li>");
+		writeln("<li><a href=\"" + urlBase("/cms/dhufish/content.cms?path=" + xmlEscape(path) + "&pagination=" + xmlEscape(page) + "&filter=" + xmlEscape(filter) + "&skip=" + last) + "\" title=\"Last Page\">Last Page</a></li>");
 	} else {
 		writeln("<li><span class=\"disabled\">Last Page</span></li>");
 	}
 
 ?>
       <li><hr/></li>
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/contentlocation.cms?pagination=" + page); ?>', 500, 200);" title="Location">Location...</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/contentlocation.cms?pagination=" + page); ?>', 500, 200);" title="Location">Location...</a></li>
     </ul>
     </li>
     <li class="menu"><a href="#" accesskey="h" title="Help" onclick="setToggle('helpmenu');"><em>H</em>elp</a>
     <ul id="helpmenu">
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/help.cms"); ?>', 800, 600);" title="Help">Help</a></li>
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/about.cms"); ?>', 500, 550);" title="About">About</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/help.cms"); ?>', 800, 600);" title="Help">Help</a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/about.cms"); ?>', 500, 550);" title="About">About</a></li>
     </ul>
     </li>
   </ul>
@@ -256,7 +256,7 @@
   <div id="crumbtrail">
     <p>Location: </p>
     <ul id="crumblist">
-    <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=/"); ?>" title="cms">cms</a></li>
+    <li><a href="<?cms urlRewrite("/cms/dhufish/content.cms?path=/"); ?>" title="cms">cms</a></li>
 <?cms
 	string path;
 	string url;
@@ -273,7 +273,7 @@
 	for (i = 0; i < arrayLength(trail); i++) {
 		if ((trail[i] != "") && (trail[i] != "/")) {
 			url += trail[i];
-			writeln("<li>&#187;&nbsp;<a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(url)) + "&pagination=" + page + "\" title=\"" + xmlEscape(trail[i]) + "\">" + xmlEscape(trail[i]) + "</a></li>");
+			writeln("<li>&#187;&nbsp;<a href=\"" + urlBase("/cms/dhufish/content.cms?path=" + xmlEscape(url)) + "&pagination=" + page + "\" title=\"" + xmlEscape(trail[i]) + "\">" + xmlEscape(trail[i]) + "</a></li>");
 		url += "/";
 		}
 	}
@@ -294,25 +294,25 @@
 		}
 
 		if ((super == "y") || ((mapLength(details) > 0) && (details["writePermission"] == 1))) {
-			writeln("<li><a title=\"Create Folder\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newfolder.cms?path=" + xmlEscape(path)) + "', 640, 300);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/folder-white-16x16.png") + "\" alt=\"New Folder\"/></a></li>");		
-      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newpage.cms?path=" + xmlEscape(path)) + "', 680, 640);\" title=\"Create Page\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/content-white-16x16.png") + "\" alt=\"New Page\"/></a></li>");
-      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/newresource.cms?path=" + xmlEscape(path)) + "', 640, 380);\" title=\"Create Resource\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/resource-white-16x16.png") + "\" alt=\"New Resource\"/></a></li>");
+			writeln("<li><a title=\"Create Folder\" href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/newfolder.cms?path=" + xmlEscape(path)) + "', 640, 300);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/dhufish/images/folder-white-16x16.png") + "\" alt=\"New Folder\"/></a></li>");		
+      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/newpage.cms?path=" + xmlEscape(path)) + "', 680, 640);\" title=\"Create Page\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/dhufish/images/content-white-16x16.png") + "\" alt=\"New Page\"/></a></li>");
+      			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/newresource.cms?path=" + xmlEscape(path)) + "', 640, 380);\" title=\"Create Resource\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/dhufish/images/resource-white-16x16.png") + "\" alt=\"New Resource\"/></a></li>");
 		} else {
-			writeln("<li><a title=\"Create Folder\" href=\"javascript:void(0);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/folder-disabled.gif") + "</a></li>");		
-			writeln("<li><a title=\"Create Page\" href=\"javascript:void(0);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/content-disabled.gif") + "</a></li>");		
-			writeln("<li><a title=\"Create Resource\" href=\"javascript:void(0);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/epiction/images/resource-disabled.gif") + "</a></li>");		
+			writeln("<li><a title=\"Create Folder\" href=\"javascript:void(0);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/dhufish/images/folder-disabled.gif") + "</a></li>");		
+			writeln("<li><a title=\"Create Page\" href=\"javascript:void(0);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/dhufish/images/content-disabled.gif") + "</a></li>");		
+			writeln("<li><a title=\"Create Resource\" href=\"javascript:void(0);\"><img width=\"16\" height=\"16\" src=\"" + urlBase("/cms/dhufish/images/resource-disabled.gif") + "</a></li>");		
 		}
 	?>
       <li><hr/></li>
-      <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=/&pagination=" + page); ?>" title="Go to the top folder"><img width="16" height="16" src="<?cms urlRewrite("/cms/epiction/images/top-folder-white-16x16.png"); ?>" alt="Top Folder"/></a></li>
-      <li><a href="<?cms urlRewrite("/cms/epiction/content.cms?path=" + xmlEscape(parent) + "&pagination=" + page); ?>" title="Go to the parent folder"><img width="16" height="16" src="<?cms urlRewrite("/cms/epiction/images/parent-folder-white-16x16.png"); ?>" alt="Open Parent"/></a></li>
+      <li><a href="<?cms urlRewrite("/cms/dhufish/content.cms?path=/&pagination=" + page); ?>" title="Go to the top folder"><img width="16" height="16" src="<?cms urlRewrite("/cms/dhufish/images/top-folder-white-16x16.png"); ?>" alt="Top Folder"/></a></li>
+      <li><a href="<?cms urlRewrite("/cms/dhufish/content.cms?path=" + xmlEscape(parent) + "&pagination=" + page); ?>" title="Go to the parent folder"><img width="16" height="16" src="<?cms urlRewrite("/cms/dhufish/images/parent-folder-white-16x16.png"); ?>" alt="Open Parent"/></a></li>
       <li><hr/></li>
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/users.cms"); ?>', 800, 480);" title="Users"><img width="16" height="16" src="<?cms urlRewrite("/cms/epiction/images/users-white-16x16.png"); ?>" alt="Users"/></a></li>
-      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/epiction/groups.cms"); ?>', 800, 480);" title="Groups"><img width="16" height="16" src="<?cms urlRewrite("/cms/epiction/images/groups-white-16x16.png"); ?>" alt="Groups"/></a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/users.cms"); ?>', 800, 480);" title="Users"><img width="16" height="16" src="<?cms urlRewrite("/cms/dhufish/images/users-white-16x16.png"); ?>" alt="Users"/></a></li>
+      <li><a href="javascript:void(0);" onclick="return popupWindow('<?cms urlRewrite("/cms/dhufish/groups.cms"); ?>', 800, 480);" title="Groups"><img width="16" height="16" src="<?cms urlRewrite("/cms/dhufish/images/groups-white-16x16.png"); ?>" alt="Groups"/></a></li>
       <li><hr/></li>
-      <li><a href="<?cms urlRewrite("/cms/epiction/login.cms"); ?>" title="Logout"><img width="16" height="16" src="<?cms urlRewrite("/cms/epiction/images/logout-white-16x16.png"); ?>" alt="Logout"/></a></li>
+      <li><a href="<?cms urlRewrite("/cms/dhufish/login.cms"); ?>" title="Logout"><img width="16" height="16" src="<?cms urlRewrite("/cms/dhufish/images/logout-white-16x16.png"); ?>" alt="Logout"/></a></li>
     </ul>
-    <form action="<?cms urlRewrite("/cms/epiction/content.cms"); ?>" method="GET">
+    <form action="<?cms urlRewrite("/cms/dhufish/content.cms"); ?>" method="GET">
     <input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
     <ul id="filter">
       <li><select class="forminput" name="pagination" onchange="submit();">
@@ -390,59 +390,59 @@
 
 		verifier = isVerifier(details["path"]);
 		writeln("<ul id=\"row" + details["fileID"] + "context\" class=\"rowcontext\">");
-		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/backup.cms?path=" + xmlEscape(details["path"])) + "', 480, 200);\" title=\"Backup this file\"><img alt=\"Backup\" src=\"" + urlBase("/cms/epiction/images/backup-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Backup</a></li>");
-		writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?buffer-copy=" + xmlEscape(details["path"])) + "&path=" + xmlEscape(path) + "&filter=" + xmlEscape(get("filter")) + "&skip=" + xmlEscape(get("skip")) + "&pagination=" + xmlEscape(get("pagination")) + "\" title=\"Copy the file\"><img alt=\"Copy\" src=\"" + urlBase("/cms/epiction/images/copy-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Copy</a></li>");
+		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/backup.cms?path=" + xmlEscape(details["path"])) + "', 480, 200);\" title=\"Backup this file\"><img alt=\"Backup\" src=\"" + urlBase("/cms/dhufish/images/backup-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Backup</a></li>");
+		writeln("<li><a href=\"" + urlBase("/cms/dhufish/content.cms?buffer-copy=" + xmlEscape(details["path"])) + "&path=" + xmlEscape(path) + "&filter=" + xmlEscape(get("filter")) + "&skip=" + xmlEscape(get("skip")) + "&pagination=" + xmlEscape(get("pagination")) + "\" title=\"Copy the file\"><img alt=\"Copy\" src=\"" + urlBase("/cms/dhufish/images/copy-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Copy</a></li>");
 		if (details["writePermission"] == 1) {
-			writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?buffer-cut=" + xmlEscape(details["path"])) + "&path=" + xmlEscape(path) + "&filter=" + xmlEscape(get("filter")) + "&skip=" + xmlEscape(get("skip")) + "&pagination=" + xmlEscape(get("pagination")) + "\" title=\"Cut the file\"><img alt=\"Cut\" src=\"" + urlBase("/cms/epiction/images/cut-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Cut</a></li>");
+			writeln("<li><a href=\"" + urlBase("/cms/dhufish/content.cms?buffer-cut=" + xmlEscape(details["path"])) + "&path=" + xmlEscape(path) + "&filter=" + xmlEscape(get("filter")) + "&skip=" + xmlEscape(get("skip")) + "&pagination=" + xmlEscape(get("pagination")) + "\" title=\"Cut the file\"><img alt=\"Cut\" src=\"" + urlBase("/cms/dhufish/images/cut-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Cut</a></li>");
 		}
 		if (details["writePermission"] == 1) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/delete.cms?path=" + xmlEscape(details["path"])) + "', 480, 240);\" title=\"Delete the file\"><img alt=\"Delete\" src=\"" + urlBase("/cms/epiction/images/delete-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Delete</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/delete.cms?path=" + xmlEscape(details["path"])) + "', 480, 240);\" title=\"Delete the file\"><img alt=\"Delete\" src=\"" + urlBase("/cms/dhufish/images/delete-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Delete</a></li>");
 		}
 		if ((details["writePermission"] == 1) && (details["type"] == "CONTENT")) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/editpage.cms?path=" + xmlEscape(details["path"])) + "', 680, 640);\" title=\"Edit the contents of this file\"><img alt=\"Edit\" src=\"" + urlBase("/cms/epiction/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit</a></li>");
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/editsource.cms?path=" + xmlEscape(details["path"])) + "', 680, 640);\" title=\"Edit the source of this file\"><img alt=\"Edit Source\" src=\"" + urlBase("/cms/epiction/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit Source</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/editpage.cms?path=" + xmlEscape(details["path"])) + "', 680, 640);\" title=\"Edit the contents of this file\"><img alt=\"Edit\" src=\"" + urlBase("/cms/dhufish/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/editsource.cms?path=" + xmlEscape(details["path"])) + "', 680, 640);\" title=\"Edit the source of this file\"><img alt=\"Edit Source\" src=\"" + urlBase("/cms/dhufish/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit Source</a></li>");
 		}
 		if ((details["writePermission"] == 1) && (details["type"] == "RESOURCE")) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/editresource.cms?path=" + xmlEscape(details["path"])) + "', 640, 380);\" title=\"Upload a new resource file\"><img alt=\"Edit\" src=\"" + urlBase("/cms/epiction/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/editresource.cms?path=" + xmlEscape(details["path"])) + "', 640, 380);\" title=\"Upload a new resource file\"><img alt=\"Edit\" src=\"" + urlBase("/cms/dhufish/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit</a></li>");
 		}
 		if ((details["writePermission"] == 1) && (details["type"] != "RESOURCE") && (details["type"] != "FOLDER") && (details["type"] != "CONTENT")) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/editpage.cms?path=" + xmlEscape(details["path"])) + "', 680, 640);\" title=\"Edit this extension\"><img alt=\"Edit\" src=\"" + urlBase("/cms/epiction/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/editpage.cms?path=" + xmlEscape(details["path"])) + "', 680, 640);\" title=\"Edit this extension\"><img alt=\"Edit\" src=\"" + urlBase("/cms/dhufish/images/edit-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Edit</a></li>");
 		}
 		if ((details["lockedByUserID"] == -1) && (details["type"] != "FOLDER") && (details["writePermission"] == 1)) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/lock.cms?path=" + xmlEscape(details["path"])) + "', 640, 240);\" title=\"Lock this file for editing\"><img alt=\"Lock\" src=\"" + urlBase("/cms/epiction/images/lock-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Lock</a></li>");	
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/lock.cms?path=" + xmlEscape(details["path"])) + "', 640, 240);\" title=\"Lock this file for editing\"><img alt=\"Lock\" src=\"" + urlBase("/cms/dhufish/images/lock-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Lock</a></li>");	
 		}
-		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/metadata.cms?path=" + xmlEscape(details["path"])) + "', 800, 480);\" title=\"View the file metadata\"><img alt=\"Metadata\" src=\"" + urlBase("/cms/epiction/images/metadata-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Metadata</a></li>");
+		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/metadata.cms?path=" + xmlEscape(details["path"])) + "', 800, 480);\" title=\"View the file metadata\"><img alt=\"Metadata\" src=\"" + urlBase("/cms/dhufish/images/metadata-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Metadata</a></li>");
 		if ((details["type"] == "FOLDER") && (details["writePermission"] == 1)) {
-			writeln("<li><a href=\"javascript:void(0);\" title=\"Notifications\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/notifications.cms?path=" + xmlEscape(details["path"])) + "', 800, 480);\"><img alt=\"Notifications\" src=\"" + urlBase("/cms/epiction/images/notifications-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Notifications</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" title=\"Notifications\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/notifications.cms?path=" + xmlEscape(details["path"])) + "', 800, 480);\"><img alt=\"Notifications\" src=\"" + urlBase("/cms/dhufish/images/notifications-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Notifications</a></li>");
 		}
 		if ((details["type"] == "FOLDER")) {
-			writeln("<li><a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(details["path"]) + "&pagination=" + page) + "\" title=\"Open the folder\"><img alt=\"Open\" src=\"" + urlBase("/cms/epiction/images/open-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Open</a></li>");
+			writeln("<li><a href=\"" + urlBase("/cms/dhufish/content.cms?path=" + xmlEscape(details["path"]) + "&pagination=" + page) + "\" title=\"Open the folder\"><img alt=\"Open\" src=\"" + urlBase("/cms/dhufish/images/open-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Open</a></li>");
 		}
 		if ((details["writePermission"] == 1)) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/permissions.cms?path=" + xmlEscape(details["path"])) + "', 640, 480);\" title=\"Change the file permissions\"><img alt=\"Permissions\" src=\"" + urlBase("/cms/epiction/images/permissions-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Permissions</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/permissions.cms?path=" + xmlEscape(details["path"])) + "', 640, 480);\" title=\"Change the file permissions\"><img alt=\"Permissions\" src=\"" + urlBase("/cms/dhufish/images/permissions-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Permissions</a></li>");
 		}
-		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/properties.cms?path=" + xmlEscape(details["path"])) + "', 480, 420);\" title=\"View the file properties\"><img alt=\"Properties\" src=\"" + urlBase("/cms/epiction/images/properties-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Properties</a></li>");
+		writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/properties.cms?path=" + xmlEscape(details["path"])) + "', 480, 420);\" title=\"View the file properties\"><img alt=\"Properties\" src=\"" + urlBase("/cms/dhufish/images/properties-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Properties</a></li>");
 		if (details["writePermission"] == 1) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/rename.cms?path=" + xmlEscape(details["path"])) + "', 480, 240);\" title=\"Rename the file\"><img alt=\"Rename\" src=\"" + urlBase("/cms/epiction/images/rename-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Rename</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/rename.cms?path=" + xmlEscape(details["path"])) + "', 480, 240);\" title=\"Rename the file\"><img alt=\"Rename\" src=\"" + urlBase("/cms/dhufish/images/rename-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Rename</a></li>");
 		}
 		if ((details["lockedByUserID"] == uid) || ((details["lockedByUserID"] != "-1") && (super == "y"))) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/unlock.cms?path=" + xmlEscape(details["path"])) + "', 640, 240);\" title=\"Unlock the file for editing\"><img alt=\"Unlock\" src=\"" + urlBase("/cms/epiction/images/unlock-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Unlock</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/unlock.cms?path=" + xmlEscape(details["path"])) + "', 640, 240);\" title=\"Unlock the file for editing\"><img alt=\"Unlock\" src=\"" + urlBase("/cms/dhufish/images/unlock-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Unlock</a></li>");
 		}
 		if ((details["writePermission"] == 1) && (details["type"] != "FOLDER")) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/versions.cms?path=" + xmlEscape(details["path"])) + "', 640, 480);\" title=\"View previous versions of this file\"><img alt=\"Versions\" src=\"" + urlBase("/cms/epiction/images/versions-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Versions</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/versions.cms?path=" + xmlEscape(details["path"])) + "', 640, 480);\" title=\"View previous versions of this file\"><img alt=\"Versions\" src=\"" + urlBase("/cms/dhufish/images/versions-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Versions</a></li>");
 		}
 		if ((details["type"] != "FOLDER") && (pathlist[0] != "templates")) {
 			if (type[0] != "text") {
-				writeln("<li><a href=\"" + urlBase("/cms/" + xmlEscape(details["path"]) + "?SAVEASFILENAME=" + xmlEscape(details["fileName"])) + "\" title=\"Download this file\" ><img alt=\"View\" src=\"" + urlBase("/cms/epiction/images/view-red-16x16.png") + "\" width=\"16\" height=\"16\"/>View</a></li>");
+				writeln("<li><a href=\"" + urlBase("/cms/" + xmlEscape(details["path"]) + "?SAVEASFILENAME=" + xmlEscape(details["fileName"])) + "\" title=\"Download this file\" ><img alt=\"View\" src=\"" + urlBase("/cms/dhufish/images/view-red-16x16.png") + "\" width=\"16\" height=\"16\"/>View</a></li>");
 			} else {
-				writeln("<li><a href=\"javascript:void(0);\" onclick=\"return openWindow('" + urlBase("/cms/" + xmlEscape(details["path"])) + "');\" title=\"View this file in a new window\" ><img alt=\"View\" src=\"" + urlBase("/cms/epiction/images/view-red-16x16.png") + "\" width=\"16\" height=\"16\"/>View</a></li>");
+				writeln("<li><a href=\"javascript:void(0);\" onclick=\"return openWindow('" + urlBase("/cms/" + xmlEscape(details["path"])) + "');\" title=\"View this file in a new window\" ><img alt=\"View\" src=\"" + urlBase("/cms/dhufish/images/view-red-16x16.png") + "\" width=\"16\" height=\"16\"/>View</a></li>");
 			}
 		}
 		if ((type[0] == "text") && (details["type"] != "FOLDER")) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"openWindow('" + urlBase("/cms/" + xmlEscape(details["path"]) + "?parse=no") + "');\" title=\"View the source of this file\"><img alt=\"View Source\" src=\"" + urlBase("/cms/epiction/images/source-red-16x16.png") + "\" width=\"16\" height=\"16\"/>View Source</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"openWindow('" + urlBase("/cms/" + xmlEscape(details["path"]) + "?parse=no") + "');\" title=\"View the source of this file\"><img alt=\"View Source\" src=\"" + urlBase("/cms/dhufish/images/source-red-16x16.png") + "\" width=\"16\" height=\"16\"/>View Source</a></li>");
 		}
 		if ((verifier) || (super == "y")) {
-			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/epiction/workflowcomments.cms?path=" + xmlEscape(details["path"])) + "', 640, 480);\" title=\"Workflow\"><img alt=\"Workflow\" src=\"" + urlBase("/cms/epiction/images/workflow-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Workflow</a></li>");
+			writeln("<li><a href=\"javascript:void(0);\" onclick=\"return popupWindow('" + urlBase("/cms/dhufish/workflowcomments.cms?path=" + xmlEscape(details["path"])) + "', 640, 480);\" title=\"Workflow\"><img alt=\"Workflow\" src=\"" + urlBase("/cms/dhufish/images/workflow-red-16x16.png") + "\" width=\"16\" height=\"16\"/>Workflow</a></li>");
 		}
 
 
@@ -477,7 +477,7 @@
 		} else {
 			write("<tr class=\"even\"");
 		}
-		if (((path != "") && (path != "/")) || (details["path"] != "epiction")) {
+		if (((path != "") && (path != "/")) || (details["path"] != "dhufish")) {
 			writeln(" onclick=\"setSelection('row" + files[i]["fileID"] + "');\" id=\"row" + files[i]["fileID"] + "\">");	
 		} else {
 			writeln(" id=\"row" + files[i]["fileID"] + "\">");	
@@ -486,30 +486,30 @@
 
 		// calculate the preview image
 		if (details["type"] == "FOLDER") {
-			write(urlBase("/cms/epiction/images/folder-white-16x16.png"));
+			write(urlBase("/cms/dhufish/images/folder-white-16x16.png"));
 		} else if (details["type"] == "CONTENT") {
-			write(urlBase("/cms/epiction/images/content-white-16x16.png"));
+			write(urlBase("/cms/dhufish/images/content-white-16x16.png"));
 		} else if (details["type"] == "RESOURCE") {
 			// if this is an image show a preview
 			if (type[0] == "image") {
 				write(urlBase("/cms/" + details["path"] + "?image-size=16-16"));
 			} else {
-				write(urlBase("/cms/epiction/images/resource-white-16x16.png"));
+				write(urlBase("/cms/dhufish/images/resource-white-16x16.png"));
 			}
 		} else {
-			write(urlBase("/cms/epiction/extensions/" + details["type"] + "/icon.png"));
+			write(urlBase("/cms/dhufish/extensions/" + details["type"] + "/icon.png"));
 		}
 		
 		writeln("\" width=\"16\" height=\"16\" alt=\"Preview Icon\"/>");
 		if (details["type"] == "FOLDER") {
-			if (((path != "") && (path != "/")) || (details["path"] != "epiction")) {
-				writeln("<a href=\"javascript:void(0);\" ondblclick=\"return setLocation('" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(details["path"]) + "&pagination=" + page) + "');\">");
+			if (((path != "") && (path != "/")) || (details["path"] != "dhufish")) {
+				writeln("<a href=\"javascript:void(0);\" ondblclick=\"return setLocation('" + urlBase("/cms/dhufish/content.cms?path=" + xmlEscape(details["path"]) + "&pagination=" + page) + "');\">");
 			} else {
 				writeln("<a href=\"javascript:void(0);\" class=\"disabled\">");
 			}
 		}
 		writeln(xmlEscape(details["fileName"]));
-		if (((path == "") || (path == "/")) && (details["path"] == "epiction")) {
+		if (((path == "") || (path == "/")) && (details["path"] == "dhufish")) {
 			write(" (system folder)");
 		}
 		if (details["type"] == "FOLDER") {
@@ -571,7 +571,7 @@
 			writeln("<li>&nbsp;<strong>" + ((i / page) + 1) + "</strong></li>");
 		} else {
 			write("<li>&nbsp;");
-			write("<a href=\"" + urlBase("/cms/epiction/content.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(get("filter")) + "&skip=" + i + "&pagination=" + page) + "\" title=\"Page " + ((i / page) + 1) + "\">");
+			write("<a href=\"" + urlBase("/cms/dhufish/content.cms?path=" + xmlEscape(path) + "&filter=" + xmlEscape(get("filter")) + "&skip=" + i + "&pagination=" + page) + "\" title=\"Page " + ((i / page) + 1) + "\">");
 			write(((i / page) + 1));
 			write("</a></li>");
 		}

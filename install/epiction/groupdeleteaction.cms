@@ -18,9 +18,9 @@
 		} else {
 			set("message", "The group " + xmlEscape(details["groupName"]) + " was not deleted. The error was " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/groupdelete.cms");
+		include("dhufish/groupdelete.cms");
 	}
 
 ?>

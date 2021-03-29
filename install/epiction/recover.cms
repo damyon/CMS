@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Deleted Items</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Deleted Items</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
-  <!--
+  
 	var lastColor = "";
 	function actionOK() {
 		window.opener.document.location.reload();
@@ -20,7 +20,7 @@
 		id = "win" + r;
 
 		if (itemID != "") {
-		window.open("<?cms urlRewrite("/cms/epiction/recoveritem.cms"); ?>&path=" + escape(itemPath) + "&itemID=" + itemID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/dhufish/recoveritem.cms"); ?>&path=" + escape(itemPath) + "&itemID=" + itemID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}

@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Items Requiring Approval</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Items Requiring Approval</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
-  <!--
+  
 	var lastColor = "";
 
 	function actionOK() {
@@ -19,7 +19,7 @@
 		id = "win" + r;
 
 		if (itemPath != "") {
-		window.open("<?cms urlRewrite("/cms/epiction/approve.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/dhufish/approve.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -32,7 +32,7 @@
 		id = "win" + r;
 
 		if (itemPath != "") {
-			window.open("<?cms urlRewrite("/cms/epiction/loadfile.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=yes,location=yes,toolbar=yes,width=540,height=240,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite("/cms/dhufish/loadfile.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=yes,location=yes,toolbar=yes,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -45,7 +45,7 @@
 		id = "win" + r;
 
 		if (itemPath != "") {
-		window.open("<?cms urlRewrite("/cms/epiction/reject.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/dhufish/reject.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}

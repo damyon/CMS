@@ -9,9 +9,9 @@
 	error = login(username, password);
 
 	if (error == 0) {
-		include("epiction/content.cms");
+		include("dhufish/content.cms");
 	} else {
 		set("error-message", "The username and password provided were not correct. Usernames and passwords are case sensitive.");
-		include("epiction/login.cms");
+		include("dhufish/login.cms");
 	}
 ?>

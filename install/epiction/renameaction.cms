@@ -27,8 +27,8 @@
 
 	parts = split(path, "/");
 	
-	if (parts[0] == "epiction") {
-		set("error", "Cannot rename from epiction folder.");
+	if (parts[0] == "dhufish") {
+		set("error", "Cannot rename from dhufish folder.");
 	}
 	
 	if (get("error") == "") {
@@ -44,12 +44,12 @@
 			} else {
 				set("message", "The file <em>" + xmlEscape(path) + "</em> was not renamed to " + xmlEscape(filename) + ". The error was: " + getErrorMessage(err));
 			}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 		} else {
-			include("epiction/extensions/" + xmlEscape(tool) + "/renameaction.cms");
+			include("dhufish/extensions/" + xmlEscape(tool) + "/renameaction.cms");
 		}
 	} else {
-		include("epiction/rename.cms");
+		include("dhufish/rename.cms");
 	}
 
 ?>

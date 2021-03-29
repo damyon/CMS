@@ -20,8 +20,8 @@
 
 	parts = split(path, "/");
 	
-	if (parts[0] == "epiction") {
-		set("error", "Cannot comment from epiction folder.");
+	if (parts[0] == "dhufish") {
+		set("error", "Cannot comment from dhufish folder.");
 	}
 	
 	if (get("error") == "") {
@@ -34,9 +34,9 @@
 		} else {
 			set("message", "The file <em>" + xmlEscape(path) + "</em> was not commented. The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/comment.cms");
+		include("dhufish/comment.cms");
 	}
 
 ?>

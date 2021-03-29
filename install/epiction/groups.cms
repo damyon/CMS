@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Epiction CMS - Groups</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/epiction/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Groups</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
-  <!--
+  
 	var issuper = "<?cms write(get("isSuperUser")); ?>";
 	var lastColor = "";
 
@@ -17,7 +17,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/epiction/newgroup.cms"); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/dhufish/newgroup.cms"); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
 	}
 	
 	function actionEdit() {
@@ -27,7 +27,7 @@
 		id = "win" + r;
 
 		if ((groupID != '')) {
-		window.open("<?cms urlRewrite("/cms/epiction/groupedit.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/dhufish/groupedit.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 		return false;
 		}
@@ -42,7 +42,7 @@
 		groupPublic = ele.value;
 
 		if ((issuper == 'y') || (groupPublic == '1')) {
-			window.open("<?cms urlRewrite("/cms/epiction/groupsusers.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=800,height=400,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite("/cms/dhufish/groupsusers.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=800,height=400,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -55,7 +55,7 @@
 		id = "win" + r;
 
 		if (groupID != "") {
-		window.open("<?cms urlRewrite("/cms/epiction/groupdelete.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/dhufish/groupdelete.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 		return false;
 		}

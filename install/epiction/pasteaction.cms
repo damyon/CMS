@@ -20,14 +20,14 @@
 	
 	parts = split(source, "/");
 
-	if (parts[0] == "epiction") {
-		set("error", "Cannot copy/cut from epiction folder.");
+	if (parts[0] == "dhufish") {
+		set("error", "Cannot copy/cut from dhufish folder.");
 	}
 
 	parts = split(path, "/");
 
-	if (parts[0] == "epiction") {
-		set("error", "Cannot copy/cut from epiction folder.");
+	if (parts[0] == "dhufish") {
+		set("error", "Cannot copy/cut from dhufish folder.");
 	}
 	
 	for (i = 0; i < arrayLength(parts); i++) {
@@ -60,9 +60,9 @@
 		} else {
 			set("message", "The <em>" + xmlEscape(mode) + "</em> was not successful. The error was: " + getErrorMessage(err));
 		}
-		include("epiction/receipt.cms");
+		include("dhufish/receipt.cms");
 	} else {
-		include("epiction/paste.cms");
+		include("dhufish/paste.cms");
 	}
 
 ?>
