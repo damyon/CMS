@@ -4,39 +4,39 @@
 	array parts;
 	int err;
 	
-	path = get("path");
-	comment = get("comment");
+	path = get('path');
+	comment = get('comment');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if ((path == "") || (path == "/")) {
-		set("error", "Cannot add workflow comments to root folder.");
+	if ((path == '') || (path == '/')) {
+		set('error', 'Cannot add workflow comments to root folder.');
 	}
 
-	if (comment == "") {
-		set("error", "Comment is required.");
+	if (comment == '') {
+		set('error', 'Comment is required.');
 	}
 
-	parts = split(path, "/");
+	parts = split(path, '/');
 	
-	if (parts[0] == "dhufish") {
-		set("error", "Cannot comment from dhufish folder.");
+	if (parts[0] == 'dhufish') {
+		set('error', 'Cannot comment from dhufish folder.');
 	}
 	
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// do the approve
 		err = addVerifierComment(path, comment);
 
 		// set the metadata
 		if (err == 0) {
-			set("message", "The file <em>" + xmlEscape(path) + "</em> was commented.");
+			set('message', 'The file <em>' + xmlEscape(path) + '</em> was commented.');
 		} else {
-			set("message", "The file <em>" + xmlEscape(path) + "</em> was not commented. The error was: " + getErrorMessage(err));
+			set('message', 'The file <em>' + xmlEscape(path) + '</em> was not commented. The error was: ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('dhufish/receipt.cms');
 	} else {
-		include("dhufish/comment.cms");
+		include('dhufish/comment.cms');
 	}
 
 ?>

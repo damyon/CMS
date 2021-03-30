@@ -38,19 +38,19 @@
 	<fieldset id="outer">
 	<legend> Create Backup </legend>
 	<p>Are you sure you want to backup this file?</p><p> This may take a long time.</p>
-	<p><span>File:</span><?cms write(xmlEscape(get("path"))); ?> </p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	<p><span>File:</span><?cms write(xmlEscape(get('path'))); ?> </p>
+	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
 	</fieldset>
 	</div>
 	<div id="actions">
 	<p>
 	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();" id="ok"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK()" id="ok"/>
 	</p>
 	</div>
     </form>
   </div>
-  <div id="loading"> <span><a href="javascript:actionCancel();" title="Close Window">Close Window</a></span> </div>
+  <div id="loading"> <span><a href="javascript:actionCancel()" title="Close Window">Close Window</a></span> </div>
 </body>
 </html>

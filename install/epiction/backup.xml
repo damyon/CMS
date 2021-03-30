@@ -2,14 +2,14 @@
   string content;
   string path;
 
-  path = get("path");
+  path = get('path');
 
   content = exportPackage(path);
 
-  if (content == "") {
-    write("Could not export the package.");
+  if (content == '') {
+    write('Could not export the package.');
   } else {
-    set("SAVEASFILENAME", "website-backup.xml");
+    set('SAVEASFILENAME', 'website-backup.xml');
     write(content);
   }
 ?>

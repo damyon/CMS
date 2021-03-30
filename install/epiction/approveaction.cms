@@ -3,37 +3,37 @@
 	array parts;
 	int err;
 	
-	path = get("path");
+	path = get('path');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if ((path == "") || (path == "/")) {
-		set("error", "Cannot approve root folder.");
+	if ((path == '') || (path == '/')) {
+		set('error', 'Cannot approve root folder.');
 	}
 
-	parts = split(path, "/");
+	parts = split(path, '/');
 	
-	if (parts[0] == "dhufish") {
-		set("error", "Cannot approve from dhufish folder.");
+	if (parts[0] == 'dhufish') {
+		set('error', 'Cannot approve from dhufish folder.');
 	}
 	
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// do the approve
 		err = approveFile(path);
 	
 		if (err == 0) {
-			err = addVerifierComment(path, "Approved.");
+			err = addVerifierComment(path, 'Approved.');
 		}
 		// set the metadata
 		if (err == 0) {
-			set("message", "The file <em>" + xmlEscape(path) + "</em> was approved.");
+			set('message', 'The file <em>' + xmlEscape(path) + '</em> was approved.');
 		} else {
-			set("message", "The file <em>" + xmlEscape(path) + "</em> was not approved. The error was: " + getErrorMessage(err));
+			set('message', 'The file <em>' + xmlEscape(path) + '</em> was not approved. The error was: ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('dhufish/receipt.cms');
 	} else {
-		include("dhufish/approve.cms");
+		include('dhufish/approve.cms');
 	}
 
 ?>
