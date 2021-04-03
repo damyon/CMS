@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Dhufish CMS - Add Group To User</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
-  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/dhufish/js/popup.js"); ?>"></script>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/system/js/popup.js"); ?>"></script>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -34,7 +34,7 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/dhufish/usersgroupsaddaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite("/cms/system/usersgroupsaddaction.cms"); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Add Group To User </legend>
@@ -65,7 +65,7 @@
 		super = get("isSuperUser");
 
 		if (super == "y") {
-			writeln("<a href=\"javascript:void(0);\" onclick=\"openWindow('" + urlBase("/cms/dhufish/newgroup.cms") + "', '480', '320');\" rel=\"popup-480-240\" title=\"Create new group\"><img border=\"0\" alt=\"Create new group\" src=\"" + urlBase("/cms/dhufish/images/add.gif") + "\"/></a>");
+			writeln("<a href=\"javascript:void(0);\" onclick=\"openWindow('" + urlBase("/cms/system/newgroup.cms") + "', '480', '320');\" rel=\"popup-480-240\" title=\"Create new group\"><img border=\"0\" alt=\"Create new group\" src=\"" + urlBase("/cms/system/images/add.gif") + "\"/></a>");
 		}
 		?>
 	</p>

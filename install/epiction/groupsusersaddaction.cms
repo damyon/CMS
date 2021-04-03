@@ -5,32 +5,32 @@
 	map userdetails;
 	int err;
 	
-	userid = get("user");
-	groupid = get("group");
+	userid = get('user');
+	groupid = get('group');
 
 	groupdetails = getGroupDetails(groupid);
 	userdetails = getUserDetails(userid);
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
 	if (groupid <= 0) {
-		set("error", "Group is required.");
+		set('error', 'Group is required.');
 	}
 
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// add the group
 
 		err = addGroupMember(groupid, userid);
 
 		if (err == 0) {
-			set("message", "The user <em>" + xmlEscape(userdetails["userName"]) + "</em> was added to the group " + xmlEscape(groupdetails["groupName"]) + ".");
+			set('message', 'The user <em>' + xmlEscape(userdetails['userName']) + '</em> was added to the group ' + xmlEscape(groupdetails['groupName']) + '.');
 		} else {
-			set("message", "The user <em>" + xmlEscape(userdetails["userName"]) + "</em> was not added to the group " + xmlEscape(groupdetails["groupName"]) + ". The error was: " + getErrorMessage(err));
+			set('message', 'The user <em>' + xmlEscape(userdetails['userName']) + '</em> was not added to the group ' + xmlEscape(groupdetails['groupName']) + '. The error was: ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/groupsusersadd.cms");
+		include('system/groupsusersadd.cms');
 	}
 
 ?>

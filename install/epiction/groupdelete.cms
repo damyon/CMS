@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Dhufish CMS - Delete Group </title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
-  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/dhufish/js/popup.js"); ?>"></script>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite('/cms/system/js/popup.js'); ?>"></script>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -36,14 +36,14 @@
 	int groupid;
 	map details;
 
-	groupid = get("group");
+	groupid = get('group');
 	details = getGroupDetails(groupid);
-	groupname = details["groupName"];
+	groupname = details['groupName'];
   ?>
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/dhufish/groupdeleteaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite('/cms/system/groupdeleteaction.cms'); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Delete Group </legend>
@@ -51,14 +51,14 @@
 	<p><span>Groupname:</span>
 	<?cms write(xmlEscape(groupname)); ?>
 	</p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
 	</fieldset>
 	</div>
 	<div id="actions">
 	<p>
-	<input type="hidden" name="group" value="<?cms write(xmlEscape(get("group"))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();" id="ok"/>
+	<input type="hidden" name="group" value="<?cms write(xmlEscape(get('group'))); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK()" id="ok"/>
 	</p>
 	</div>
     </form>

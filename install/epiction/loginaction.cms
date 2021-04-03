@@ -3,15 +3,15 @@
 	string password;
 	int error;
 
-	username = get("username");
-	password = get("password");
+	username = get('username');
+	password = get('password');
 
 	error = login(username, password);
 
 	if (error == 0) {
-		include("dhufish/content.cms");
+		include('system/content.cms');
 	} else {
-		set("error-message", "The username and password provided were not correct. Usernames and passwords are case sensitive.");
-		include("dhufish/login.cms");
+		set('error-message', 'The username and password provided were not correct. Usernames and passwords are case sensitive.');
+		include('system/login.cms');
 	}
 ?>

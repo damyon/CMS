@@ -4,35 +4,35 @@
 	int itemID;
 	int err;
 	
-	path = get("path");
-	itemID = get("itemID");
+	path = get('path');
+	itemID = get('itemID');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if ((path == "") || (path == "/")) {
-		set("error", "Cannot recover root folder.");
+	if ((path == '') || (path == '/')) {
+		set('error', 'Cannot recover root folder.');
 	}
 
-	parts = split(path, "/");
+	parts = split(path, '/');
 	
-	if (parts[0] == "dhufish") {
-		set("error", "Cannot recover from dhufish folder.");
+	if (parts[0] == 'dhufish') {
+		set('error', 'Cannot recover from dhufish folder.');
 	}
 	
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// do the copy
-		err = recoverFileVersion(path, itemID, "y");
+		err = recoverFileVersion(path, itemID, 'y');
 	
 		// all done
 		if (err == 0) {
-			set("message", "The file <em>" + xmlEscape(path) + "</em> was recovered.");
+			set('message', 'The file <em>' + xmlEscape(path) + '</em> was recovered.');
 		} else {
-			set("message", "The file <em>" + xmlEscape(path) + "</em> was not recovered. The error was: " + getErrorMessage(err));
+			set('message', 'The file <em>' + xmlEscape(path) + '</em> was not recovered. The error was: ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/recoveritem.cms");
+		include('system/recoveritem.cms');
 	}
 
 ?>

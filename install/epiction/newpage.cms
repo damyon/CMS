@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - New Page (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -44,7 +44,7 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/dhufish/newpageaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite("/cms/system/newpageaction.cms"); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Create New Page </legend>
@@ -76,7 +76,7 @@
 
 			tool = get("tool");
 		
-			tools = getFolderContents("dhufish/extensions", "", 0, 1024, "relative");
+			tools = getFolderContents("system/extensions", "", 0, 1024, "relative");
 			writeln("<option value=\"CONTENT\">None</option>");
 
 			for (i = 0; i < arrayLength(tools); i++) {

@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Login</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/login.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/login.css"); ?>"></link>
 <?cms
 	/* kill any active sessions */
 	logout();
@@ -10,11 +10,11 @@
 </head>
 <body>
   <div id="titlebar">
-	<h1><a href="http://www.dhufish.com" title="Dhufish"><img src="<?cms urlRewrite("/cms/dhufish/images/logo.png"); ?>" alt="Dhufish"/></a></h1>
+	<h1><a href="http://www.dhufish.com" title="Dhufish"><img src="<?cms urlRewrite("/cms/system/images/logo.png"); ?>" alt="Dhufish"/></a></h1>
   </div>
   <div id="loginform">
     <h2>Login</h2>
-    <form action="<?cms urlRewrite("/cms/dhufish/loginaction.cms"); ?>">
+    <form action="<?cms urlRewrite("/cms/system/loginaction.cms"); ?>">
 	<fieldset>
 	<p>Enter your username and password to continue.</p>
 	<p class="input"><span>Username:</span>

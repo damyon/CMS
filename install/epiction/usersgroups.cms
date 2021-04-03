@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - User Groups</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	var issuper = "<?cms write(get("isSuperUser")); ?>";
@@ -17,7 +17,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/dhufish/usersgroupsadd.cms?user=" + xmlEscape(get("user"))); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/usersgroupsadd.cms?user=" + xmlEscape(get("user"))); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
 	}
 	
 	function actionRemove() {
@@ -29,7 +29,7 @@
 		id = "win" + r;
 
 		if (((issuper == "y") || (groupPublic == "1")) && (groupid != "")) {
-			window.open("<?cms urlRewrite("/cms/dhufish/usersgroupsdelete.cms?user=" + xmlEscape(get("user"))); ?>&group=" + groupid, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite("/cms/system/usersgroupsdelete.cms?user=" + xmlEscape(get("user"))); ?>&group=" + groupid, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}

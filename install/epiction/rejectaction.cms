@@ -4,39 +4,39 @@
 	array parts;
 	int err;
 	
-	path = get("path");
-	comment = get("comment");
+	path = get('path');
+	comment = get('comment');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if ((path == "") || (path == "/")) {
-		set("error", "Cannot reject root folder.");
+	if ((path == '') || (path == '/')) {
+		set('error', 'Cannot reject root folder.');
 	}
 
-	if (comment == "") {
-		comment = "No comment.";
+	if (comment == '') {
+		comment = 'No comment.';
 	}
 
-	parts = split(path, "/");
+	parts = split(path, '/');
 	
-	if (parts[0] == "dhufish") {
-		set("error", "Cannot reject from dhufish folder.");
+	if (parts[0] == 'dhufish') {
+		set('error', 'Cannot reject from dhufish folder.');
 	}
 	
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// do the approve
-		err = addVerifierComment(path, ("Rejected:" + comment));
+		err = addVerifierComment(path, ('Rejected:' + comment));
 
 		// set the metadata
 		if (err == 0) {
-			set("message", "The file <em>" + xmlEscape(path) + "</em> was rejected.");
+			set('message', 'The file <em>' + xmlEscape(path) + '</em> was rejected.');
 		} else {
-			set("message", "The file <em>" + xmlEscape(path) + "</em> was not rejected. The error was: " + getErrorMessage(err));
+			set('message', 'The file <em>' + xmlEscape(path) + '</em> was not rejected. The error was: ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/reject.cms");
+		include('system/reject.cms');
 	}
 
 ?>

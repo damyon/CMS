@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Dhufish CMS - Delete (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Delete (/cms/<?cms write(xmlEscape(get('path'))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -35,37 +35,37 @@
 	string tool;
 	map details;
 
-	path = get("path");
-	tool = get("tool");
+	path = get('path');
+	tool = get('tool');
 	details = getFileDetails(path);
 	
-	if (get("tool") == "") {
-		tool = details["type"];
-		if (tool == "CONTENT") {
-			set("tool", "None");
+	if (get('tool') == '') {
+		tool = details['type'];
+		if (tool == 'CONTENT') {
+			set('tool', 'None');
 		} else {
-			set("tool", capitalise(tool) + " Page");
+			set('tool', capitalise(tool) + ' Page');
 		}
 	}
   ?>
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/dhufish/deleteaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite('/cms/system/deleteaction.cms'); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Delete </legend>
 	<p>Are you sure you want to delete this file?</p>
 	<p><span>Delete file:</span><?cms write(xmlEscape(path)); ?></p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
 	</fieldset>
 	</div>
 	<div id="actions">
 	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="hidden" name="tool" value="<?cms write(xmlEscape(details["type"])); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();" id="cancel"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
+	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+	<input type="hidden" name="tool" value="<?cms write(xmlEscape(details['type'])); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel()" id="cancel"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK()"/>
 	</p>
 	</div>
     </form>

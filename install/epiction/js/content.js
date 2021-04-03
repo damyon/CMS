@@ -8,7 +8,7 @@
  * Hide all ul elements with 'menu' in the id
  */
 function closeAllMenus() {
-	var eles = document.getElementsByTagName('ul');
+	var eles = document.getElementsByTagName("ul");
 	var i = 0;
 
 	for (i = 0; i < eles.length; i ++) {
@@ -22,7 +22,7 @@ function closeAllMenus() {
  * Revert all table rows to unselected and hide context menus
  */
 function unselectAll() {
-	var eles = document.getElementsByTagName('tr');
+	var eles = document.getElementsByTagName("tr");
 	var i = 0;
 
 	for (i = 0; i < eles.length; i ++) {
@@ -35,7 +35,7 @@ function unselectAll() {
 			eles[i].style.color = "#000";
 		}
 	}
-	eles = document.getElementsByTagName('ul');
+	eles = document.getElementsByTagName("ul");
 
 	for (i = 0; i < eles.length; i ++) {
 		if (eles[i].id.indexOf("row") >= 0) {

@@ -10,42 +10,42 @@
 	map details;
 	int err;
 	
-	userid = get("user");
-	username = get("newusername");
-	fullname = get("newfullname");
-	email = get("newemail");
-	password = get("password1");
-	password2 = get("password2");
-	administrator = get("newadministrator");
-	enabled = get("newenabled");
+	userid = get('user');
+	username = get('newusername');
+	fullname = get('newfullname');
+	email = get('newemail');
+	password = get('password1');
+	password2 = get('password2');
+	administrator = get('newadministrator');
+	enabled = get('newenabled');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if (username == "") {
-		set("error", "Username is a required field.");
+	if (username == '') {
+		set('error', 'Username is a required field.');
 	}
 	
-	if (fullname == "") {
-		set("error", "Fullname is a required field.");
+	if (fullname == '') {
+		set('error', 'Fullname is a required field.');
 	}
 
 	if (password != password2) {
-		set("error", "Passwords do not match.");
+		set('error', 'Passwords do not match.');
 	}
 
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// create the folder
 		err = editUserDetails(userid, username, password, enabled, administrator, fullname, email);
 	
 		if (err == 0) {
-			set("message", "The user <em>" + xmlEscape(username) + "</em> was updated.");
+			set('message', 'The user <em>' + xmlEscape(username) + '</em> was updated.');
 		} else {
-			set("message", "The user <em>" + xmlEscape(username) + "</em> was not updated. The error was: " + getErrorMessage(err));
+			set('message', 'The user <em>' + xmlEscape(username) + '</em> was not updated. The error was: ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/useredit.cms");
+		include('system/useredit.cms');
 	}
 
 ?>

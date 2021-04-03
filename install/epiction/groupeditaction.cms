@@ -5,29 +5,29 @@
 	map details;
 	int err;
 	
-	groupid = get("group");
-	groupname = get("newgroupname");
-	public = get("newpublic");
+	groupid = get('group');
+	groupname = get('newgroupname');
+	public = get('newpublic');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if (groupname == "") {
-		set("error", "Groupname is a required field.");
+	if (groupname == '') {
+		set('error', 'Groupname is a required field.');
 	}
 	
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// edit the group
 		err = editGroupDetails(groupid, groupname, public);
 	
 		if (err == 0) {
-			set("message", "The group <em>" + xmlEscape(groupname) + "</em> was updated.");
+			set('message', 'The group <em>' + xmlEscape(groupname) + '</em> was updated.');
 		} else {
-			set("message", "The group <em>" + xmlEscape(groupname) + "</em> was not updated. The error was: " + getErrorMessage(err));
+			set('message', 'The group <em>' + xmlEscape(groupname) + '</em> was not updated. The error was: ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/groupedit.cms");
+		include('system/groupedit.cms');
 	}
 
 ?>

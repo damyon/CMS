@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Groups</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	var issuper = "<?cms write(get("isSuperUser")); ?>";
@@ -17,7 +17,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/dhufish/newgroup.cms"); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/newgroup.cms"); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
 	}
 	
 	function actionEdit() {
@@ -27,7 +27,7 @@
 		id = "win" + r;
 
 		if ((groupID != '')) {
-		window.open("<?cms urlRewrite("/cms/dhufish/groupedit.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/groupedit.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 		return false;
 		}
@@ -42,7 +42,7 @@
 		groupPublic = ele.value;
 
 		if ((issuper == 'y') || (groupPublic == '1')) {
-			window.open("<?cms urlRewrite("/cms/dhufish/groupsusers.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=800,height=400,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite("/cms/system/groupsusers.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=800,height=400,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -55,7 +55,7 @@
 		id = "win" + r;
 
 		if (groupID != "") {
-		window.open("<?cms urlRewrite("/cms/dhufish/groupdelete.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/groupdelete.cms?a=b"); ?>&group=" + groupID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 		return false;
 		}

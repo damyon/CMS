@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Go To Page</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -11,7 +11,7 @@
 
 	function actionOK() {
 		var ele = document.getElementById("skip");
-		window.opener.document.location = "<?cms urlRewrite("/cms/dhufish/content.cms?path=" + xmlEscape(get("path")) + "&filter=" + xmlEscape(get("filter")) + "&pagination=" + xmlEscape(get("pagination"))); ?>" + "&skip=" + ele.value;
+		window.opener.document.location = "<?cms urlRewrite('/cms/system/content.cms?path=' + xmlEscape(get('path')) + '&filter=' + xmlEscape(get('filter')) + '&pagination=' + xmlEscape(get('pagination'))); ?>&skip=" + ele.value;
 		window.close();
 	}
 
@@ -41,10 +41,10 @@
 		int page;
 		int i;
 
-		total = get("total");
-		page = get("pagination");
+		total = get('total');
+		page = get('pagination');
 		for (i = 0; ((i * page) < total); i += 1) {
-			writeln("<option value=\"" + (i * page) + "\">" + (i + 1) + "</option>");
+			writeln('<option value="' + (i * page) + '">' + (i + 1) + '</option>');
 		}
 	?>
 	</select>
@@ -53,8 +53,8 @@
 	</div>
 	<div id="actions">
 	<p>
-	<input type="button" class="button" name="submit-action" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" name="submit-action" value="OK" onclick="actionOK();"/>
+	<input type="button" class="button" name="submit-action" value="Cancel" onclick="actionCancel()"/>
+	<input type="submit" class="button" name="submit-action" value="OK" onclick="actionOK()"/>
 	</p>
 	</div>
     </form>

@@ -13,57 +13,57 @@
 	int err;
 	
 
-	path = get("path");
-	title = get("title");
-	description = get("description");
-	content = get("content");
-	template = get("template");
-	tool = get("tool");
-	keywords = get("keywords");
-	public = get("public");
-	order = get("order");
-	parts = split(path, "/");
+	path = get('path');
+	title = get('title');
+	description = get('description');
+	content = get('content');
+	template = get('template');
+	tool = get('tool');
+	keywords = get('keywords');
+	public = get('public');
+	order = get('order');
+	parts = split(path, '/');
 	filename = parts[arrayLength(parts) - 1];
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if (template == "") {
-		set("error", "Template is a required field.");
+	if (template == '') {
+		set('error', 'Template is a required field.');
 	}
 	
-	if (filename == "") {
-		set("error", "Filename is a required field.");
+	if (filename == '') {
+		set('error', 'Filename is a required field.');
 	}
 	
-	if (tool == "") {
-		set("error", "Tool is a required field.");
+	if (tool == '') {
+		set('error', 'Tool is a required field.');
 	}
 
-	if (get("error") == "") {
-		if (tool == "CONTENT") {
+	if (get('error') == '') {
+		if (tool == 'CONTENT') {
 			// replace the current page
 			err = replaceFileText(path, 1, template, content);
 		
 			// set the metadata
 			if (err == 0) {
 				err = editFileDetails(path, filename, public, order);
-				setFileMetadata((path), "dc:title", title);
-				setFileMetadata((path), "dc:description", description);
-				setFileMetadata((path), "dc:subject", keywords);
+				setFileMetadata((path), 'dc:title', title);
+				setFileMetadata((path), 'dc:description', description);
+				setFileMetadata((path), 'dc:subject', keywords);
 			}
 
 			if (err == 0) {
-				set("message", "The page <em>" + xmlEscape(filename) + "</em> was updated.");
+				set('message', 'The page <em>' + xmlEscape(filename) + '</em> was updated.');
 			} else {
-				set("message", "The page <em>" + xmlEscape(filename) + "</em> was not updated. The error was: " + getErrorMessage(err));
+				set('message', 'The page <em>' + xmlEscape(filename) + '</em> was not updated. The error was: ' + getErrorMessage(err));
 			}
-			include("dhufish/receipt.cms");
+			include('system/receipt.cms');
 		} else {
-			include("dhufish/extensions/" + xmlEscape(tool) + "/edit.cms");
+			include('system/extensions/' + xmlEscape(tool) + '/edit.cms');
 		}
 	} else {
-		include("dhufish/editpage.cms");
+		include('system/editpage.cms');
 	}
 
 ?>

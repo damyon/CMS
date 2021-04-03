@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Items Requiring Approval</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	var lastColor = "";
@@ -19,7 +19,7 @@
 		id = "win" + r;
 
 		if (itemPath != "") {
-		window.open("<?cms urlRewrite("/cms/dhufish/approve.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/approve.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -32,7 +32,7 @@
 		id = "win" + r;
 
 		if (itemPath != "") {
-			window.open("<?cms urlRewrite("/cms/dhufish/loadfile.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=yes,location=yes,toolbar=yes,width=540,height=240,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite("/cms/system/loadfile.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=yes,location=yes,toolbar=yes,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -45,7 +45,7 @@
 		id = "win" + r;
 
 		if (itemPath != "") {
-		window.open("<?cms urlRewrite("/cms/dhufish/reject.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/reject.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}

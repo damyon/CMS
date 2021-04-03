@@ -7,37 +7,37 @@
 	string fullname;
 	int err;
 	
-	userid = get("user");
+	userid = get('user');
 	details = getUserDetails(userid);
-	fieldname = get("fieldname");
-	fieldvalue = get("fieldvalue");
-	namespace = get("namespace");
+	fieldname = get('fieldname');
+	fieldvalue = get('fieldvalue');
+	namespace = get('namespace');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 
-	if (fieldname == "") {
-		set("error", "Field name is required.");
+	if (fieldname == '') {
+		set('error', 'Field name is required.');
 	}
 
-	if (namespace == "http://purl.org/dc/elements/1.1/") {
-		fullname = "dc:" + fieldname;
+	if (namespace == 'http://purl.org/dc/elements/1.1/') {
+		fullname = 'dc:' + fieldname;
 	} else {
-		fullname = fieldname + "[" + namespace + "]";
+		fullname = fieldname + '[' + namespace + ']';
 	}
 	
-	if (get("error") == "") {
+	if (get('error') == '') {
 		err = setUserMetadata(userid, fullname, fieldvalue);
 
 		// set the metadata
 		if (err == 0) {
-			set("message", "The user metadata field <em>" + xmlEscape(fieldname) + "</em> was set for the user " + xmlEscape(details[4]) + ".");
+			set('message', 'The user metadata field <em>' + xmlEscape(fieldname) + '</em> was set for the user ' + xmlEscape(details[4]) + '.');
 		} else {
-			set("message", "The user metadata field <em>" + xmlEscape(fieldname) + "</em> was not set for the user " + xmlEscape(details[4]) + ". The error was: " + getErrorMessage(err));
+			set('message', 'The user metadata field <em>' + xmlEscape(fieldname) + '</em> was not set for the user ' + xmlEscape(details[4]) + '. The error was: ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/usermetadataadd.cms");
+		include('system/usermetadataadd.cms');
 	}
 
 ?>

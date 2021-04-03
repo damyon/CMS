@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - About</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/dhufish/css/popup.css'); ?>"/>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"/>
 </head>
 <body>
   <div>
@@ -10,7 +10,7 @@
 	<fieldset id="outer">
 	<legend> About </legend>
 	<div style="background-color: white; text-align: center; border: 1px solid black;">
-	<img src="<?cms urlRewrite('/cms/dhufish/images/background.png?image-size=150x150'); ?>" alt="Dhufish" style="padding: 2em;"/>
+	<img src="<?cms urlRewrite('/cms/system/images/background.png?image-size=150x150'); ?>" alt="Dhufish" style="padding: 2em;"/>
 	<h1>Dhufish Content Management System</h1>
 	<p><?cms write(getVersion()); ?></p>
 	</div>

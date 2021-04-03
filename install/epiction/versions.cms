@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Versions</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 
@@ -37,7 +37,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/dhufish/versionsrollback.cms?path=" + xmlEscape(get("path"))); ?>&versionID=" + versionID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/versionsrollback.cms?path=" + xmlEscape(get("path"))); ?>&versionID=" + versionID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 	}
 
 	function selectVersion(versionID, timestamp, mimetype) {

@@ -3,30 +3,30 @@
 	string fieldname;
 	int err;
 	
-	path = get("path");
-	fieldname = get("fieldname");
+	path = get('path');
+	fieldname = get('fieldname');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if ((path == "") || (path == "/")) {
-		set("error", "Cannot set metadata for root folder.");
+	if ((path == '') || (path == '/')) {
+		set('error', 'Cannot set metadata for root folder.');
 	}
 	
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// remove the metadata
 
 		err = removeFileMetadata(path, fieldname);
 
 		// set the metadata
 		if (err == 0) {
-			set("message", "The metadata was removed from the file " + xmlEscape(path) + ".");
+			set('message', 'The metadata was removed from the file ' + xmlEscape(path) + '.');
 		} else {
-			set("message", "The metadata was not removed from the file " + xmlEscape(path) + ". The error was " + getErrorMessage(err));
+			set('message', 'The metadata was not removed from the file ' + xmlEscape(path) + '. The error was ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/metadatadelete.cms");
+		include('system/metadatadelete.cms');
 	}
 
 ?>

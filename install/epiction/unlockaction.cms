@@ -3,34 +3,34 @@
 	array parts;
 	int err;
 	
-	path = get("path");
+	path = get('path');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if ((path == "") || (path == "/")) {
-		set("error", "Cannot unlock root folder.");
+	if ((path == '') || (path == '/')) {
+		set('error', 'Cannot unlock root folder.');
 	}
 
-	parts = split(path, "/");
+	parts = split(path, '/');
 	
-	if (parts[0] == "dhufish") {
-		set("error", "Cannot unlock from dhufish folder.");
+	if (parts[0] == 'dhufish') {
+		set('error', 'Cannot unlock from dhufish folder.');
 	}
 	
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// do the unlock
 		err = unLockFile(path);
 	
 		// set the metadata
 		if (err == 0) {
-			set("message", "The file <em>" + xmlEscape(path) + "</em> was unlocked for editing.");
+			set('message', 'The file <em>' + xmlEscape(path) + '</em> was unlocked for editing.');
 		} else {
-			set("message", "The file <em>" + xmlEscape(path) + "</em> was not unlocked for editing. The error was: " + getErrorMessage(err));
+			set('message', 'The file <em>' + xmlEscape(path) + '</em> was not unlocked for editing. The error was: ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/unlock.cms");
+		include('system/unlock.cms');
 	}
 
 ?>

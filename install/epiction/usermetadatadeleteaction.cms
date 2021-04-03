@@ -4,27 +4,27 @@
 	map details;
 	int err;
 	
-	userid = get("user");
-	fieldname = get("fieldname");
+	userid = get('user');
+	fieldname = get('fieldname');
 	details = getUserDetails(userid);
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// remove the metadata
 
 		err = removeUserMetadata(userid, fieldname);
 
 		// set the metadata
 		if (err == 0) {
-			set("message", "The metadata was removed from the user " + xmlEscape(details["fullName"]) + ".");
+			set('message', 'The metadata was removed from the user ' + xmlEscape(details['fullName']) + '.');
 		} else {
-			set("message", "The metadata was not removed from the user " + xmlEscape(details["fullName"]) + ". The error was " + getErrorMessage(err));
+			set('message', 'The metadata was not removed from the user ' + xmlEscape(details['fullName']) + '. The error was ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/usermetadatadelete.cms");
+		include('system/usermetadatadelete.cms');
 	}
 
 ?>

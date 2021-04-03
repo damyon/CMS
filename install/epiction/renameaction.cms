@@ -6,50 +6,50 @@
 	map details;
 	int err;
 	
-	path = get("path");
-	filename = get("filename");
-	tool = get("tool");
+	path = get('path');
+	filename = get('filename');
+	tool = get('tool');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if ((path == "") || (path == "/")) {
-		set("error", "Cannot rename root folder.");
+	if ((path == '') || (path == '/')) {
+		set('error', 'Cannot rename root folder.');
 	}
 
-	if (filename == "") {
-		set("error", "Filename is required.");
+	if (filename == '') {
+		set('error', 'Filename is required.');
 	}
 
 	if (isValidFilename(filename) == 0) {
-		set("error", "File name can only contain numbers, letters and the characters '-', '_' and '.'.");
+		set('error', 'File name can only contain numbers, letters and the characters '-', '_' and '.'.');
 	}
 
-	parts = split(path, "/");
+	parts = split(path, '/');
 	
-	if (parts[0] == "dhufish") {
-		set("error", "Cannot rename from dhufish folder.");
+	if (parts[0] == 'dhufish') {
+		set('error', 'Cannot rename from dhufish folder.');
 	}
 	
-	if (get("error") == "") {
-		if ((tool == "CONTENT") || (tool == "RESOURCE") || (tool == "FOLDER")) {
+	if (get('error') == '') {
+		if ((tool == 'CONTENT') || (tool == 'RESOURCE') || (tool == 'FOLDER')) {
 			// do the rename
 			details = getFileDetails(path);
 
-			err = editFileDetails(path, filename, details["isPublic"], details["relativeOrder"]);
+			err = editFileDetails(path, filename, details['isPublic'], details['relativeOrder']);
 	
 			// set the metadata
 			if (err == 0) {
-				set("message", "The file <em>" + xmlEscape(path) + "</em> was renamed to " + xmlEscape(filename) + ".");
+				set('message', 'The file <em>' + xmlEscape(path) + '</em> was renamed to ' + xmlEscape(filename) + '.');
 			} else {
-				set("message", "The file <em>" + xmlEscape(path) + "</em> was not renamed to " + xmlEscape(filename) + ". The error was: " + getErrorMessage(err));
+				set('message', 'The file <em>' + xmlEscape(path) + '</em> was not renamed to ' + xmlEscape(filename) + '. The error was: ' + getErrorMessage(err));
 			}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 		} else {
-			include("dhufish/extensions/" + xmlEscape(tool) + "/renameaction.cms");
+			include('system/extensions/' + xmlEscape(tool) + '/renameaction.cms');
 		}
 	} else {
-		include("dhufish/rename.cms");
+		include('system/rename.cms');
 	}
 
 ?>

@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Workflow Comments</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
   <?cms
 	map details;
 	int isonline;
@@ -23,7 +23,7 @@
 		id = "win" + r;
 
 		if (isonline == "0") {
-		window.open("<?cms urlRewrite("/cms/dhufish/approve.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/approve.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
 		}
 	}
 	function actionReject() {
@@ -31,14 +31,14 @@
 		id = "win" + r;
 
 		if (isonline == "0") {
-		window.open("<?cms urlRewrite("/cms/dhufish/reject.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/reject.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
 		}
 	}
 	function actionComment() {
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/dhufish/comment.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=520,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/comment.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=520,height=240,screenX=160,screenY=160");
 	}
 	
   -->

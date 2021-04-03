@@ -2,29 +2,29 @@
 	string path;
 	int err;
 	
-	path = get("path");
+	path = get('path');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if ((path == "") || (path == "/")) {
-		set("error", "Cannot set notifications for root folder.");
+	if ((path == '') || (path == '/')) {
+		set('error', 'Cannot set notifications for root folder.');
 	}
 
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// delete the notification settings
 
 		err = removeNotificationSettings(path);
 
 		// set the metadata
 		if (err == 0) {
-			set("message", "The notification settings were removed from the file " + xmlEscape(path) + ".");
+			set('message', 'The notification settings were removed from the file ' + xmlEscape(path) + '.');
 		} else {
-			set("message", "The notification settings were not removed from the file " + xmlEscape(path) + ". The error was " + getErrorMessage(err));
+			set('message', 'The notification settings were not removed from the file ' + xmlEscape(path) + '. The error was ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/notificationsdelete.cms");
+		include('system/notificationsdelete.cms');
 	}
 
 ?>

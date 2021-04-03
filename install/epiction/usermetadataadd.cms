@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Add User Metadata Field </title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	var descriptions = new Array();
@@ -229,7 +229,7 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/dhufish/usermetadataaddaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite("/cms/system/usermetadataaddaction.cms"); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Add User Metadata Field </legend>

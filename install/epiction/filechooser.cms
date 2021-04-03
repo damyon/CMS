@@ -2,17 +2,17 @@
 <html>
 <head>
   <title>Dhufish CMS - File Chooser</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	var lastColor = "";
 
 	function actionOK() {
 		var ele = document.getElementById("mimeType");
-		if (((ele.value == "application/folder") && ("<?cms write(get("onlyfolders")); ?>" == "true")) ||
-            ((ele.value != "application/folder") && ("<?cms write(get("onlyfolders")); ?>" == "false"))) {
+		if (((ele.value == "application/folder") && ("<?cms write(get('onlyfolders')); ?>" == "true")) ||
+            ((ele.value != "application/folder") && ("<?cms write(get('onlyfolders')); ?>" == "false"))) {
 			ele = document.getElementById("filePath");
-			window.opener.document.getElementById("<?cms write(xmlEscape(get("fileelement"))); ?>").value = ele.value;
+			window.opener.document.getElementById("<?cms write(xmlEscape(get('fileelement'))); ?>").value = ele.value;
 			window.close();
 		}
 	}
@@ -21,12 +21,12 @@
 		var ele = document.getElementById("mimeType");
 		if (ele.value == "application/folder") {
 			ele = document.getElementById("filePath");
-			document.location = "<?cms urlRewrite("/cms/dhufish/filechooser.cms?onlyfolders=" + xmlEscape(get("onlyfolders"))); ?>&fileelement=<?cms write(xmlEscape(get("fileelement"))); ?>&path=" + ele.value;
+			document.location = "<?cms urlRewrite('/cms/system/filechooser.cms?onlyfolders=' + xmlEscape(get('onlyfolders'))); ?>&fileelement=<?cms write(xmlEscape(get('fileelement'))); ?>&path=" + ele.value;
 		}
 	}
 	
 	function openFolder(path) {
-		document.location = "<?cms urlRewrite("/cms/dhufish/filechooser.cms?onlyfolders=" + xmlEscape(get("onlyfolders"))); ?>&fileelement=<?cms write(xmlEscape(get("fileelement"))); ?>&path=" + path;
+		document.location = "<?cms urlRewrite('/cms/system/filechooser.cms?onlyfolders=' + xmlEscape(get('onlyfolders'))); ?>&fileelement=<?cms write(xmlEscape(get('fileelement'))); ?>&path=" + path;
 	}
 
 	function actionCancel() {
@@ -62,8 +62,8 @@
 		}
 		ele = document.getElementById("selectbutton");
 		if (ele != null) {
-			if ((mimeType == "application/folder" && "<?cms write(get("onlyfolders")); ?>" == "true") ||
-                (mimeType != "application/folder" && "<?cms write(get("onlyfolders")); ?>" == "false")) {
+			if ((mimeType == "application/folder" && "<?cms write(get('onlyfolders')); ?>" == "true") ||
+                (mimeType != "application/folder" && "<?cms write(get('onlyfolders')); ?>" == "false")) {
 				ele.style.color = "#000";
 			} else {
 				ele.style.color = "#999";
@@ -82,7 +82,6 @@
 			ele.value = index;
 		}
 	}
-  -->
   </script>
 </head>
 <body>
@@ -97,69 +96,69 @@
 			int i;
 			string filepath;
 
-			writeln("<a href=\"" + urlBase("/cms/dhufish/filechooser.cms?path=&onlyfolders=" + get("onlyfolders")) + "&fileelement=" + xmlEscape(get("fileelement")) + "\" title=\"/cms/\">cms</a>");
-			parts = split(get("path"), "/");
+			writeln('<a href="' + urlBase('/cms/system/filechooser.cms?path=&onlyfolders=' + get('onlyfolders')) + '&fileelement=' + xmlEscape(get('fileelement')) + '" title="/cms/">cms</a>');
+			parts = split(get('path'), '/');
 			for (i = 0; i < arrayLength(parts); i++) {
-				if (parts[i] != "") {
-					filepath += "/" + parts[i];	
-					write("/ <a href=\"" + urlBase("/cms/dhufish/filechooser.cms?path=" + xmlEscape(filepath) + "&onlyfolders=" + get("onlyfolders")) + "&fileelement=" + xmlEscape(get("fileelement")) + "\" title=\"" + xmlEscape(filepath) + "\"> " + xmlEscape(parts[i]) + "</a>");
+				if (parts[i] != '') {
+					filepath += '/' + parts[i];	
+					write('/ <a href="' + urlBase('/cms/system/filechooser.cms?path=' + xmlEscape(filepath) + '&onlyfolders=' + get('onlyfolders')) + '&fileelement=' + xmlEscape(get('fileelement')) + '" title="' + xmlEscape(filepath) + '"> ' + xmlEscape(parts[i]) + '</a>');
 				}
 			}
 
 		 ?>
 	</p>
-	<table width="100%" cellpadding="0" cellspacing="0" id="metadatatable" style="max-height: 16em; overflow: auto;">
-        <tr><th>Filename</th><th>Title</th><th>Type</th></tr>
-	<?cms
-		int topskip, topcount = 0;
-        int topmax = 15, numwritten = 0;
-		string toppath;
+	<table width="100%" cellpadding="0" cellspacing="0" id="metadatatable" style="max-height: 16em; overflow: auto; ">
+    <tr><th>Filename</th><th>Title</th><th>Type</th></tr>
+	  <?cms
+		  int topskip, topcount = 0;
+      int topmax = 15, numwritten = 0;
+		  string toppath;
 		
-		toppath = get("path");
-        topskip = get("skip");
+		  toppath = get('path');
+      topskip = get('skip');
 
-        function writeFilesList(string path, int skip, int max) {	
-			array files;
-			int i, count;
-			map details;
-			string title;
+      function writeFilesList(string path, int skip, int max) {	
+			  array files;
+			  int i, count;
+			  map details;
+			  string title;
         
-			if ((path == "") || (path == "/")) {
-				files = getRootFolderContents("", 0, skip + max, "relative");
-			} else {
-				files = getFolderContents(get("path"), "", 0, skip + max, "relative");
-			}
+			  if ((path == '') || (path == '/')) {
+				  files = getRootFolderContents('', 0, skip + max, 'relative');
+			  } else {
+			  	files = getFolderContents(get('path'), '', 0, skip + max, 'relative');
+			  }
 
-			for (i = 0; i < arrayLength(files); i++) {
-				details = getFileDetails(files[i]["path"]);
-				title = getFileMetadata(files[i]["path"], "dc:title");
-				if ((((get("onlyfolders") == "false") || (details["mimeType"] == "application/folder")) && (details["path"] != "dhufish"))) {
-					if (count >= skip) {
-						write("<tr style=\"cursor: pointer;\" ");
+			  for (i = 0; i < arrayLength(files); i++) {
+  				details = getFileDetails(files[i]['path']);
+  				title = getFileMetadata(files[i]['path'], 'dc:title');
+  				if ((((get('onlyfolders') == 'false') || (details['mimeType'] == 'application/folder')) && (details['path'] != 'dhufish'))) {
+  					if (count >= skip) {
+  						write('<tr style="cursor: pointer; " ');
 
-						if (count % 2) {
-							write("class=\"odd\"");
-						} else {
-							write("class=\"even\"");
-						}
-						write(" id=\"file" + count + "\" onClick=\"selectRow(" + count + ", '" + xmlEscape(details["path"]) + "', '" + xmlEscape(details["mimeType"]) + "');\"");
-						if (details["type"] == "FOLDER") {
-							write(" onDblClick=\"openFolder('" + xmlEscape(details["path"]) + "');\"");
-						}
-						writeln("><td>" + xmlEscape(details["fileName"]) + "</td><td>" + xmlEscape(title) + "</td><td>" + xmlEscape(details["mimeType"]) + "</td></tr>");
-					}
-					count++;
-				 }
+	  					if (count % 2) {
+	  						write('class="odd"');
+	  					} else {
+	  						write('class="even"');
+	  					}
+	  					write(' id="file' + count + '" onClick="selectRow(`' + count + '`, `' + xmlEscape(details['path']) + '`, `' + xmlEscape(details['mimeType']) + '`)"');
+	  					if (details['type'] == 'FOLDER') {
+	  						write(' onDblClick="openFolder(`' + xmlEscape(details['path']) + '`)"');
+	  					}
+	  					writeln('><td>' + xmlEscape(details['fileName']) + '</td><td>' + xmlEscape(title) + '</td><td>' + xmlEscape(details['mimeType']) + '</td></tr>');
+	  				}
+	  				count++;
+	 			  }
 		  	}
-			topskip = skip + i;
-			return count;
-        }
+			  topskip = skip + i;
+			  return count;
+      }
         
-		do {
-			topcount = writeFilesList(toppath, topskip, topmax - numwritten);
-			numwritten += topcount;
-		} while ((topcount > 0) && (numwritten < topmax));
-	?>
+		  do {
+			  topcount = writeFilesList(toppath, topskip, topmax - numwritten);
+			  numwritten += topcount;
+		  } while ((topcount > 0) && (numwritten < topmax));
+	  ?>
 	</table>
 	</div>
 	<div id="leftmenu">
@@ -167,27 +166,29 @@
 	<input type="hidden" name="filePath" id="filePath" value=""/>
 	<input type="hidden" name="fileIndex" id="fileIndex" value=""/>
 	<input type="hidden" name="mimeType" id="mimeType" value=""/>
-	<input type="button" onclick="actionOK();" id="selectbutton" name="selectbutton" class="button" value="Select" style="color: #999;"/><br/><br/>
-	<input type="button" onclick="actionOpen();" id="openbutton" name="openfolder" class="button" value="Open" style="color: #999;"/><br/><br/>
+	<input type="button" onclick="actionOK();" id="selectbutton" name="selectbutton" class="button" value="Select" style="color: #999; "/><br/><br/>
+	<input type="button" onclick="actionOpen();" id="openbutton" name="openfolder" class="button" value="Open" style="color: #999; "/><br/><br/>
 	</form>
 	</div>
 	<div style="clear: left;">
-	<p><?cms 
-		int skip;
-		skip = get("skip");
+	<p>
+		<?cms 
+		  int skip;
+		  skip = get('skip');
 
-		if (skip > 0) {
-			write("<a href=\"" + urlBase("/cms/dhufish/filechooser.cms?path=" + get("path") + "&onlyfolders=" + get("onlyfolders") + "&fileelement=" + get("fileelement") + "&skip=" + (skip - 15)) + "\">Previous</a>&nbsp;");
-		} else if (numwritten == topmax) {
-			write("<a href=\"" + urlBase("/cms/dhufish/filechooser.cms?path=" + get("path") + "&onlyfolders=" + get("onlyfolders") + "&fileelement=" + get("fileelement") + "&skip=" + (skip + 15)) + "\">Next</a>&nbsp;");		
-		}
-	?></p>
+		  if (skip > 0) {
+		  	write('<a href="' + urlBase('/cms/system/filechooser.cms?path=' + get('path') + '&onlyfolders=' + get('onlyfolders') + '&fileelement=' + get('fileelement') + '&skip=' + (skip - 15)) + '">Previous</a>&nbsp;');
+		  } else if (numwritten == topmax) {
+	  		write('<a href="' + urlBase('/cms/system/filechooser.cms?path=' + get('path') + '&onlyfolders=' + get('onlyfolders') + '&fileelement=' + get('fileelement') + '&skip=' + (skip + 15)) + '">Next</a>&nbsp;');		
+		  }
+  	?>
+  </p>
 	</div>
 	</fieldset>
   </div>
   <div id="actions">
   <p>
-  <input type="button" onclick="actionCancel();" class="button" name="submit-action" value="Cancel"/>
+  <input type="button" onclick="actionCancel()" class="button" name="submit-action" value="Cancel"/>
   </p>
   </div>
 </body>

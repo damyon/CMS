@@ -60,9 +60,9 @@
 		} else {
 			set("message", "The <em>" + xmlEscape(mode) + "</em> was not successful. The error was: " + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include("system/receipt.cms");
 	} else {
-		include("dhufish/paste.cms");
+		include("system/paste.cms");
 	}
 
 ?>

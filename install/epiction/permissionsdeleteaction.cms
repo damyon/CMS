@@ -4,37 +4,37 @@
 	map groupdetails;
 	int err;
 	
-	path = get("path");
-	groupid = get("group");
+	path = get('path');
+	groupid = get('group');
 
 	groupdetails = getGroupDetails(groupid);
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if ((path == "") || (path == "/")) {
-		set("error", "Cannot set permissions for root folder.");
+	if ((path == '') || (path == '/')) {
+		set('error', 'Cannot set permissions for root folder.');
 	}
 
 	
 	if (groupid <= 0) {
-		set("error", "Group is required.");
+		set('error', 'Group is required.');
 	}
 
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// delete the permission
 
 		err = removePermission(path, groupid);
 
 		// set the metadata
 		if (err == 0) {
-			set("message", "The permissions for the group <em>" + xmlEscape(groupdetails["groupName"]) + "</em> were removed from the file " + xmlEscape(path) + ".");
+			set('message', 'The permissions for the group <em>' + xmlEscape(groupdetails['groupName']) + '</em> were removed from the file ' + xmlEscape(path) + '.');
 		} else {
-			set("message", "The permissions for the group <em>" + xmlEscape(groupdetails["groupName"]) + "</em> were not removed from the file " + xmlEscape(path) + ". The error was " + getErrorMessage(err));
+			set('message', 'The permissions for the group <em>' + xmlEscape(groupdetails['groupName']) + '</em> were not removed from the file ' + xmlEscape(path) + '. The error was ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/permissionsdelete.cms");
+		include('system/permissionsdelete.cms');
 	}
 
 ?>

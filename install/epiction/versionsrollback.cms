@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Rollback Version (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -44,7 +44,7 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/dhufish/versionsrollbackaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite("/cms/system/versionsrollbackaction.cms"); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Rollback Version </legend>

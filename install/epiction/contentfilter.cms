@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Filter</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/dhufish/css/popup.css'); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -17,7 +17,7 @@
 			filter = filter.substring(4);
 		}
 
-		window.opener.document.location = "<?cms urlRewrite('/cms/dhufish/content.cms?path=' + xmlEscape(get('path')) + '&pagination=' + xmlEscape(get('pagination'))); ?>" + "&filter=" + filter;
+		window.opener.document.location = "<?cms urlRewrite('/cms/system/content.cms?path=' + xmlEscape(get('path')) + '&pagination=' + xmlEscape(get('pagination'))); ?>" + "&filter=" + filter;
 		window.close();
 	}
 

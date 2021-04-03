@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Dhufish CMS - Remove User Metadata Field </title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
-  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/dhufish/js/popup.js"); ?>"></script>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/system/js/popup.js"); ?>"></script>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -41,7 +41,7 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/dhufish/usermetadatadeleteaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite("/cms/system/usermetadatadeleteaction.cms"); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Remove User Metadata Field </legend>

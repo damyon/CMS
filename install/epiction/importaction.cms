@@ -3,27 +3,27 @@
 	int parentid;
 	int err;
 	
-	path = get("path");
+	path = get('path');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if (uploadFileExists("package") == 0) {
-		set("error", "You must specify a package file to upload.");
+	if (uploadFileExists('package') == 0) {
+		set('error', 'You must specify a package file to upload.');
 	}
 
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// import the package
-		err = importPackage(path, "package");
+		err = importPackage(path, 'package');
 	
 		if (err == 0) {
-			set("message", "The package was imported.");
+			set('message', 'The package was imported.');
 		} else {
-			set("message", "The package was not imported. The error was: " + getErrorMessage(err));
+			set('message', 'The package was not imported. The error was: ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/import.cms");
+		include('system/import.cms');
 	}
 
 ?>

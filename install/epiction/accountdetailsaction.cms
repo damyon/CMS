@@ -44,9 +44,9 @@
 		} else {
 			set('message', 'The user <em>' + xmlEscape(username) + '</em> was not updated. The error was: ' + getErrorMessage(err));
 		}
-		include('dhufish/receipt.cms');
+		include('system/receipt.cms');
 	} else {
-		include('dhufish/accountdetails.cms');
+		include('system/accountdetails.cms');
 	}
 
 ?>

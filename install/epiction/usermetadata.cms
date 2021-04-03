@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - User Metadata</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	var lastColor = "";
@@ -13,7 +13,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/dhufish/usermetadataadd.cms?user=" + xmlEscape(get("user"))); ?>", id, "menubar=no,width=680,height=400,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/usermetadataadd.cms?user=" + xmlEscape(get("user"))); ?>", id, "menubar=no,width=680,height=400,screenX=160,screenY=160");
 	}
 	
 	function actionEdit() {
@@ -22,7 +22,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/dhufish/usermetadataedit.cms?user=" + xmlEscape(get("user"))); ?>&fieldname=" + escape(fieldName), id, "menubar=no,width=480,height=320,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/usermetadataedit.cms?user=" + xmlEscape(get("user"))); ?>&fieldname=" + escape(fieldName), id, "menubar=no,width=480,height=320,screenX=160,screenY=160");
 	}
 
 	function actionDelete() {
@@ -31,7 +31,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/dhufish/usermetadatadelete.cms?user=" + xmlEscape(get("user"))); ?>&fieldname=" + escape(fieldName), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite("/cms/system/usermetadatadelete.cms?user=" + xmlEscape(get("user"))); ?>&fieldname=" + escape(fieldName), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 	}
 
 	function selectRow(index, name) {

@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Help </title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
 </head>
 <body>
   <div>
@@ -31,14 +31,14 @@
 						writeHelpMenu(details["path"]);
 					} else {
 						write("<li>");
-						write("<a href=\"" + urlBase("/cms/dhufish/help.cms?path=" + xmlEscape(details["path"])) + "\" title=\"" + xmlEscape(title) + "\">" + xmlEscape(title) + "</a>");
+						write("<a href=\"" + urlBase("/cms/system/help.cms?path=" + xmlEscape(details["path"])) + "\" title=\"" + xmlEscape(title) + "\">" + xmlEscape(title) + "</a>");
 						writeln("</li>");
 					}
 				}
 				writeln("</ul>");
 			}
 
-			writeHelpMenu("dhufish/help");
+			writeHelpMenu("system/help");
 		?>
 	</div>
 	<div style="background: white; width: 40em; height: 39em; border: 1px solid black; padding: 0.5em; float: left;">
@@ -47,7 +47,7 @@
 		helpfile = get("path");
 
 		if (helpfile == "") {
-			helpfile = "dhufish/help/about.html";
+			helpfile = "system/help/about.html";
 		}
 
 		include(helpfile);

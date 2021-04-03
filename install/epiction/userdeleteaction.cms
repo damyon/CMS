@@ -3,24 +3,24 @@
 	int userid;
 	int err;
 	
-	userid = get("user");
+	userid = get('user');
 	details = getUserDetails(userid);
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if (get("error") == "") {
+	if (get('error') == '') {
 		err = deleteUser(userid);
 
 		// set the metadata
 		if (err == 0) {
-			set("message", "The user " + xmlEscape(details["userName"]) + " was deleted.");
+			set('message', 'The user ' + xmlEscape(details['userName']) + ' was deleted.');
 		} else {
-			set("message", "The user " + xmlEscape(details["userName"]) + " was not deleted. The error was " + getErrorMessage(err));
+			set('message', 'The user ' + xmlEscape(details['userName']) + ' was not deleted. The error was ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/userdelete.cms");
+		include('system/userdelete.cms');
 	}
 
 ?>

@@ -5,39 +5,39 @@
 	map groupdetails;
 	int err;
 	
-	path = get("path");
-	groupid = get("group");
+	path = get('path');
+	groupid = get('group');
 
-	requireall = get("requireall");
+	requireall = get('requireall');
 
 	groupdetails = getGroupDetails(groupid);
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if ((path == "") || (path == "/")) {
-		set("error", "Cannot set workflow for root folder.");
+	if ((path == '') || (path == '/')) {
+		set('error', 'Cannot set workflow for root folder.');
 	}
 
 	
 	if (groupid <= 0) {
-		set("error", "Group is required.");
+		set('error', 'Group is required.');
 	}
 
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// set the workflow
 
 		err = attachWorkflowSettings(path, groupid, requireall);
 
 		// set the metadata
 		if (err == 0) {
-			set("message", "The workflow settings for the group <em>" + xmlEscape(groupdetails["groupName"]) + "</em> were added to the folder " + xmlEscape(path) + ".");
+			set('message', 'The workflow settings for the group <em>' + xmlEscape(groupdetails['groupName']) + '</em> were added to the folder ' + xmlEscape(path) + '.');
 		} else {
-			set("message", "The workflow settings for the group <em>" + xmlEscape(groupdetails["groupName"]) + "</em> were not added to the folder " + xmlEscape(path) + ". The error was " + getErrorMessage(err));
+			set('message', 'The workflow settings for the group <em>' + xmlEscape(groupdetails['groupName']) + '</em> were not added to the folder ' + xmlEscape(path) + '. The error was ' + getErrorMessage(err));
 		}
-		include("dhufish/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("dhufish/workflowadd.cms");
+		include('system/workflowadd.cms');
 	}
 
 ?>

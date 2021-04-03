@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Rename (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/dhufish/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
   <?cms
 	string path;
 	string tools;
@@ -61,7 +61,7 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/dhufish/renameaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite("/cms/system/renameaction.cms"); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Rename </legend>
