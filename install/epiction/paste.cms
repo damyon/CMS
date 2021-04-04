@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Dhufish CMS - Paste (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Paste (/cms/<?cms write(xmlEscape(get('path'))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -35,35 +35,35 @@
 	string mode;
 	string path;
 
-	path = get("path");
+	path = get('path');
 
-	source = getSessionData("session:copy");
-	mode = "copy";
-	if (source == "") {
-		source = getSessionData("session:cut");
-		mode = "cut";
+	source = getSessionData('session:copy');
+	mode = 'copy';
+	if (source == '') {
+		source = getSessionData('session:cut');
+		mode = 'cut';
 	}
   ?>
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/pasteaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite('/cms/system/pasteaction.cms'); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Paste </legend>
 	<p>Are you sure you want to paste this file in this location?</p>
-	<p><span><?cms if (mode == "copy") { write("Copy from:"); } else { write("Cut from:"); } ?></span><?cms write(xmlEscape(source)); ?></p>
-	<p><span><?cms if (mode == "copy") { write("Copy to:"); } else { write("Cut to:"); } ?></span><?cms write(xmlEscape(path)); ?></p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	<p><span><?cms if (mode == 'copy') { write('Copy from:'); } else { write('Cut from:'); } ?></span><?cms write(xmlEscape(source)); ?></p>
+	<p><span><?cms if (mode == 'copy') { write('Copy to:'); } else { write('Cut to:'); } ?></span><?cms write(xmlEscape(path)); ?></p>
+	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
 	</fieldset>
 	</div>
 	<div id="actions">
 	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
+	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
 	<input type="hidden" name="mode" value="<?cms write(xmlEscape(mode)); ?>"/>
 	<input type="hidden" name="source" value="<?cms write(xmlEscape(source)); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();" id="cancel"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel()" id="cancel"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK()"/>
 	</p>
 	</div>
     </form>

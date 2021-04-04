@@ -7,62 +7,62 @@
 	int err;
 	int i;
 	
-	path = get("path");
-	source = get("source");
-	mode = get("mode");
+	path = get('path');
+	source = get('source');
+	mode = get('mode');
 
 	// validate the inputs
-	set("error", "");
+	set('error', '');
 	
-	if ((source == "") || (source == "/")) {
-		set("error", "Cannot copy/cut root folder.");
+	if ((source == '') || (source == '/')) {
+		set('error', 'Cannot copy/cut root folder.');
 	}
 	
-	parts = split(source, "/");
+	parts = split(source, '/');
 
-	if (parts[0] == "dhufish") {
-		set("error", "Cannot copy/cut from dhufish folder.");
+	if (parts[0] == 'system') {
+		set('error', 'Cannot copy/cut from system folder.');
 	}
 
-	parts = split(path, "/");
+	parts = split(path, '/');
 
-	if (parts[0] == "dhufish") {
-		set("error", "Cannot copy/cut from dhufish folder.");
+	if (parts[0] == 'system') {
+		set('error', 'Cannot copy/cut from system folder.');
 	}
 	
 	for (i = 0; i < arrayLength(parts); i++) {
 		if (i > 0) {
-			subpath += "/";
+			subpath += '/';
 		}
 		subpath += parts[i];
 
 		if ((subpath == source) || 
-			(("/" + subpath) == source) || 
-			((subpath + "/") == source) || 
-			(("/" + subpath + "/") == source)) {
-			set("error", "Cannot copy/cut from parent folder to subfolder.");
+			(('/' + subpath) == source) || 
+			((subpath + '/') == source) || 
+			(('/' + subpath + '/') == source)) {
+			set('error', 'Cannot copy/cut from parent folder to subfolder.');
 		}
 	}
 	
-	if (get("error") == "") {
+	if (get('error') == '') {
 		// do the copy
 		err = copyFile(source, path);
 	
 		// set the metadata
 		if (err == 0) {
-			if (mode == "cut") {
+			if (mode == 'cut') {
 				err = deleteFile(source);
 			}
 		}
 
 		if (err == 0) {
-			set("message", "The <em>" + xmlEscape(mode) + "</em> was successful.");
+			set('message', 'The <em>' + xmlEscape(mode) + '</em> was successful.');
 		} else {
-			set("message", "The <em>" + xmlEscape(mode) + "</em> was not successful. The error was: " + getErrorMessage(err));
+			set('message', 'The <em>' + xmlEscape(mode) + '</em> was not successful. The error was: ' + getErrorMessage(err));
 		}
-		include("system/receipt.cms");
+		include('system/receipt.cms');
 	} else {
-		include("system/paste.cms");
+		include('system/paste.cms');
 	}
 
 ?>

@@ -2,13 +2,13 @@
 <html>
 <head>
   <title>Dhufish CMS - Group Members</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	var lastColor = "";
 
 	function actionOK() {
-                window.opener.document.location.reload();
+    window.opener.document.location.reload();
 		window.close();
 	}
 	
@@ -16,7 +16,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/system/groupsusersadd.cms?group=" + xmlEscape(get("group"))); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite('/cms/system/groupsusersadd.cms?group=' + xmlEscape(get('group'))); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
 	}
 	
 	function actionRemove() {
@@ -25,7 +25,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/system/usersgroupsdelete.cms?group=" + xmlEscape(get("group"))); ?>&user=" + userid, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite('/cms/system/usersgroupsdelete.cms?group=' + xmlEscape(get('group'))); ?>&user=" + userid, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 	}
 
 	function selectUser(userID) {
@@ -56,7 +56,6 @@
 			ele.value = userID;
 		}
 	}
-  -->
   </script>
 </head>
 <body>
@@ -74,23 +73,23 @@
 		map details;
 		int err;
 	
-		groupid = get("group");
-		users = getGroupMembers(groupid, "", 0, 2048);
+		groupid = get('group');
+		users = getGroupMembers(groupid, '', 0, 2048);
 
 		for (i = 0; i < arrayLength(users); i++) {
-			details = getUserDetails(users[i]["userID"]);
-			write("<tr ");
+			details = getUserDetails(users[i]['userID']);
+			write('<tr ');
 			if (i % 2) {
-				write(" class=\"odd\" ");
+				write(' class="odd" ');
 			}
-			write("id=\"user" + users[i]["userID"] + "\" onclick=\"selectUser(" + users[i]["userID"] + ");\" style=\"cursor: pointer;\"><td>" + xmlEscape(details["userName"]) + "</td><td>" + xmlEscape(details["fullName"]) + "</td><td>" + xmlEscape(details["email"]) + "</td></tr>");
+			write('id="user' + users[i]['userID'] + '" onclick="selectUser(' + users[i]['userID'] + ')" style="cursor: pointer; "><td>' + xmlEscape(details['userName']) + '</td><td>' + xmlEscape(details['fullName']) + '</td><td>' + xmlEscape(details['email']) + '</td></tr>');
 		}
 		
 		while (i < 5) {
 			if (i % 2) {
-				writeln("<tr class=\"odd\"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+				writeln('<tr class="odd"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
 			} else {
-				writeln("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+				writeln('<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
 			}
 			i++;
 		}
@@ -106,13 +105,13 @@
 		map details;
 		int groupid;
 
-		groupid = get("group");
-		super = get("isSuperUser");
+		groupid = get('group');
+		super = get('isSuperUser');
 		details = getGroupDetails(groupid);
 
-		if ((super == "y") || (details["isPublic"] == 1)) {
-			writeln("<input type=\"button\" onclick=\"actionAdd();\" id=\"addbutton\" name=\"adduser\" class=\"button\" value=\"Add\"/><br/><br/>");
-			writeln("<input type=\"button\" onclick=\"actionRemove();\" id=\"removebutton\" name=\"removeuser\" class=\"button\" value=\"Remove\" style=\"color: #999;\"/><br/><br/>");
+		if ((super == 'y') || (details['isPublic'] == 1)) {
+			writeln('<input type="button" onclick="actionAdd();" id="addbutton" name="adduser" class="button" value="Add"/><br/><br/>');
+			writeln('<input type="button" onclick="actionRemove();" id="removebutton" name="removeuser" class="button" value="Remove" style="color: #999; "/><br/><br/>');
 		}
 	?>
 	</form>
@@ -121,7 +120,7 @@
   </div>
   <div id="actions">
   <p>
-  <input type="button" onclick="actionOK();" class="button" name="submit-action" value="Close"/>
+  <input type="button" onclick="actionOK()" class="button" name="submit-action" value="Close"/>
   </p>
   </div>
 </body>

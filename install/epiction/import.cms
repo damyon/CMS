@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Import Package</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -33,21 +33,21 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/importaction.cms"); ?>" method="POST" enctype="multipart/form-data">
+    <form action="<?cms urlRewrite('/cms/system/importaction.cms'); ?>" method="POST" enctype="multipart/form-data">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Import Package</legend>
 	<p><span>Upload File: </span>
 	<input type="file" name="package" id="package" size="32"/>
 	</p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
 	</fieldset>
 	</div>
 	<div id="actions">
 	<p>
-	<input type="hidden" name="path" id="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
+	<input type="hidden" name="path" id="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK()"/>
 	</p>
 	</div>
     </form>

@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - New Group</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -33,34 +33,34 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/newgroupaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite('/cms/system/newgroupaction.cms'); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Create New Group </legend>
 	<p><span>Group Name:</span>
-	<input type="text" class="forminput" name="groupname" size="16" id="groupname" value="<?cms write(xmlEscape(get("groupname"))); ?>" maxlength="250"/>
+		<input type="text" class="forminput" name="groupname" size="16" id="groupname" value="<?cms write(xmlEscape(get('groupname'))); ?>" maxlength="250"/>
 	</p>
 	<p><span>Public:</span>
-        <select name="newpublic">
-                <?cms
-                if (get("newpublic") == 1) {
-                        writeln("<option value=\"1\" selected=\"selected\">True</option>");
-                        writeln("<option value=\"0\">False</option>");
-                } else {
-                        writeln("<option value=\"1\">True</option>");
-                        writeln("<option value=\"0\" selected=\"selected\">False</option>");
-                }
-                ?>
-        </select>
+		<select name="newpublic">
+			<?cms
+			if (get('newpublic') == 1) {
+				writeln('<option value="1" selected="selected">True</option>');
+				writeln('<option value="0">False</option>');
+			} else {
+				writeln('<option value="1">True</option>');
+				writeln('<option value="0" selected="selected">False</option>');
+			}
+			?>
+		</select>
 	</p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
 	</fieldset>
 	</div>
 	<div id="actions">
 	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
+	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK()"/>
 	</p>
 	</div>
     </form>

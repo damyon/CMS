@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Dhufish CMS - Add Permissions (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
-  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/system/js/popup.js"); ?>"></script>
+  <title>Dhufish CMS - Add Permissions (/cms/<?cms write(xmlEscape(get('path'))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite('/cms/system/js/popup.js'); ?>"></script>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -34,7 +34,7 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/permissionsaddaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite('/cms/system/permissionsaddaction.cms'); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Add Permissions </legend>
@@ -45,21 +45,21 @@
 		map details;
 		int i;
 
-		groups = getGroupList("", 0, 2048);
+		groups = getGroupList('', 0, 2048);
 
 		for (i = 0; i < arrayLength(groups); i++) {
-			details = getGroupDetails(groups[i]["groupID"]);
-			writeln("<option value=\"" + groups[i]["groupID"] + "\">" + xmlEscape(details["groupName"]) + "</option>");
+			details = getGroupDetails(groups[i]['groupID']);
+			writeln('<option value="' + groups[i]['groupID'] + '">' + xmlEscape(details['groupName']) + '</option>');
 		}
 	?>
 	</select>
 	<?cms 
 		string super;
 
-		super = get("isSuperUser");
+		super = get('isSuperUser');
 
-		if (super == "y") {
-			writeln("<a href=\"javascript:void(0);\" onclick=\"openWindow('" + urlBase("/cms/system/newgroup.cms") + "', '480', '320');\" rel=\"popup-480-240\" title=\"Create new group\"><img border=\"0\" alt=\"Create new group\" src=\"" + urlBase("/cms/system/images/add.gif") + "\"/></a>");
+		if (super == 'y') {
+			writeln('<a href="javascript:void(0);" onclick="openWindow(`' + urlBase('/cms/system/newgroup.cms') + '`, 480, 320)" rel="popup-480-240" title="Create new group"><img border="0" alt="Create new group" src="' + urlBase('/cms/system/images/add.gif') + '"/></a>');
 		}
 		?>
 	</p>
@@ -68,14 +68,14 @@
 	<input type="checkbox" name="write"/> Write
 	<input type="checkbox" name="execute"/> Execute
 	</p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
 	</fieldset>
 	</div>
 	<div id="actions">
 	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
+	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK()"/>
 	</p>
 	</div>
     </form>

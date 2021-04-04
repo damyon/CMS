@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Help </title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
 </head>
 <body>
   <div>
@@ -18,36 +18,36 @@
 				int i;
 				int j;
 			
-				files = getFolderContents(path, "", 0, 2048, "relative");
-				title = getFileMetadata(path, "dc:title");
-				writeln("<ul>");
-				writeln("<strong>" + xmlEscape(title) + "</strong><br/>");
+				files = getFolderContents(path, '', 0, 2048, 'relative');
+				title = getFileMetadata(path, 'dc:title');
+				writeln('<ul>');
+				writeln('<strong>' + xmlEscape(title) + '</strong><br/>');
 
 				for (i = 0; i < arrayLength(files); i++) {
-					details = getFileDetails(files[i]["path"]);
-					title = getFileMetadata(files[i]["path"], "dc:title");
+					details = getFileDetails(files[i]['path']);
+					title = getFileMetadata(files[i]['path'], 'dc:title');
 
-					if (details["type"] == "FOLDER") {
-						writeHelpMenu(details["path"]);
+					if (details['type'] == 'FOLDER') {
+						writeHelpMenu(details['path']);
 					} else {
-						write("<li>");
-						write("<a href=\"" + urlBase("/cms/system/help.cms?path=" + xmlEscape(details["path"])) + "\" title=\"" + xmlEscape(title) + "\">" + xmlEscape(title) + "</a>");
-						writeln("</li>");
+						write('<li>');
+						write('<a href="' + urlBase('/cms/system/help.cms?path=' + xmlEscape(details['path'])) + '" title="' + xmlEscape(title) + '">' + xmlEscape(title) + '</a>');
+						writeln('</li>');
 					}
 				}
-				writeln("</ul>");
+				writeln('</ul>');
 			}
 
-			writeHelpMenu("system/help");
+			writeHelpMenu('system/help');
 		?>
 	</div>
 	<div style="background: white; width: 40em; height: 39em; border: 1px solid black; padding: 0.5em; float: left;">
 	<?cms 
 		string helpfile;
-		helpfile = get("path");
+		helpfile = get('path');
 
-		if (helpfile == "") {
-			helpfile = "system/help/about.html";
+		if (helpfile == '') {
+			helpfile = 'system/help/about.html';
 		}
 
 		include(helpfile);

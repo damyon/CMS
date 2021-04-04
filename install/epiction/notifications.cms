@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Notification Settings (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -10,18 +10,18 @@
 	}
 
 	function actionAdd() {
-                r = Math.round(Math.random() * 1024);
-                id = "win" + r;
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
 
-                window.open("<?cms urlRewrite("/cms/system/notificationsadd.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
-        }
+		window.open("<?cms urlRewrite('/cms/system/notificationsadd.cms?path=' + xmlEscape(get('path'))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
+	}
 
 	function actionRemove(groupID, requiresAll) {
-                r = Math.round(Math.random() * 1024);
-                id = "win" + r;
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
 
-                window.open("<?cms urlRewrite("/cms/system/notificationsdelete.cms?path=" + xmlEscape(get("path"))); ?>&group=" + groupID + "&requiresall=" + requiresAll, id, "menubar=no,width=640,height=240,screenX=160,screenY=160");
-        }
+		window.open("<?cms urlRewrite('/cms/system/notificationsdelete.cms?path=' + xmlEscape(get('path'))); ?>&group=" + groupID + "&requiresall=" + requiresAll, id, "menubar=no,width=640,height=240,screenX=160,screenY=160");
+	}
 
 	function setFocus(ele) {
 		var ele = document.getElementById(ele);
@@ -39,14 +39,14 @@
 	string path;
 	map details;
 
-	path = get("path");
+	path = get('path');
 	details = getFileDetails(path);
 
   ?>
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/notificationsaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite('/cms/system/notificationsaction.cms'); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Notification Settings </legend>
@@ -60,35 +60,35 @@
 		string path;
 		int groupid;
 
-		path = get("path");
+		path = get('path');
 
 		groupid = getNotificationSettings(path);
 		if (groupid > 0) {
 		  notificationset = 1;
 			details = getGroupDetails(groupid);
-			write("All members of the group <em> " + xmlEscape(details["groupName"]) + " </em> will be notified of changes to this folder.");
+			write('All members of the group <em> ' + xmlEscape(details['groupName']) + ' </em> will be notified of changes to this folder.');
 		} else {
 		  notificationset = 0;
-			writeln("No one will recieve notifications of changes to this folder.");
+			writeln('No one will recieve notifications of changes to this folder.');
 		}
 	?>
 	</p>
 	<p>&nbsp;</p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
 	</div>
 	</fieldset>
 	</div>
 	<div id="actions">
 	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="button" class="button" value="Close" onclick="actionCancel();" id="cancel"/>
+	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+	<input type="button" class="button" value="Close" onclick="actionCancel()" id="cancel"/>
 	<?cms
 		if (notificationset == 1) {
-			writeln("<input type=\"button\" class=\"button\" value=\"Remove Notification Settings\" onclick=\"actionRemove(" + groupid + ");\"/>");
-			writeln("<input type=\"button\" class=\"button disabled\" value=\"Add Notification Settings\"/>");
+			writeln('<input type="button" class="button" value="Remove Notification Settings" onclick="actionRemove(' + groupid + ')"/>');
+			writeln('<input type="button" class="button disabled" value="Add Notification Settings"/>');
 		} else {
-			writeln("<input type=\"button\" class=\"button disabled\" value=\"Remove Notification Settings\"/>");
-			writeln("<input type=\"button\" class=\"button\" value=\"Add Notification Settings\" onclick=\"actionAdd();\"/>");
+			writeln('<input type="button" class="button disabled" value="Remove Notification Settings"/>');
+			writeln('<input type="button" class="button" value="Add Notification Settings" onclick="actionAdd()"/>');
 		}
 	?>
 	</p>

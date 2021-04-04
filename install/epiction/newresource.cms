@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Dhufish CMS - New Resource (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - New Resource (/cms/<?cms write(xmlEscape(get('path'))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -44,23 +44,23 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/newresourceaction.cms"); ?>" method="POST" enctype="multipart/form-data">
+    <form action="<?cms urlRewrite('/cms/system/newresourceaction.cms'); ?>" method="POST" enctype="multipart/form-data">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Create New Resource </legend>
 	<fieldset id="lefttop">
 	<legend> Metadata </legend>
 	<p><span>Title:</span>
-	<input type="text" class="forminput" id="title" name="title" size="16" value="<?cms write(xmlEscape(get("title"))); ?>" maxlength="250"/>
+	<input type="text" class="forminput" id="title" name="title" size="16" value="<?cms write(xmlEscape(get('title'))); ?>" maxlength="250"/>
 	</p>
 	<p><span>Filename:</span>
-	<input type="text" class="forminput" id="filename" name="filename" size="16" value="<?cms write(xmlEscape(get("filename"))); ?>" maxlength="250"/>
+	<input type="text" class="forminput" id="filename" name="filename" size="16" value="<?cms write(xmlEscape(get('filename'))); ?>" maxlength="250"/>
 	</p>
 	<p><span><em>Description</em>:</span>
-	<input type="text" class="forminput" name="description" size="16" value="<?cms write(xmlEscape(get("description"))); ?>" maxlength="250"/>
+	<input type="text" class="forminput" name="description" size="16" value="<?cms write(xmlEscape(get('description'))); ?>" maxlength="250"/>
 	</p>
 	<p><span><em>Keywords</em>:</span>
-	<input type="text" class="forminput" name="keywords" size="16" value="<?cms write(xmlEscape(get("keywords"))); ?>" maxlength="250"/>
+	<input type="text" class="forminput" name="keywords" size="16" value="<?cms write(xmlEscape(get('keywords'))); ?>" maxlength="250"/>
 	</p>
 	</fieldset>
 	<fieldset id="righttop">
@@ -70,19 +70,19 @@
 	<?cms
 	map details;
 
-	if (get("public") == "") {
-		details = getFileDetails(get("path"));
+	if (get('public') == '') {
+		details = getFileDetails(get('path'));
 		if (mapLength(details) > 0) {
-			set("public", details["isPublic"]);
+			set('public', details['isPublic']);
 		}
 	}
 
-	if (get("public") == 1) {
-		writeln("<option value=\"1\" selected=\"selected\">Public</option>");
-		writeln("<option value=\"0\">Private</option>");
+	if (get('public') == 1) {
+		writeln('<option value="1" selected="selected">Public</option>');
+		writeln('<option value="0">Private</option>');
 	} else {
-		writeln("<option value=\"1\">Public</option>");
-		writeln("<option value=\"0\" selected=\"selected\">Private</option>");
+		writeln('<option value="1">Public</option>');
+		writeln('<option value="0" selected="selected">Private</option>');
 	}
 
 	?>
@@ -94,10 +94,10 @@
 	int i;
 
 	for (i = 1; i < 100; i += 1) {
-		if (i == get("order")) {
-			writeln("<option selected=\"selected\">" + i + "</option>");
+		if (i == get('order')) {
+			writeln('<option selected="selected">' + i + '</option>');
 		} else {
-			writeln("<option>" + i + "</option>");
+			writeln('<option>' + i + '</option>');
 		}
 	}
 	?>
@@ -110,14 +110,14 @@
 	<input type="file" name="upload" size="16" class="forminput"/>
 	</p>
 	</fieldset>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
 	</fieldset>
 	</div>
 	<div id="actions">
 	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" value="OK" onclick="return actionOK();"/>
+	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+	<input type="submit" class="button" value="OK" onclick="return actionOK()"/>
 	</p>
 	</div>
     </form>

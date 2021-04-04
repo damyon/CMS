@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Dhufish CMS - Remove Permissions (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
-  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/system/js/popup.js"); ?>"></script>
+  <title>Dhufish CMS - Remove Permissions (/cms/<?cms write(xmlEscape(get('path'))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite('/cms/system/js/popup.js'); ?>"></script>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -34,34 +34,34 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/permissionsdeleteaction.cms"); ?>" method="POST">
+    <form action="<?cms urlRewrite('/cms/system/permissionsdeleteaction.cms'); ?>" method="POST">
 	<div id="fields">
 	<fieldset id="outer">
 	<legend> Remove Permissions </legend>
 	<p><span>Path:</span>
-	<?cms write(xmlEscape(get("path"))); ?>
+	<?cms write(xmlEscape(get('path'))); ?>
 	</p>
 	<p><span>Group:</span>
 	<?cms
 		int groupid;
 		map groupdetails;
 		
-		groupid = get("group");
+		groupid = get('group');
 	
 		groupdetails = getGroupDetails(groupid);
 
-		write(xmlEscape(groupdetails["groupName"])); 
+		write(xmlEscape(groupdetails['groupName'])); 
 	?>
 	</p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
+	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
 	</fieldset>
 	</div>
 	<div id="actions">
 	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="hidden" name="group" value="<?cms write(xmlEscape(get("group"))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();" id="ok"/>
+	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+	<input type="hidden" name="group" value="<?cms write(xmlEscape(get('group'))); ?>"/>
+	<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+	<input type="submit" class="button" value="OK" onclick="actionOK()" id="ok"/>
 	</p>
 	</div>
     </form>

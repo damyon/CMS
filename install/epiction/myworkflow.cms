@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Items Requiring Approval</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	var lastColor = "";
@@ -19,7 +19,7 @@
 		id = "win" + r;
 
 		if (itemPath != "") {
-		window.open("<?cms urlRewrite("/cms/system/approve.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite('/cms/system/approve.cms?a=b'); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -32,7 +32,7 @@
 		id = "win" + r;
 
 		if (itemPath != "") {
-			window.open("<?cms urlRewrite("/cms/system/loadfile.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=yes,location=yes,toolbar=yes,width=540,height=240,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite('/cms/system/loadfile.cms?a=b'); ?>&path=" + escape(itemPath), id, "menubar=yes,location=yes,toolbar=yes,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -45,7 +45,7 @@
 		id = "win" + r;
 
 		if (itemPath != "") {
-		window.open("<?cms urlRewrite("/cms/system/reject.cms?a=b"); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite('/cms/system/reject.cms?a=b'); ?>&path=" + escape(itemPath), id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -91,7 +91,6 @@
 			ele.value = itemPath;
 		}
 	}
-  -->
   </script>
 </head>
 <body>
@@ -100,7 +99,7 @@
 	<fieldset id="outer">
 	<legend> Items Requiring Approval </legend>
 	<div id="info">
-	<p><span>Folder:</span><?cms write(xmlEscape(get("path"))); ?></p>
+	<p><span>Folder:</span><?cms write(xmlEscape(get('path'))); ?></p>
 	<table width="100%" cellpadding="0" cellspacing="0" id="approvetable">
 	<tr><th>Filename</th><th>Publisher</th><th>Version</th><th>Mimetype</th><th>Size</th></tr>
 
@@ -113,29 +112,29 @@
 		string publisher;
 		int err;
 	
-		items = getWorkflowList("", 0, 2048);
+		items = getWorkflowList('', 0, 2048);
 
 		for (i = 0; i < arrayLength(items); i++) {
-			details = getFileDetails(items[i]["path"]);
-			publishdate = getFileMetadata(items[i]["path"], "dc:date");
-			publisher = getFileMetadata(items[i]["path"], "dc:publisher");
-			filesize = details["fileSize"];
+			details = getFileDetails(items[i]['path']);
+			publishdate = getFileMetadata(items[i]['path'], 'dc:date');
+			publisher = getFileMetadata(items[i]['path'], 'dc:publisher');
+			filesize = details['fileSize'];
 			filesize /= 1024;
 			if (filesize == 0) {
 				filesize = 1;
 			}
-			write("<tr ");
+			write('<tr ');
 			if (i % 2) {
-				write(" class=\"odd\" ");
+				write(' class="odd" ');
 			}
-			writeln("id=\"item" + items[i]["fileID"] + "\" onclick=\"selectItem(" + items[i]["fileID"] + ", '" + xmlEscape(details["path"]) + "');\" style=\"cursor: pointer;\"><td>" + xmlEscape(details["path"]) + "</td><td>" + xmlEscape(publisher) + "</td><td>" + xmlEscape(publishdate) + "</td><td>" + xmlEscape(details["mimeType"]) + "</td><td>" + xmlEscape(filesize) + " kb</td></tr>");
+			writeln('id="item' + items[i]['fileID'] + '" onclick="selectItem(' + items[i]['fileID'] + ', `' + xmlEscape(details['path']) + '`)" style="cursor: pointer; "><td>' + xmlEscape(details['path']) + '</td><td>' + xmlEscape(publisher) + '</td><td>' + xmlEscape(publishdate) + '</td><td>' + xmlEscape(details['mimeType']) + '</td><td>' + xmlEscape(filesize) + ' kb</td></tr>');
 		}
 		
 		while (i < 5) {
 			if (i % 2) {
-				writeln("<tr class=\"odd\"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+				writeln('<tr class="odd"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
 			} else {
-				writeln("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+				writeln('<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
 			}
 			i++;
 		}
@@ -147,16 +146,16 @@
 	<form action="#">
 	<input type="hidden" name="itemID" id="itemID" value=""/>
 	<input type="hidden" name="itemPath" id="itemPath" value=""/>
-	<input type="button" onclick="actionApprove();" id="approvebutton" name="approveitem" class="button" value="Approve" style="color: #999;"/><br/><br/>
-	<input type="button" onclick="actionReject();" id="rejectbutton" name="rejectitem" class="button" value="Reject" style="color: #999;"/><br/><br/>
-	<input type="button" onclick="actionView();" id="viewbutton" name="viewitem" class="button" value="View" style="color: #999;"/>
+	<input type="button" onclick="actionApprove()" id="approvebutton" name="approveitem" class="button" value="Approve" style="color: #999; "/><br/><br/>
+	<input type="button" onclick="actionReject()" id="rejectbutton" name="rejectitem" class="button" value="Reject" style="color: #999; "/><br/><br/>
+	<input type="button" onclick="actionView()" id="viewbutton" name="viewitem" class="button" value="View" style="color: #999; "/>
 	</form>
 	</div>
 	</fieldset>
   </div>
   <div id="actions">
   <p>
-  <input type="button" onclick="actionOK();" class="button" name="submit-action" value="Close"/>
+  <input type="button" onclick="actionOK()" class="button" name="submit-action" value="Close"/>
   </p>
   </div>
 </body>
