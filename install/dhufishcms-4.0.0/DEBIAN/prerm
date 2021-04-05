@@ -6,7 +6,7 @@ case "$1" in
     remove|upgrade|remove-in-favour|deconfigure-in-favour)
 
 	/usr/sbin/a2dissite cms
-	/etc/init.d/epictioncms stop
+	/etc/init.d/dhufishcms stop
         ;;
     failed-upgrade)
         ;;

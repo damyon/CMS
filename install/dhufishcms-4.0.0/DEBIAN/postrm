@@ -22,7 +22,7 @@ userdel cms
 # Remove from startup
 
 if [ "$1" = purge ]; then
-	update-rc.d epictioncms remove
+	update-rc.d dhufishcms remove
 fi
 
         ;;

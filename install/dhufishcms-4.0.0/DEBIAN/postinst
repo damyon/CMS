@@ -35,7 +35,7 @@ echo "Create user"
 
 echo "Start on boot"
 # Install the startup scripts
-update-rc.d epictioncms defaults
+update-rc.d dhufishcms defaults
 
 # Set some permissions
 chown -R cms /var/lib/cms
@@ -43,11 +43,11 @@ chown -R cms /var/log/cms
 
 echo "Start CMS"
 # Start the CMS
-/etc/init.d/epictioncms start
+/etc/init.d/dhufishcms start
 
 echo "Install CMS"
 # Install the interface
-/usr/bin/curl -# -F package=@/var/lib/cms/install/interface.xml -F "username=administrator" -F "password=changeme" "http://localhost/cms/epiction/bootstrap.txt"
+/usr/bin/curl -# -F package=@/var/lib/cms/install/interface.xml -F "username=administrator" -F "password=changeme" "http://localhost/cms/system/bootstrap.txt"
 
 
         ;;

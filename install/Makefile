@@ -1,10 +1,10 @@
 PACKAGER=./createPackage
 PKGDIR=./
-PKGFILE=epictioncms-4.0.0.deb
-INTERFACE=epictioncms-4.0.0/var/lib/cms/install/interface.xml
-SERVER=epictioncms-4.0.0/usr/bin/cms
-CGI=epictioncms-4.0.0/usr/lib/cgi-bin/cms.cgi
-DAV=epictioncms-4.0.0/usr/lib/cgi-bin/dav.cgi
+PKGFILE=dhufishcms-4.0.0.deb
+INTERFACE=dhufishcms-4.0.0/var/lib/cms/install/interface.xml
+SERVER=dhufishcms-4.0.0/usr/bin/cms
+CGI=dhufishcms-4.0.0/usr/lib/cgi-bin/cms.cgi
+DAV=dhufishcms-4.0.0/usr/lib/cgi-bin/dav.cgi
 
 all:$(INTERFACE) $(PKGDIR)$(PKGFILE)
 
@@ -19,12 +19,12 @@ $(DAV):
 
 $(PKGDIR)$(PKGFILE):$(INTERFACE) $(SERVER) $(CGI) $(DAV)
 	@echo "Building debian install package..."
-	fakeroot dpkg-deb --build epictioncms-4.0.0
+	fakeroot dpkg-deb --build dhufishcms-4.0.0
 
 clean:
 	@echo "Cleaning debian install package."
 	rm -f $(PKGDIR)$(PKGFILE) $(CGI) $(DAV) $(SERVER) $(INTERFACE)
 
 $(INTERFACE):
-	$(PACKAGER) -i=epiction > $(INTERFACE)
+	$(PACKAGER) -i=system > $(INTERFACE)
 

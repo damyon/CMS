@@ -311,7 +311,7 @@ ALTER TABLE public.verifiers OWNER TO dhufish;
 -- Data for Name: objects; Type: TABLE DATA; Schema: public; Owner: dhufish
 --
 
-INSERT INTO objects (objectid, objectname, parentid, isonline, ispublic, isdeleted, mimetype, version, lockedbyuserid, "type", "template", relativeorder) VALUES (1, 'epiction', -1, 'y', 'y', 'n', 'application/folder', 1110787619, -1, 'FOLDER', '', 50);
+INSERT INTO objects (objectid, objectname, parentid, isonline, ispublic, isdeleted, mimetype, version, lockedbyuserid, "type", "template", relativeorder) VALUES (1, 'system', -1, 'y', 'y', 'n', 'application/folder', 1110787619, -1, 'FOLDER', '', 50);
 INSERT INTO objects (objectid, objectname, parentid, isonline, ispublic, isdeleted, mimetype, version, lockedbyuserid, "type", "template", relativeorder) VALUES (2, 'bootstrap.txt', 1, 'y', 'y', 'n', 'text/plain', 0, -1, 'RESOURCE', '', 50);
 
 

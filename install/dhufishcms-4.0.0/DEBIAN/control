@@ -1,0 +1,8 @@
+Package: dhufishcms
+Version: 4.0.0
+Section: web
+Priority: optional
+Architecture: i386
+Depends: imagemagick
+Maintainer: damyon.wiese@gmail.com
+Description: Dhufish Content Management System

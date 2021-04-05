@@ -192,7 +192,7 @@ CREATE TABLE Verifiers (
 -- Data for Name: Objects; Type: TABLE DATA; Schema: public; Owner: dhufish
 --
 
-INSERT INTO Objects (objectID, objectName, parentID, isOnline, isPublic, isDeleted, mimeType, version, lockedByUserID, type, template, publisherUserID) VALUES (1, 'epiction', -1, 'y', 'y', 'n', 'application/folder', 1110787619, -1, 'FOLDER', '', 1);
+INSERT INTO Objects (objectID, objectName, parentID, isOnline, isPublic, isDeleted, mimeType, version, lockedByUserID, type, template, publisherUserID) VALUES (1, 'system', -1, 'y', 'y', 'n', 'application/folder', 1110787619, -1, 'FOLDER', '', 1);
 INSERT INTO Objects (objectID, objectName, parentID, isOnline, isPublic, isDeleted, mimeType, version, lockedByUserID, type, template, publisherUserID) VALUES (2, 'bootstrap.txt', 1, 'y', 'y', 'n', 'text/plain', 1110787619, -1, 'RESOURCE', '', 1);
 
 --
