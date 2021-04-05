@@ -80,72 +80,72 @@
 <body>
   <div id="popupform">
     <form action="<?cms urlRewrite('/cms/system/editresourceaction.cms'); ?>" method="POST" enctype="multipart/form-data">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Edit Resource </legend>
-	<fieldset id="lefttop">
-	<legend> Metadata </legend>
-	<p><span>Title:</span>
-	<input type="text" class="forminput" name="title" id="title" size="16" value="<?cms write(xmlEscape(get('title'))); ?>" maxlength="250"/>
-	</p>
-	<p><span>Filename:</span>
-	<?cms write(xmlEscape(get('filename'))); ?>
-	</p>
-	<p><span><em>Description</em>:</span>
-	<input type="text" class="forminput" name="description" size="16" value="<?cms write(xmlEscape(get('description'))); ?>" maxlength="250"/>
-	</p>
-	<p><span><em>Keywords</em>:</span>
-	<input type="text" class="forminput" name="keywords" size="16" value="<?cms write(xmlEscape(get('keywords'))); ?>" maxlength="250"/>
-	</p>
-	</fieldset>
-	<fieldset id="righttop">
-	<legend>Other</legend>
-	<p><span>Security:</span>
-	<select name="public" class="forminput">
-	<?cms
-	if (get('public') == '1') {
-		writeln('<option value="1" selected="selected">Public</option>');
-		writeln('<option value="0">Private</option>');
-	} else {
-		writeln('<option value="1">Public</option>');
-		writeln('<option value="0" selected="selected">Private</option>');
-	}
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Edit Resource </legend>
+					<fieldset id="lefttop">
+						<legend> Metadata </legend>
+						<p><span>Title:</span>
+							<input type="text" class="forminput" name="title" id="title" size="16" value="<?cms write(xmlEscape(get('title'))); ?>" maxlength="250"/>
+						</p>
+						<p><span>Filename:</span>
+							<?cms write(xmlEscape(get('filename'))); ?>
+						</p>
+						<p><span><em>Description</em>:</span>
+							<input type="text" class="forminput" name="description" size="16" value="<?cms write(xmlEscape(get('description'))); ?>" maxlength="250"/>
+						</p>
+						<p><span><em>Keywords</em>:</span>
+							<input type="text" class="forminput" name="keywords" size="16" value="<?cms write(xmlEscape(get('keywords'))); ?>" maxlength="250"/>
+						</p>
+					</fieldset>
+					<fieldset id="righttop">
+						<legend>Other</legend>
+						<p><span>Security:</span>
+							<select name="public" class="forminput">
+								<?cms
+								if (get('public') == '1') {
+									writeln('<option value="1" selected="selected">Public</option>');
+									writeln('<option value="0">Private</option>');
+								} else {
+									writeln('<option value="1">Public</option>');
+									writeln('<option value="0" selected="selected">Private</option>');
+								}
 
-	?>
-	</select>
-	</p>
-	<p><span>Display Order:</span>
-	<select name="order" class="forminput">
-	<?cms 
-	int i;
+								?>
+							</select>
+						</p>
+						<p><span>Display Order:</span>
+							<select name="order" class="forminput">
+								<?cms 
+								int i;
 
-	for (i = 1; i < 100; i += 1) {
-		if (i == get('order')) {
-			writeln('<option selected="selected">' + i + '</option>');
-		} else {
-			writeln('<option>' + i + '</option>');
-		}
-	}
-	?>
-	</select>
-	</p>
-	</fieldset>
-	<fieldset>
-        <legend>File</legend>
-        <p><span>File:</span>
-	<input type="file" name="upload" size="16" class="forminput"/>
-	</p>
-	</fieldset>
-	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK()"/>
-	</p>
-	</div>
+								for (i = 1; i < 100; i += 1) {
+									if (i == get('order')) {
+										writeln('<option selected="selected">' + i + '</option>');
+									} else {
+										writeln('<option>' + i + '</option>');
+									}
+								}
+								?>
+							</select>
+						</p>
+					</fieldset>
+					<fieldset>
+						<legend>File</legend>
+						<p><span>File:</span>
+							<input type="file" name="upload" size="16" class="forminput"/>
+						</p>
+					</fieldset>
+					<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK()"/>
+				</p>
+			</div>
     </form>
   </div>
   <div id="loading"> <span>Please Wait...</span> </div>

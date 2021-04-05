@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dhufish CMS - Receipt</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionOK() {
@@ -26,19 +26,19 @@
 <body>
   <div id="popupform">
     <form action="#">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Receipt </legend>
-	<p style="padding: 1.5em;">
-	<?cms write(get("message")); ?>
-	</p>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="submit" class="button" value="OK" onclick="actionOK();" id="ok"/>
-	</p>
-	</div>
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Receipt </legend>
+					<p style="padding: 1.5em;">
+						<?cms write(get('message')); ?>
+					</p>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="submit" class="button" value="OK" onclick="actionOK()" id="ok"/>
+				</p>
+			</div>
     </form>
   </div>
 </body>

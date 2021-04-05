@@ -10,26 +10,26 @@
 </head>
 <body>
   <div id="titlebar">
-	<h1><a href="http://www.dhufish.com" title="Dhufish"><img src="<?cms urlRewrite('/cms/system/images/logo.png'); ?>" alt="Dhufish"/></a></h1>
-  </div>
-  <div id="loginform">
-    <h2>Login</h2>
-    <form action="<?cms urlRewrite('/cms/system/loginaction.cms'); ?>">
-	<fieldset>
-	<p>Enter your username and password to continue.</p>
-	<p class="input"><span>Username:</span>
-	<input type="text" class="forminput" name="username" size="16" value=""/>
-	</p>
-	<p class="input"><span>Password:</span>
-	<input type="password" class="forminput" name="password" size="16" value=""/>
-	</p>
-	<p class="error"><?cms write(get('error-message')); ?>&nbsp;
-	</p>
-	<p class="submit">
-	<input type="submit" class="button" name="submit-action" value="Login"/>
-	</p>
-	</fieldset>
-    </form>
+		<h1><a href="http://www.dhufish.com" title="Dhufish"><img src="<?cms urlRewrite('/cms/system/images/logo.png'); ?>" alt="Dhufish"/></a></h1>
+	</div>
+	<div id="loginform">
+		<h2>Login</h2>
+		<form action="<?cms urlRewrite('/cms/system/loginaction.cms'); ?>">
+			<fieldset>
+				<p>Enter your username and password to continue.</p>
+				<p class="input"><span>Username:</span>
+					<input type="text" class="forminput" name="username" size="16" value=""/>
+				</p>
+				<p class="input"><span>Password:</span>
+					<input type="password" class="forminput" name="password" size="16" value=""/>
+				</p>
+				<p class="error"><?cms write(get('error-message')); ?>&nbsp;
+				</p>
+				<p class="submit">
+					<input type="submit" class="button" name="submit-action" value="Login"/>
+				</p>
+			</fieldset>
+		</form>
   </div>
 </body>
 </html>

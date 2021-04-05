@@ -2,14 +2,14 @@
 <html>
 <head>
   <title>Dhufish CMS - User Groups</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
-	var issuper = "<?cms write(get("isSuperUser")); ?>";
+	var issuper = "<?cms write(get('isSuperUser')); ?>";
 	var lastColor = "";
 
 	function actionOK() {
-                window.opener.document.location.reload();
+    window.opener.document.location.reload();
 		window.close();
 	}
 	
@@ -17,7 +17,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/system/usersgroupsadd.cms?user=" + xmlEscape(get("user"))); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite('/cms/system/usersgroupsadd.cms?user=' + xmlEscape(get('user'))); ?>", id, "menubar=no,width=540,height=200,screenX=160,screenY=160");
 	}
 	
 	function actionRemove() {
@@ -29,7 +29,7 @@
 		id = "win" + r;
 
 		if (((issuper == "y") || (groupPublic == "1")) && (groupid != "")) {
-			window.open("<?cms urlRewrite("/cms/system/usersgroupsdelete.cms?user=" + xmlEscape(get("user"))); ?>&group=" + groupid, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite('/cms/system/usersgroupsdelete.cms?user=' + xmlEscape(get('user'))); ?>&group=" + groupid, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -71,70 +71,70 @@
 			ele.value = groupPublic;
 		}
 	}
-  -->
+  
   </script>
 </head>
 <body>
   <div id="popupform">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> User Groups </legend>
-	<div id="info">
-	<table width="100%" cellpadding="0" cellspacing="0" id="groupstable">
-	<tr><th>Groupname</th><th>Public</th></tr>
-	<?cms
-		int i;
-		int userid;
-		array groups;
-		map details;
-		int err;
-	
-		userid = get("user");
-		groups = getUsersGroups(userid, "", 0, 2048);
+		<div id="fields">
+			<fieldset id="outer">
+				<legend> User Groups </legend>
+				<div id="info">
+					<table width="100%" cellpadding="0" cellspacing="0" id="groupstable">
+						<tr><th>Groupname</th><th>Public</th></tr>
+						<?cms
+							int i;
+							int userid;
+							array groups;
+							map details;
+							int err;
+						
+							userid = get('user');
+							groups = getUsersGroups(userid, '', 0, 2048);
 
-		for (i = 0; i < arrayLength(groups); i++) {
-			details = getGroupDetails(groups[i]["groupID"]);
-			write("<tr ");
-			if (i % 2) {
-				write(" class=\"odd\" ");
-			}
-			write("id=\"group" + groups[i]["groupID"] + "\" onclick=\"selectGroup(" + groups[i]["groupID"] + ", '" + details["isPublic"] + "');\" style=\"cursor: pointer;\"><td>" + xmlEscape(details["groupName"]) + "</td><td>");
-			if (details["isPublic"] == "1") {
-				write("True");
-			} else {
-				write("False");
-			}
-			write("</td></tr>");
-		}
-		
-		while (i < 5) {
-			if (i % 2) {
-				writeln("<tr class=\"odd\"><td>&nbsp;</td><td>&nbsp;</td></tr>");
-			} else {
-				writeln("<tr><td>&nbsp;</td><td>&nbsp;</td></tr>");
-			}
-			i++;
-		}
+							for (i = 0; i < arrayLength(groups); i++) {
+								details = getGroupDetails(groups[i]['groupID']);
+								write('<tr ');
+								if (i % 2) {
+									write(' class="odd" ');
+								}
+								write('id="group' + groups[i]['groupID'] + '" onclick="selectGroup(' + groups[i]['groupID'] + ', `' + details['isPublic'] + '`)" style="cursor: pointer; "><td>' + xmlEscape(details['groupName']) + '</td><td>');
+								if (details['isPublic'] == '1') {
+									write('True');
+								} else {
+									write('False');
+								}
+								write('</td></tr>');
+							}
+							
+							while (i < 5) {
+								if (i % 2) {
+									writeln('<tr class="odd"><td>&nbsp;</td><td>&nbsp;</td></tr>');
+								} else {
+									writeln('<tr><td>&nbsp;</td><td>&nbsp;</td></tr>');
+								}
+								i++;
+							}
 
-	?>
-	</table>
-	</div>
-	<div id="leftmenu">
-	<form action="#">
-	<input type="hidden" name="groupID" id="groupID" value=""/>
-	<input type="hidden" name="groupPublic" id="groupPublic" value=""/>
-	<?cms
-		writeln("<input type=\"button\" onclick=\"actionAdd();\" id=\"addbutton\" name=\"adduser\" class=\"button\" value=\"Add\"/><br/><br/>");
-		writeln("<input type=\"button\" onclick=\"actionRemove();\" id=\"removebutton\" name=\"removeuser\" class=\"button\" value=\"Remove\" style=\"color: #999;\"/><br/><br/>");
-	?>
-	</form>
-	</div>
-	</fieldset>
-  </div>
-  <div id="actions">
-  <p>
-  <input type="button" onclick="actionOK();" class="button" name="submit-action" value="Close"/>
-  </p>
+						?>
+					</table>
+				</div>
+				<div id="leftmenu">
+					<form action="#">
+						<input type="hidden" name="groupID" id="groupID" value=""/>
+						<input type="hidden" name="groupPublic" id="groupPublic" value=""/>
+						<?cms
+							writeln('<input type="button" onclick="actionAdd()" id="addbutton" name="adduser" class="button" value="Add"/><br/><br/>');
+							writeln('<input type="button" onclick="actionRemove()" id="removebutton" name="removeuser" class="button" value="Remove" style="color: #999;"/><br/><br/>');
+						?>
+					</form>
+				</div>
+			</fieldset>
+		</div>
+		<div id="actions">
+			<p>
+				<input type="button" onclick="actionOK()" class="button" name="submit-action" value="Close"/>
+			</p>
   </div>
 </body>
 </html>

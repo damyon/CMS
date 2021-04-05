@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Dhufish CMS - Search ( <?cms write(xmlEscape(get("path"))); ?> )</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Search ( <?cms write(xmlEscape(get('path'))); ?> )</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	var lastColor = "";
@@ -16,25 +16,25 @@
 		var parent = ele.value.split("/");
 		var file = parent.pop();
 		parent = parent.join("/");
-		window.opener.location.href = "<?cms urlRewrite("/cms/system/content.cms?path="); ?>" + parent + "&filter=" + file;
+		window.opener.location.href = "<?cms urlRewrite('/cms/system/content.cms?path='); ?>" + parent + "&filter=" + file;
 	}
 	
 	function selectFolder() {
-                var ele = document.getElementById("path");
-                var r = Math.round(Math.random() * 1024);
-                var id = "win" + r;
+		var ele = document.getElementById("path");
+		var r = Math.round(Math.random() * 1024);
+		var id = "win" + r;
 
-                window.open("<?cms urlRewrite("/cms/system/filechooser.cms?fileelement=path"); ?>&onlyfolders=true&path=" + ele.value, id, "menubar=no,width=800,height=480,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite('/cms/system/filechooser.cms?fileelement=path'); ?>&onlyfolders=true&path=" + ele.value, id, "menubar=no,width=800,height=480,screenX=160,screenY=160");
 	}
 
 	function showLoading() {
-                var ele = document.getElementById("loading");
-                ele.style.display = "block";
-        }
+		var ele = document.getElementById("loading");
+		ele.style.display = "block";
+	}
 
-        function actionSearch() {
-                showLoading();
-        }
+	function actionSearch() {
+		showLoading();
+	}
 
 	function setFocus(ele) {
 		var ele = document.getElementById(ele);
@@ -46,37 +46,37 @@
 	}
 
 	function selectRow(index, path) {
-                var ele = document.getElementById("fileId");
+		var ele = document.getElementById("fileId");
 
-                if (ele != null) {
-                        ele = document.getElementById("file" + ele.value);
-                        if (ele != null) {
-                                ele.style.backgroundColor = lastColor;
-                                ele.style.color = "#000";
-                        }
-                }
+		if (ele != null) {
+			ele = document.getElementById("file" + ele.value);
+			if (ele != null) {
+				ele.style.backgroundColor = lastColor;
+				ele.style.color = "#000";
+			}
+		}
 
-                ele = document.getElementById("file" + index);
+		ele = document.getElementById("file" + index);
 
-                if (ele != null) {
-                        lastColor = ele.style.backgroundColor;
-                        ele.style.backgroundColor = "#479";
-                        ele.style.color = "#fff";
-                }
+		if (ele != null) {
+			lastColor = ele.style.backgroundColor;
+			ele.style.backgroundColor = "#479";
+			ele.style.color = "#fff";
+		}
 
-                ele = document.getElementById("locatebutton");
-                if (ele != null) {
-                        ele.style.color = "#000";
-                }
-                ele = document.getElementById("fileId");
-                if (ele != null) {
-                        ele.value = index;
-                }
-                ele = document.getElementById("parentpath");
-                if (ele != null) {
-                        ele.value = path;
-                }
-        }
+		ele = document.getElementById("locatebutton");
+		if (ele != null) {
+			ele.style.color = "#000";
+		}
+		ele = document.getElementById("fileId");
+		if (ele != null) {
+			ele.value = index;
+		}
+		ele = document.getElementById("parentpath");
+		if (ele != null) {
+			ele.value = path;
+		}
+	}
 
 
 	window.onload = setDefaultFocus;
@@ -85,110 +85,109 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/search.cms"); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Search </legend>
-	<div id="info">
-	<p><span>Query:</span><input type="text" name="query" value="<?cms write(xmlEscape(get("query"))); ?>" size="30" maxlength="250"/></p>
-	<p><span>Search Path:</span><input type="text" name="path" id="path" value="<?cms write(xmlEscape(get("path"))); ?>" size="30" maxlength="250"/><a href="javascript:selectFolder();"><img src="<?cms urlRewrite("/cms/system/images/folder-white-16x16.png"); ?>" alt="Folder" width="16" height="16"/></a></p>
-	<p><span>Search Results:</span></p>
-	<table width="100%" cellpadding="0" cellspacing="0" id="searchtable">
-        <tr><th width="20%">Path</th><th>Size</th><th>Type</th><th>Last Modified</th><th>Score</th></tr>
-	<?cms
-		array files;
-		string query;
-		string path;
-		array parts;
-		map details;
-		int objectid;
-		int page;
-		int skip;
-		int err;
-		int size;
-		int score;
-		int i;
-		int total;
+    <form action="<?cms urlRewrite('/cms/system/search.cms'); ?>" method="POST">
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Search </legend>
+					<div id="info">
+						<p><span>Query:</span><input type="text" name="query" value="<?cms write(xmlEscape(get('query'))); ?>" size="30" maxlength="250"/></p>
+						<p><span>Search Path:</span><input type="text" name="path" id="path" value="<?cms write(xmlEscape(get('path'))); ?>" size="30" maxlength="250"/><a href="javascript:selectFolder();"><img src="<?cms urlRewrite("/cms/system/images/folder-white-16x16.png"); ?>" alt="Folder" width="16" height="16"/></a></p>
+						<p><span>Search Results:</span></p>
+						<table width="100%" cellpadding="0" cellspacing="0" id="searchtable">
+							<tr><th width="20%">Path</th><th>Size</th><th>Type</th><th>Last Modified</th><th>Score</th></tr>
+							<?cms
+								array files;
+								string query;
+								string path;
+								array parts;
+								map details;
+								int objectid;
+								int page;
+								int skip;
+								int err;
+								int size;
+								int score;
+								int i;
+								int total;
 
-		query = get("query");
-		page = get("page");
-		path = get("path");
-		skip = get("skip");
-		if (page == 0) {
-			page = 15;
-		}
-	
-		if (query != "") {
-			total = searchLength(query, path);
-			set("total", total);
-			files = search(query, path, skip, (skip + page));
+								query = get('query');
+								page = get('page');
+								path = get('path');
+								skip = get('skip');
+								if (page == 0) {
+									page = 15;
+								}
+							
+								if (query != '') {
+									total = searchLength(query, path);
+									set('total', total);
+									files = search(query, path, skip, (skip + page));
 
-			for (i = 0; i < arrayLength(files); i++) {
-				score = files[i]["score"];
-				details = getFileDetails(files[i]["path"]);
-				size = details["fileSize"];
-				size /= 1024;
-				if (size == 0) {
-					size = 1;
-				}
+									for (i = 0; i < arrayLength(files); i++) {
+										score = files[i]['score'];
+										details = getFileDetails(files[i]['path']);
+										size = details['fileSize'];
+										size /= 1024;
+										if (size == 0) {
+											size = 1;
+										}
 
-				write("<tr");
- 				if (i % 2) {
-					write(" class=\"odd\" ");
-				}
-				writeln(" id=\"file" + files[i]["fileID"] + "\" onclick=\"selectRow(" + files[i]["fileID"] + ", '" + xmlEscape(files[i]["path"]) + "');\"><td>" + xmlEscape(details["path"]) + "</td><td>" + size + " kb</td><td>" + xmlEscape(details["type"]) + "</td><td>" + getISODate(details["version"]) + "</td><td>" + score + "</td></tr>");
-			}
-		}
+										write('<tr');
+										if (i % 2) {
+											write(' class="odd" ');
+										}
+										writeln(' id="file' + files[i]['fileID'] + '" onclick="selectRow(' + files[i]['fileID'] + ', `' + xmlEscape(files[i]['path']) + '`)"><td>' + xmlEscape(details['path']) + '</td><td>' + size + ' kb</td><td>' + xmlEscape(details['type']) + '</td><td>' + getISODate(details['version']) + '</td><td>' + score + '</td></tr>');
+									}
+								}
 
-		while (i < 5) {
-			if (i % 2) {
-				writeln("<tr class=\"odd\"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
-			} else {
-				writeln("<tr ><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
-			}
-			i++;
-		}
+								while (i < 5) {
+									if (i % 2) {
+										writeln('<tr class="odd"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
+									} else {
+										writeln('<tr ><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
+									}
+									i++;
+								}
 
-		write("<tr id=\"searchfooter\"><td colspan=\"2\">");
-		if (arrayLength(files) > 0) {
-			write(" Displaying files " + skip + " to " + (skip + arrayLength(files)) + " of " + total + ". ");
-		} else {
-			write(" No files found. ");
-		}
-		write("</td><td colspan=\"3\" align=\"right\">");
+								write('<tr id="searchfooter"><td colspan="2">');
+								if (arrayLength(files) > 0) {
+									write(' Displaying files ' + skip + ' to ' + (skip + arrayLength(files)) + ' of ' + total + '. ');
+								} else {
+									write(' No files found. ');
+								}
+								write('</td><td colspan="3" align="right">');
 
-	
-		for (i = 0; i < total; i += page) {
-			if (i == 0) {
-				write("Page ");
-			}
-			if (i == skip) {
-				writeln("<strong>" + ((i / page) + 1) + "</strong>");
-			} else {
-				write("<a href=\"" + urlBase("/cms/system/search.cms?query=" + xmlEscape(get("query")) + "&skip=" + i + "&pagination=" + page) + "\" title=\"Page " + ((i / page) + 1) + "\">");
-				write(((i / page) + 1));
-				write("</a>&nbsp;");
-			}
-		}
+							
+								for (i = 0; i < total; i += page) {
+									if (i == 0) {
+										write('Page ');
+									}
+									if (i == skip) {
+										writeln('<strong>' + ((i / page) + 1) + '</strong>');
+									} else {
+										write('<a href="' + urlBase('/cms/system/search.cms?query=' + xmlEscape(get('query')) + '&skip=' + i + '&pagination=' + page) + '" title="Page ' + ((i / page) + 1) + '">');
+										write(((i / page) + 1));
+										write('</a>&nbsp;');
+									}
+								}
 
-		writeln("</td></tr>");
-	?>
-	</table>
-	
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
-	</div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="hidden" name="fileId" id="fileId"/>
-	<input type="hidden" name="path" id="parentpath"/>
-	<input type="button" class="button" value="Locate" onclick="actionLocate();" id="locatebutton" style="color: #999;"/>
-	<input type="button" class="button" value="Close" onclick="actionCancel();" id="cancel"/>
-	<input type="submit" class="button" value="Search" onclick="actionSearch();" id="search"/>
-	</p>
-	</div>
+								writeln('</td></tr>');
+							?>
+						</table>
+						<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+					</div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+					<input type="hidden" name="fileId" id="fileId"/>
+					<input type="hidden" name="path" id="parentpath"/>
+					<input type="button" class="button" value="Locate" onclick="actionLocate()" id="locatebutton" style="color: #999;"/>
+					<input type="button" class="button" value="Close" onclick="actionCancel()" id="cancel"/>
+					<input type="submit" class="button" value="Search" onclick="actionSearch()" id="search"/>
+				</p>
+			</div>
     </form>
   </div>
 </body>

@@ -37,21 +37,21 @@
 <body>
   <div id="popupform">
     <form action="#">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Filter </legend>
-	<p>Enter a search string to filter the results.</p>
-	<p><span>Filter: </span>
-	<input type="text" name="filter" id="filter" value="<?cms write(xmlEscape(get('filter'))); ?>" size="16" maxlength="256"/>
-	</p>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
-	</p>
-	</div>
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Filter </legend>
+					<p>Enter a search string to filter the results.</p>
+					<p><span>Filter: </span>
+						<input type="text" name="filter" id="filter" value="<?cms write(xmlEscape(get('filter'))); ?>" size="16" maxlength="256"/>
+					</p>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK();"/>
+				</p>
+			</div>
     </form>
   </div>
 </body>

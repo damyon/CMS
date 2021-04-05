@@ -35,44 +35,44 @@
 <body>
   <div id="popupform">
     <form action="<?cms urlRewrite('/cms/system/groupsusersaddaction.cms'); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Add User To Group </legend>
-	<p><span>User:</span>
-	<select name="user" id="user">
-	<?cms
-		array users;
-		map details;
-		int i;
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Add User To Group </legend>
+					<p><span>User:</span>
+						<select name="user" id="user">
+						<?cms
+							array users;
+							map details;
+							int i;
 
-		users = getUserList('', 0, 2048);
+							users = getUserList('', 0, 2048);
 
-		for (i = 0; i < arrayLength(users); i ++) {
-			details = getUserDetails(users[i]['userID']);
-			writeln('<option value="' + users[i]['userID'] + '">' + xmlEscape(details['userName']) + '</option>');
-		}
-	?>
-	</select>
-	<?cms 
-		string super;
+							for (i = 0; i < arrayLength(users); i ++) {
+								details = getUserDetails(users[i]['userID']);
+								writeln('<option value="' + users[i]['userID'] + '">' + xmlEscape(details['userName']) + '</option>');
+							}
+						?>
+						</select>
+						<?cms 
+							string super;
 
-		super = get('isSuperUser');
+							super = get('isSuperUser');
 
-		if (super == 'y') {
-			writeln('<a href="javascript:void(0)" onclick="openWindow(`' + urlBase('/cms/system/newuser.cms') + '`, 480, 400);" rel="popup-480-400" title="Create new user"><img border="0" alt="Create new user" src="' + urlBase('/cms/system/images/add.gif') + '"/></a>');
-		}
-		?>
-	</p>
-	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="group" value="<?cms write(xmlEscape(get('group'))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK()"/>
-	</p>
-	</div>
+							if (super == 'y') {
+								writeln('<a href="javascript:void(0)" onclick="openWindow(`' + urlBase('/cms/system/newuser.cms') + '`, 480, 400);" rel="popup-480-400" title="Create new user"><img border="0" alt="Create new user" src="' + urlBase('/cms/system/images/add.gif') + '"/></a>');
+							}
+							?>
+					</p>
+					<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="group" value="<?cms write(xmlEscape(get('group'))); ?>"/>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK()"/>
+				</p>
+			</div>
     </form>
   </div>
   <div id="loading"> <span>Please Wait...</span> </div>

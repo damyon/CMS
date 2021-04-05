@@ -6,55 +6,55 @@
 </head>
 <body>
   <div>
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Help  </legend>
-	<div style="float: left; width: 14em; height: 39em; overflow: auto;" id="menu">
-		<?cms 
-			function writeHelpMenu(string path) {
-				array files;
-				map details;
-				string title;
-				int i;
-				int j;
-			
-				files = getFolderContents(path, '', 0, 2048, 'relative');
-				title = getFileMetadata(path, 'dc:title');
-				writeln('<ul>');
-				writeln('<strong>' + xmlEscape(title) + '</strong><br/>');
+		<div id="fields">
+			<fieldset id="outer">
+				<legend> Help  </legend>
+				<div style="float: left; width: 14em; height: 39em; overflow: auto;" id="menu">
+					<?cms 
+						function writeHelpMenu(string path) {
+							array files;
+							map details;
+							string title;
+							int i;
+							int j;
+						
+							files = getFolderContents(path, '', 0, 2048, 'relative');
+							title = getFileMetadata(path, 'dc:title');
+							writeln('<ul>');
+							writeln('<strong>' + xmlEscape(title) + '</strong><br/>');
 
-				for (i = 0; i < arrayLength(files); i++) {
-					details = getFileDetails(files[i]['path']);
-					title = getFileMetadata(files[i]['path'], 'dc:title');
+							for (i = 0; i < arrayLength(files); i++) {
+								details = getFileDetails(files[i]['path']);
+								title = getFileMetadata(files[i]['path'], 'dc:title');
 
-					if (details['type'] == 'FOLDER') {
-						writeHelpMenu(details['path']);
-					} else {
-						write('<li>');
-						write('<a href="' + urlBase('/cms/system/help.cms?path=' + xmlEscape(details['path'])) + '" title="' + xmlEscape(title) + '">' + xmlEscape(title) + '</a>');
-						writeln('</li>');
+								if (details['type'] == 'FOLDER') {
+									writeHelpMenu(details['path']);
+								} else {
+									write('<li>');
+									write('<a href="' + urlBase('/cms/system/help.cms?path=' + xmlEscape(details['path'])) + '" title="' + xmlEscape(title) + '">' + xmlEscape(title) + '</a>');
+									writeln('</li>');
+								}
+							}
+							writeln('</ul>');
+						}
+
+						writeHelpMenu('system/help');
+					?>
+				</div>
+				<div style="background: white; width: 40em; height: 39em; border: 1px solid black; padding: 0.5em; float: left;">
+				<?cms 
+					string helpfile;
+					helpfile = get('path');
+
+					if (helpfile == '') {
+						helpfile = 'system/help/about.html';
 					}
-				}
-				writeln('</ul>');
-			}
 
-			writeHelpMenu('system/help');
-		?>
-	</div>
-	<div style="background: white; width: 40em; height: 39em; border: 1px solid black; padding: 0.5em; float: left;">
-	<?cms 
-		string helpfile;
-		helpfile = get('path');
-
-		if (helpfile == '') {
-			helpfile = 'system/help/about.html';
-		}
-
-		include(helpfile);
-	?>
-	</div>
-	</fieldset>
-	</div>
+					include(helpfile);
+				?>
+				</div>
+			</fieldset>
+		</div>
   </div>
 </body>
 </html>

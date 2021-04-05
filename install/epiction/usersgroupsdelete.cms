@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Dhufish CMS - Remove User From Group </title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
-  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/system/js/popup.js"); ?>"></script>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite('/cms/system/js/popup.js'); ?>"></script>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -39,38 +39,38 @@
 	map udetails;
 	map gdetails;
 
-	userid = get("user");
+	userid = get('user');
 	udetails = getUserDetails(userid);
-	username = udetails["userName"];
-	groupid = get("group");
+	username = udetails['userName'];
+	groupid = get('group');
 	gdetails = getGroupDetails(groupid);
-	groupname = gdetails["groupName"];
+	groupname = gdetails['groupName'];
   ?>
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/usersgroupsdeleteaction.cms"); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Remove User From Group </legend>
-	<p>Are you sure you want to remove this user from this group?</p>
-	<p><span>Username:</span>
-	<?cms write(xmlEscape(username)); ?>
-	</p>
-	<p><span>Group name:</span>
-	<?cms write(xmlEscape(groupname)); ?>
-	</p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="user" value="<?cms write(xmlEscape(get("user"))); ?>"/>
-	<input type="hidden" name="group" value="<?cms write(xmlEscape(get("group"))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();" id="ok"/>
-	</p>
-	</div>
+    <form action="<?cms urlRewrite('/cms/system/usersgroupsdeleteaction.cms'); ?>" method="POST">
+			<div id="fields">
+			<fieldset id="outer">
+				<legend> Remove User From Group </legend>
+				<p>Are you sure you want to remove this user from this group?</p>
+				<p><span>Username:</span>
+					<?cms write(xmlEscape(username)); ?>
+				</p>
+				<p><span>Group name:</span>
+					<?cms write(xmlEscape(groupname)); ?>
+				</p>
+				<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+			</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="user" value="<?cms write(xmlEscape(get('user'))); ?>"/>
+					<input type="hidden" name="group" value="<?cms write(xmlEscape(get('group'))); ?>"/>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK()" id="ok"/>
+				</p>
+			</div>
     </form>
   </div>
   <div id="loading"> <span>Please Wait...</span> </div>

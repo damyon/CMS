@@ -31,32 +31,32 @@
 <body>
   <div id="popupform">
     <form action="#">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Go To Page </legend>
-	<p><span>Page Number: </span>
-	<select name="skip" id="skip">
-	<?cms
-		int total;
-		int page;
-		int i;
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Go To Page </legend>
+					<p><span>Page Number: </span>
+						<select name="skip" id="skip">
+							<?cms
+								int total;
+								int page;
+								int i;
 
-		total = get('total');
-		page = get('pagination');
-		for (i = 0; ((i * page) < total); i += 1) {
-			writeln('<option value="' + (i * page) + '">' + (i + 1) + '</option>');
-		}
-	?>
-	</select>
-	</p>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="button" class="button" name="submit-action" value="Cancel" onclick="actionCancel()"/>
-	<input type="submit" class="button" name="submit-action" value="OK" onclick="actionOK()"/>
-	</p>
-	</div>
+								total = get('total');
+								page = get('pagination');
+								for (i = 0; ((i * page) < total); i += 1) {
+									writeln('<option value="' + (i * page) + '">' + (i + 1) + '</option>');
+								}
+							?>
+						</select>
+					</p>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="button" class="button" name="submit-action" value="Cancel" onclick="actionCancel()"/>
+					<input type="submit" class="button" name="submit-action" value="OK" onclick="actionOK()"/>
+				</p>
+			</div>
     </form>
   </div>
 </body>

@@ -2,13 +2,13 @@
 <html>
 <head>
   <title>Dhufish CMS - Properties</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionOK() {
 		window.close();
 	}
-  -->
+
   </script>
   <?cms
 	map details;
@@ -22,26 +22,26 @@
 	array children;
 	int size;
 
-	path = get("path");
+	path = get('path');
 	details = getFileDetails(path);
-	title = getFileMetadata(path, "dc:title");
-	description = getFileMetadata(path, "dc:description");
-	subject = getFileMetadata(path, "dc:subject");
-	publisher = getFileMetadata(path, "dc:publisher");
-	author = getFileMetadata(path, "dc:author");
+	title = getFileMetadata(path, 'dc:title');
+	description = getFileMetadata(path, 'dc:description');
+	subject = getFileMetadata(path, 'dc:subject');
+	publisher = getFileMetadata(path, 'dc:publisher');
+	author = getFileMetadata(path, 'dc:author');
 	
-	if (details["type"] == "FOLDER") {
-		children = getFolderContents(path, "", 0, 2048, "relative");
-		type = "Folder";
-	} else if (details["type"] == "RESOURCE") {
-		type = "Resource File";
-	} else if (details["type"] == "CONTENT") {
-		type = "Web Page";
+	if (details['type'] == 'FOLDER') {
+		children = getFolderContents(path, '', 0, 2048, 'relative');
+		type = 'Folder';
+	} else if (details['type'] == 'RESOURCE') {
+		type = 'Resource File';
+	} else if (details['type'] == 'CONTENT') {
+		type = 'Web Page';
 	} else {
-		type = details["type"];
+		type = details['type'];
 	}
 
-	size = details["fileSize"] / 1024;
+	size = details['fileSize'] / 1024;
 	if (size == 0)
 		size = 1;
 
@@ -49,40 +49,40 @@
 </head>
 <body>
   <div>
-        <form action="#" id="popupform">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Properties </legend>
-	<div id="info">
-	<p><span>Type:</span><?cms write(xmlEscape(type)); ?></p>
-	<p><span>Name:</span><?cms write(xmlEscape(details["fileName"])); ?></p>
-	<p><span>Title:</span><?cms write(xmlEscape(title)); ?></p>
-	<p><span>Description:</span><?cms if (description != "") { write(xmlEscape(description)); } else { write("Not specified"); }  ?></p>
-	<p><span>Subject/Keywords:</span><?cms if (subject != "") { write(xmlEscape(subject)); } else { write("Not specified"); } ?></p>
-	<?cms 
-		if (type == "Folder") {
-			writeln("<p><span>Contents:</span>" + arrayLength(children) + " items.</p>");
-		}
-	?>
-	<p><span>Last Modified:</span><?cms write(getISODate(details["version"])); ?></p>
-	<p><span>Public:</span><?cms if (details["isPublic"]) write("Yes"); else write("No"); ?></p>
-	<p><span>Author:</span><?cms if (author != "") { write(xmlEscape(author)); } else { write("Not specified"); } ?></p>
-	<p><span>Publisher:</span><?cms write(xmlEscape(publisher)); ?></p>
-	<?cms 
-		if (type != "Folder") {
-			writeln("<p><span>File type:</span>" + xmlEscape(details["mimeType"]) + "</p>");
-			writeln("<p><span>File size:</span>" + size + " kb</p>");
-		}
-	?>
-	</div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="button" onclick="actionOK();" class="button" name="submit-action" value="Close"/>
-	</p>
-	</div>
-        </form>
+    <form action="#" id="popupform">
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Properties </legend>
+					<div id="info">
+						<p><span>Type:</span><?cms write(xmlEscape(type)); ?></p>
+						<p><span>Name:</span><?cms write(xmlEscape(details['fileName'])); ?></p>
+						<p><span>Title:</span><?cms write(xmlEscape(title)); ?></p>
+						<p><span>Description:</span><?cms if (description != '') { write(xmlEscape(description)); } else { write('Not specified'); }  ?></p>
+						<p><span>Subject/Keywords:</span><?cms if (subject != '') { write(xmlEscape(subject)); } else { write('Not specified'); } ?></p>
+						<?cms 
+							if (type == 'Folder') {
+								writeln('<p><span>Contents:</span>' + arrayLength(children) + ' items.</p>');
+							}
+						?>
+						<p><span>Last Modified:</span><?cms write(getISODate(details['version'])); ?></p>
+						<p><span>Public:</span><?cms if (details['isPublic']) write('Yes'); else write('No'); ?></p>
+						<p><span>Author:</span><?cms if (author != '') { write(xmlEscape(author)); } else { write('Not specified'); } ?></p>
+						<p><span>Publisher:</span><?cms write(xmlEscape(publisher)); ?></p>
+						<?cms 
+							if (type != 'Folder') {
+								writeln('<p><span>File type:</span>' + xmlEscape(details['mimeType']) + '</p>');
+								writeln('<p><span>File size:</span>' + size + ' kb</p>');
+							}
+						?>
+					</div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="button" onclick="actionOK()" class="button" name="submit-action" value="Close"/>
+				</p>
+			</div>
+    </form>
   </div>
 </body>
 </html>

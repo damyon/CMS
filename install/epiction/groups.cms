@@ -112,71 +112,72 @@
 </head>
 <body>
   <div id="popupform">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Groups </legend>
-	<div id="info">
-	<table width="100%" cellpadding="0" cellspacing="0" id="userstable">
-	<tr><th>Group Name</th><th>Public</th></tr>
-	<?cms
-		int i;
-		array groups;
-		map details;
-		int err;
-	
-		groups = getGroupList('', 0, 2048);
+		<div id="fields">
+			<fieldset id="outer">
+				<legend> Groups </legend>
+				<div id="info">
+					<table width="100%" cellpadding="0" cellspacing="0" id="userstable">
+					<tr><th>Group Name</th><th>Public</th></tr>
+					<?cms
+						int i;
+						array groups;
+						map details;
+						int err;
+					
+						groups = getGroupList('', 0, 2048);
 
-		for (i = 0; i < arrayLength(groups); i++) {
-		 	details = getGroupDetails(groups[i]['groupID']);
-		 	write('<tr ');
-			if (i % 2) {
-				write(' class="odd" ');
-			}
-			write('id="group' + groups[i]['groupID'] + '" onclick="selectGroup(' + groups[i]['groupID'] + ', `' + details['isPublic'] + '`)" style="cursor: pointer;"><td>' + xmlEscape(details['groupName']) + '</td><td>');
-		 	if (details['isPublic']) {
-				write('True');
-		 	} else {
-				write('False');
-		 	}
-		 	writeln('</td></tr>');
-		}
-		
-		while (i < 5) {
-			if (i % 2) {
-				writeln('<tr class="odd"><td>&nbsp;</td><td>&nbsp;</td></tr>');
-			} else {
-				writeln('<tr><td>&nbsp;</td><td>&nbsp;</td></tr>');
-			}
-			i++;
-		}
+						for (i = 0; i < arrayLength(groups); i++) {
+							details = getGroupDetails(groups[i]['groupID']);
+							write('<tr ');
+							if (i % 2) {
+								write(' class="odd" ');
+							}
+							write('id="group' + groups[i]['groupID'] + '" onclick="selectGroup(' + groups[i]['groupID'] + ', `' + details['isPublic'] + '`)" style="cursor: pointer;"><td>' + xmlEscape(details['groupName']) + '</td><td>');
+							if (details['isPublic']) {
+								write('True');
+							} else {
+								write('False');
+							}
+							writeln('</td></tr>');
+						}
+						
+						while (i < 5) {
+							if (i % 2) {
+								writeln('<tr class="odd"><td>&nbsp;</td><td>&nbsp;</td></tr>');
+							} else {
+								writeln('<tr><td>&nbsp;</td><td>&nbsp;</td></tr>');
+							}
+							i++;
+						}
 
-	?>
-	</table>
+					?>
+					</table>
+				</div>
+				<div id="leftmenu">
+					<form action="#">
+						<input type="hidden" name="groupID" id="groupID" value=""/>
+						<input type="hidden" name="groupPublic" id="groupPublic" value=""/>
+						<?cms
+							string super;
+
+							super = get('isSuperUser');
+
+							if (super == 'y') {
+								writeln('<input type="button" onclick="actionAdd()" id="addbutton" name="addgroup" class="button" value="Add"/><br/><br/>');
+								writeln('<input type="button" onclick="actionEdit()" id="editbutton" name="editgroup" class="button" value="Edit" style="color: #999;"/><br/><br/>');
+								writeln('<input type="button" onclick="actionDelete()" id="deletebutton" name="deletegroup" class="button" value="Delete" style="color: #999;"/><br/><br/>');
+							}
+							writeln('<input type="button" onclick="actionUsers()" id="usersbutton" name="groupsuser" class="button" value="Users" style="color: #999;"/>');
+						?>
+					</form>
+				</div>
+			</fieldset>
+		</div>
+		<div id="actions">
+			<p>
+				<input type="button" onclick="actionOK()" class="button" name="submit-action" value="Close"/>
+			</p>
+ 		</div>
 	</div>
-	<div id="leftmenu">
-	<form action="#">
-	<input type="hidden" name="groupID" id="groupID" value=""/>
-	<input type="hidden" name="groupPublic" id="groupPublic" value=""/>
-	<?cms
-		string super;
-
-		super = get('isSuperUser');
-
-		if (super == 'y') {
-			writeln('<input type="button" onclick="actionAdd()" id="addbutton" name="addgroup" class="button" value="Add"/><br/><br/>');
-			writeln('<input type="button" onclick="actionEdit()" id="editbutton" name="editgroup" class="button" value="Edit" style="color: #999;"/><br/><br/>');
-			writeln('<input type="button" onclick="actionDelete()" id="deletebutton" name="deletegroup" class="button" value="Delete" style="color: #999;"/><br/><br/>');
-		}
-		writeln('<input type="button" onclick="actionUsers()" id="usersbutton" name="groupsuser" class="button" value="Users" style="color: #999;"/>');
-	?>
-	</form>
-	</div>
-	</fieldset>
-  </div>
-  <div id="actions">
-  <p>
-  <input type="button" onclick="actionOK()" class="button" name="submit-action" value="Close"/>
-  </p>
-  </div>
 </body>
 </html>

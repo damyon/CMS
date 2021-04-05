@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Dhufish CMS - Remove Workflow Settings (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
-  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/system/js/popup.js"); ?>"></script>
+  <title>Dhufish CMS - Remove Workflow Settings (/cms/<?cms write(xmlEscape(get('path'))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite('/cms/system/js/popup.js'); ?>"></script>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -34,44 +34,44 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/workflowdeleteaction.cms"); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Remove Workflow Settings </legend>
-	<p><span>Path:</span>
-	<?cms write(xmlEscape(get("path"))); ?>
-	</p>
-	<p><span>Workflow Setting:</span>
-	<?cms 
-		int requiresall;
-		map details;
-		int groupID;
-	
-		groupID = get("group");
+    <form action="<?cms urlRewrite('/cms/system/workflowdeleteaction.cms'); ?>" method="POST">
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Remove Workflow Settings </legend>
+					<p><span>Path:</span>
+						<?cms write(xmlEscape(get('path'))); ?>
+					</p>
+					<p><span>Workflow Setting:</span>
+						<?cms 
+							int requiresall;
+							map details;
+							int groupID;
+						
+							groupID = get('group');
 
-		details = getGroupDetails(groupID);
-	
-		requiresall = get("requiresall");
+							details = getGroupDetails(groupID);
+						
+							requiresall = get('requiresall');
 
-		if (requiresall) {
-			writeln("Files published into this folder require approval by all members of the group <em>" + xmlEscape(details["groupName"]) + "</em>.");
-		} else {
-			writeln("Files published into this folder require approval by any one member of the group <em>" + xmlEscape(details["groupName"]) + "</em>.");
-		}
-		
-	      ?>
-	</p>
-	<p>&nbsp;</p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();" id="ok"/>
-	</p>
-	</div>
+							if (requiresall) {
+								writeln('Files published into this folder require approval by all members of the group <em>' + xmlEscape(details['groupName']) + '</em>.');
+							} else {
+								writeln('Files published into this folder require approval by any one member of the group <em>' + xmlEscape(details['groupName']) + '</em>.');
+							}
+							
+						?>
+					</p>
+					<p>&nbsp;</p>
+					<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK()" id="ok"/>
+				</p>
+			</div>
     </form>
   </div>
   <div id="loading"> <span>Please Wait...</span> </div>

@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Dhufish CMS - Workflow Settings (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Workflow Settings (/cms/<?cms write(xmlEscape(get('path'))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -10,18 +10,18 @@
 	}
 
 	function actionAdd() {
-                r = Math.round(Math.random() * 1024);
-                id = "win" + r;
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
 
-                window.open("<?cms urlRewrite("/cms/system/workflowadd.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
-        }
+		window.open("<?cms urlRewrite('/cms/system/workflowadd.cms?path=' + xmlEscape(get('path'))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
+	}
 
 	function actionRemove(groupID, requiresAll) {
-                r = Math.round(Math.random() * 1024);
-                id = "win" + r;
+		r = Math.round(Math.random() * 1024);
+		id = "win" + r;
 
-                window.open("<?cms urlRewrite("/cms/system/workflowdelete.cms?path=" + xmlEscape(get("path"))); ?>&group=" + groupID + "&requiresall=" + requiresAll, id, "menubar=no,width=640,height=240,screenX=160,screenY=160");
-        }
+		window.open("<?cms urlRewrite('/cms/system/workflowdelete.cms?path=' + xmlEscape(get('path'))); ?>&group=" + groupID + "&requiresall=" + requiresAll, id, "menubar=no,width=640,height=240,screenX=160,screenY=160");
+	}
 
 	function setFocus(ele) {
 		var ele = document.getElementById(ele);
@@ -39,70 +39,70 @@
 	string path;
 	map details;
 
-	path = get("path");
+	path = get('path');
 	details = getFileDetails(path);
 
   ?>
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/workflowaction.cms"); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Workflow Settings </legend>
-	<div id="info">
-	<p><span>Folder:</span><?cms write(xmlEscape(path)); ?></p>
-	<p style="line-height: 1.2em;"><span>Setting:</span>
-	<?cms	
-		map settings;
-		map details;
-		int err;
-		string path;
-		int requiresall;
-		int workflowset;
-		int groupID;
+		<form action="<?cms urlRewrite('/cms/system/workflowaction.cms'); ?>" method="POST">
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Workflow Settings </legend>
+					<div id="info">
+						<p><span>Folder:</span><?cms write(xmlEscape(path)); ?></p>
+						<p style="line-height: 1.2em;"><span>Setting:</span>
+							<?cms	
+								map settings;
+								map details;
+								int err;
+								string path;
+								int requiresall;
+								int workflowset;
+								int groupID;
 
-		path = get("path");
+								path = get('path');
 
-		settings = getWorkflowSettings(path);
-		if (mapLength(settings) > 0) {
-			workflowset = 1;
-			groupID = settings["groupID"];
-			requiresall = settings["requiresAll"];
-			details = getGroupDetails(settings["groupID"]);
-			write("Files published into this folder require approval by ");
-			if (settings["requiresAll"]) {
-				write(" all members ");
-			} else {
-				write(" any member ");
-			}
-			write(" of the group <em>" + xmlEscape(details["groupName"]) + "</em>.");
-		} else {
-			workflowset = 0;
-			writeln("No approval is required for files published to this folder.");
-		}
-	?>
-	</p>
-	<p>&nbsp;</p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
-	</div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="button" class="button" value="Close" onclick="actionCancel();" id="cancel"/>
-	<?cms
-		if (workflowset == 1) {
-			writeln("<input type=\"button\" class=\"button\" value=\"Remove Workflow Settings\" onclick=\"actionRemove(" + groupID + ", '" + requiresall + "');\"/>");
-			writeln("<input type=\"button\" class=\"button disabled\" value=\"Add Workflow Settings\"/>");
-		} else {
-			writeln("<input type=\"button\" class=\"button disabled\" value=\"Remove Workflow Settings\"/>");
-			writeln("<input type=\"button\" class=\"button\" value=\"Add Workflow Settings\" onclick=\"actionAdd();\"/>");
-		}
-	?>
-	</p>
-	</div>
+								settings = getWorkflowSettings(path);
+								if (mapLength(settings) > 0) {
+									workflowset = 1;
+									groupID = settings['groupID'];
+									requiresall = settings['requiresAll'];
+									details = getGroupDetails(settings['groupID']);
+									write('Files published into this folder require approval by ');
+									if (settings['requiresAll']) {
+										write(' all members ');
+									} else {
+										write(' any member ');
+									}
+									write(' of the group <em>' + xmlEscape(details['groupName']) + '</em>.');
+								} else {
+									workflowset = 0;
+									writeln('No approval is required for files published to this folder.');
+								}
+							?>
+						</p>
+						<p>&nbsp;</p>
+						<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+					</div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+					<input type="button" class="button" value="Close" onclick="actionCancel()" id="cancel"/>
+					<?cms
+						if (workflowset == 1) {
+							writeln('<input type="button" class="button" value="Remove Workflow Settings" onclick="actionRemove(' + groupID + ', `' + requiresall + '`)"/>');
+							writeln('<input type="button" class="button disabled" value="Add Workflow Settings"/>');
+						} else {
+							writeln('<input type="button" class="button disabled" value="Remove Workflow Settings"/>');
+							writeln('<input type="button" class="button" value="Add Workflow Settings" onclick="actionAdd()"/>');
+						}
+					?>
+				</p>
+			</div>
     </form>
   </div>
 </body>

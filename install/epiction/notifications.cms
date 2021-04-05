@@ -47,52 +47,52 @@
 <body>
   <div id="popupform">
     <form action="<?cms urlRewrite('/cms/system/notificationsaction.cms'); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Notification Settings </legend>
-	<div id="info">
-	<p><span>Folder:</span><?cms write(xmlEscape(path)); ?></p>
-	<p style="line-height: 1.2em;"><span>Setting:</span>
-	<?cms	
-		map details;
-		int err;
-		int notificationset;
-		string path;
-		int groupid;
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Notification Settings </legend>
+					<div id="info">
+						<p><span>Folder:</span><?cms write(xmlEscape(path)); ?></p>
+						<p style="line-height: 1.2em;"><span>Setting:</span>
+							<?cms	
+								map details;
+								int err;
+								int notificationset;
+								string path;
+								int groupid;
 
-		path = get('path');
+								path = get('path');
 
-		groupid = getNotificationSettings(path);
-		if (groupid > 0) {
-		  notificationset = 1;
-			details = getGroupDetails(groupid);
-			write('All members of the group <em> ' + xmlEscape(details['groupName']) + ' </em> will be notified of changes to this folder.');
-		} else {
-		  notificationset = 0;
-			writeln('No one will recieve notifications of changes to this folder.');
-		}
-	?>
-	</p>
-	<p>&nbsp;</p>
-	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
-	</div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
-	<input type="button" class="button" value="Close" onclick="actionCancel()" id="cancel"/>
-	<?cms
-		if (notificationset == 1) {
-			writeln('<input type="button" class="button" value="Remove Notification Settings" onclick="actionRemove(' + groupid + ')"/>');
-			writeln('<input type="button" class="button disabled" value="Add Notification Settings"/>');
-		} else {
-			writeln('<input type="button" class="button disabled" value="Remove Notification Settings"/>');
-			writeln('<input type="button" class="button" value="Add Notification Settings" onclick="actionAdd()"/>');
-		}
-	?>
-	</p>
-	</div>
+								groupid = getNotificationSettings(path);
+								if (groupid > 0) {
+									notificationset = 1;
+									details = getGroupDetails(groupid);
+									write('All members of the group <em> ' + xmlEscape(details['groupName']) + ' </em> will be notified of changes to this folder.');
+								} else {
+									notificationset = 0;
+									writeln('No one will recieve notifications of changes to this folder.');
+								}
+							?>
+						</p>
+						<p>&nbsp;</p>
+						<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+					</div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+					<input type="button" class="button" value="Close" onclick="actionCancel()" id="cancel"/>
+					<?cms
+						if (notificationset == 1) {
+							writeln('<input type="button" class="button" value="Remove Notification Settings" onclick="actionRemove(' + groupid + ')"/>');
+							writeln('<input type="button" class="button disabled" value="Add Notification Settings"/>');
+						} else {
+							writeln('<input type="button" class="button disabled" value="Remove Notification Settings"/>');
+							writeln('<input type="button" class="button" value="Add Notification Settings" onclick="actionAdd()"/>');
+						}
+					?>
+				</p>
+			</div>
     </form>
   </div>
 </body>

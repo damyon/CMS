@@ -45,140 +45,140 @@
 <body>
   <div id="popupform">
     <form action="<?cms urlRewrite('/cms/system/newpageaction.cms'); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Create New Page </legend>
-	<fieldset id="lefttop">
-	<legend> Metadata </legend>
-	<p><span>Title:</span>
-	<input type="text" id="title" class="forminput" name="title" size="16" value="" maxlength="250"/>
-	</p>
-	<p><span>Filename:</span>
-	<input type="text" class="forminput" id="filename" name="filename" size="16" value="" maxlength="250"/>
-	</p>
-	<p><span><em>Description</em>:</span>
-	<input type="text" class="forminput" name="description" size="16" value="" maxlength="250"/>
-	</p>
-	<p><span><em>Keywords</em>:</span>
-	<input type="text" class="forminput" name="keywords" size="16" value="" maxlength="250"/>
-	</p>
-	</fieldset>
-	<fieldset id="righttop">
-	<legend>Other</legend>
-	<p><span>Tool:</span>
-	<select name="tool" class="forminput">
-		<?cms
-			string tool;
-			array tools;
-			map details;
-			string title;
-			int i;
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Create New Page </legend>
+					<fieldset id="lefttop">
+						<legend> Metadata </legend>
+						<p><span>Title:</span>
+							<input type="text" id="title" class="forminput" name="title" size="16" value="" maxlength="250"/>
+						</p>
+						<p><span>Filename:</span>
+							<input type="text" class="forminput" id="filename" name="filename" size="16" value="" maxlength="250"/>
+						</p>
+						<p><span><em>Description</em>:</span>
+							<input type="text" class="forminput" name="description" size="16" value="" maxlength="250"/>
+						</p>
+						<p><span><em>Keywords</em>:</span>
+							<input type="text" class="forminput" name="keywords" size="16" value="" maxlength="250"/>
+						</p>
+					</fieldset>
+					<fieldset id="righttop">
+						<legend>Other</legend>
+						<p><span>Tool:</span>
+							<select name="tool" class="forminput">
+								<?cms
+									string tool;
+									array tools;
+									map details;
+									string title;
+									int i;
 
-			tool = get('tool');
-		
-			tools = getFolderContents('system/extensions', '', 0, 1024, 'relative');
-			writeln('<option value="CONTENT">None</option>');
+									tool = get('tool');
+								
+									tools = getFolderContents('system/extensions', '', 0, 1024, 'relative');
+									writeln('<option value="CONTENT">None</option>');
 
-			for (i = 0; i < arrayLength(tools); i++) {
-				title = getFileMetadata(tools[i]['path'], 'dc:title');
-				details = getFileDetails(tools[i]['path']);
+									for (i = 0; i < arrayLength(tools); i++) {
+										title = getFileMetadata(tools[i]['path'], 'dc:title');
+										details = getFileDetails(tools[i]['path']);
 
-				write('<option value="' + xmlEscape(details['fileName']) + '"');
-				if (tool == details['fileName']) {
-					write(' selected="selected"');
-				}
-				writeln('>' + xmlEscape(title) + '</option>');
-			}
-		?>
-	</select>
-	</p>
-	<p><span>Security:</span>
-	<select name="public" class="forminput">
-	<?cms
-		map details;
+										write('<option value="' + xmlEscape(details['fileName']) + '"');
+										if (tool == details['fileName']) {
+											write(' selected="selected"');
+										}
+										writeln('>' + xmlEscape(title) + '</option>');
+									}
+								?>
+							</select>
+						</p>
+						<p><span>Security:</span>
+							<select name="public" class="forminput">
+							<?cms
+								map details;
 
-		if (get('public') == '') {
-			details = getFileDetails(get('path'));
-			if (mapLength(details) > 0) {
-				set('public', details['isPublic']);
-			}
-		}
+								if (get('public') == '') {
+									details = getFileDetails(get('path'));
+									if (mapLength(details) > 0) {
+										set('public', details['isPublic']);
+									}
+								}
 
-		if (get('public') == 1) {
-			writeln('<option value="1" selected="selected">Public</option>');
-			writeln('<option value="0">Private</option>');
-		} else {
-			writeln('<option value="1">Public</option>');
-			writeln('<option value="0" selected="selected">Private</option>');
-		}
+								if (get('public') == 1) {
+									writeln('<option value="1" selected="selected">Public</option>');
+									writeln('<option value="0">Private</option>');
+								} else {
+									writeln('<option value="1">Public</option>');
+									writeln('<option value="0" selected="selected">Private</option>');
+								}
 
-	?>
-	</select>
-	</p>
-	<p><span>Display Order:</span>
-	<select name="order" class="forminput">
-		<?cms
-			int i;
+							?>
+							</select>
+						</p>
+						<p><span>Display Order:</span>
+							<select name="order" class="forminput">
+								<?cms
+									int i;
 
-			for (i = 1; i < 100; i += 1) {
-				if (i == get('order')) {
-					writeln('<option selected="selected">' + i + '</option>');
-				} else {
-					writeln('<option>' + i + '</option>');
-				}
-			}
-		?>
-	</select>
-	</p>
-	<p><span>Template:</span>
-	<select name="template" class="forminput">
-		<?cms
-			string template;
-			array templates;
-			string title;
-			map details;
-			int i;
+									for (i = 1; i < 100; i += 1) {
+										if (i == get('order')) {
+											writeln('<option selected="selected">' + i + '</option>');
+										} else {
+											writeln('<option>' + i + '</option>');
+										}
+									}
+								?>
+							</select>
+						</p>
+						<p><span>Template:</span>
+							<select name="template" class="forminput">
+								<?cms
+									string template;
+									array templates;
+									string title;
+									map details;
+									int i;
 
-			template = get('template');
-		
-			templates = getFolderContents('templates', '', 0, 1024, 'relative');
+									template = get('template');
+								
+									templates = getFolderContents('templates', '', 0, 1024, 'relative');
 
-			for (i = 0; i < arrayLength(templates); i++) {
-				title = getFileMetadata(templates[i]['path'], 'dc:title');
-				details = getFileDetails(templates[i]['path']);
-				
-				// only show resources
-				if (details['type'] == 'RESOURCE') {
+									for (i = 0; i < arrayLength(templates); i++) {
+										title = getFileMetadata(templates[i]['path'], 'dc:title');
+										details = getFileDetails(templates[i]['path']);
+										
+										// only show resources
+										if (details['type'] == 'RESOURCE') {
 
-				  write('<option value="' + xmlEscape(templates[i]['path']) + '"');
-				  if (template == templates[i]['path']) {
-					  write(' selected="selected"');
-				  }
-				  writeln('>' + xmlEscape(title) + '</option>');
-				}
-			}
-			if (i == 0) {
-				writeln('<option value="">No Templates Installed</option>');
-			}
-		?>
-	</select>
-	</p>
-	</fieldset>
-	<fieldset id="bottomcenter">
-	<legend>Content</legend>
-	<p><span>Content:</span></p>
-	<div id="editor"><textarea name="content" rows="12" cols="80" class="forminput"></textarea></div>
-	</fieldset>
-	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
-	<input type="button" onclick="actionCancel()" class="button" name="submit-action" value="Cancel"/>
-	<input type="submit" onclick="return actionOK()" class="button" name="submit-action" value="OK"/>
-	</p>
-	</div>
+											write('<option value="' + xmlEscape(templates[i]['path']) + '"');
+											if (template == templates[i]['path']) {
+												write(' selected="selected"');
+											}
+											writeln('>' + xmlEscape(title) + '</option>');
+										}
+									}
+									if (i == 0) {
+										writeln('<option value="">No Templates Installed</option>');
+									}
+								?>
+							</select>
+						</p>
+					</fieldset>
+					<fieldset id="bottomcenter">
+						<legend>Content</legend>
+						<p><span>Content:</span></p>
+						<div id="editor"><textarea name="content" rows="12" cols="80" class="forminput"></textarea></div>
+					</fieldset>
+					<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+					<input type="button" onclick="actionCancel()" class="button" name="submit-action" value="Cancel"/>
+					<input type="submit" onclick="return actionOK()" class="button" name="submit-action" value="OK"/>
+				</p>
+			</div>
     </form>
   </div>
   <div id="loading"> <span>Please Wait...</span> </div>

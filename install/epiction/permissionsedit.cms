@@ -35,60 +35,60 @@
 <body>
   <div id="popupform">
     <form action="<?cms urlRewrite('/cms/system/permissionsaddaction.cms'); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Edit Permissions </legend>
-	<p><span>Group:</span>
-	<?cms
-		map details;
-		int groupid;
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Edit Permissions </legend>
+					<p><span>Group:</span>
+						<?cms
+							map details;
+							int groupid;
 
-		groupid = get('group');
+							groupid = get('group');
 
-		details = getGroupDetails(groupid);
+							details = getGroupDetails(groupid);
 
-		writeln(xmlEscape(details['groupName']));
-	?>
-	</p>
-	<p><span>Permissions:</span>
-	<?cms
-		int groupid;
-		string path;
-		map bits;
+							writeln(xmlEscape(details['groupName']));
+						?>
+					</p>
+					<p><span>Permissions:</span>
+						<?cms
+							int groupid;
+							string path;
+							map bits;
 
-		path = get('path');
-		groupid = get('group');
+							path = get('path');
+							groupid = get('group');
 
-		bits = getPermissionBits(path, groupid);
+							bits = getPermissionBits(path, groupid);
 
-		if (bits['read']) {
-			writeln(' <input type="checkbox" name="read" id="read" checked="checked"/> Read');
-		} else {
-			writeln(' <input type="checkbox" name="read" id="read"/> Read');
-		}
-		if (bits['write']) {
-			writeln(' <input type="checkbox" name="write" id="write" checked="checked"/> Write');
-		} else {
-			writeln(' <input type="checkbox" name="write" id="write"/> Write');
-		}
-		if (bits['execute']) {
-			writeln(' <input type="checkbox" name="execute" id="execute" checked="checked"/> Execute');
-		} else {
-			writeln(' <input type="checkbox" name="execute" id="execute"/> Execute');
-		}
-	?>
-	</p>
-	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
-	<input type="hidden" name="group" value="<?cms write(xmlEscape(get('group'))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK()"/>
-	</p>
-	</div>
+							if (bits['read']) {
+								writeln(' <input type="checkbox" name="read" id="read" checked="checked"/> Read');
+							} else {
+								writeln(' <input type="checkbox" name="read" id="read"/> Read');
+							}
+							if (bits['write']) {
+								writeln(' <input type="checkbox" name="write" id="write" checked="checked"/> Write');
+							} else {
+								writeln(' <input type="checkbox" name="write" id="write"/> Write');
+							}
+							if (bits['execute']) {
+								writeln(' <input type="checkbox" name="execute" id="execute" checked="checked"/> Execute');
+							} else {
+								writeln(' <input type="checkbox" name="execute" id="execute"/> Execute');
+							}
+						?>
+					</p>
+					<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+					<input type="hidden" name="group" value="<?cms write(xmlEscape(get('group'))); ?>"/>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK()"/>
+				</p>
+			</div>
     </form>
   </div>
   <div id="loading"> <span>Please Wait...</span> </div>

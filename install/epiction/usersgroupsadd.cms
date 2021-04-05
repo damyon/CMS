@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Dhufish CMS - Add Group To User</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
-  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite("/cms/system/js/popup.js"); ?>"></script>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
+  <script language="Javascript" type="text/javascript" src="<?cms urlRewrite('/cms/system/js/popup.js'); ?>"></script>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -34,51 +34,51 @@
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/usersgroupsaddaction.cms"); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Add Group To User </legend>
-	<p><span>Group:</span>
-	<select name="group" id="group">
-	<?cms
-		array groups;
-		map details;
-		int i;
-		string super;
+    <form action="<?cms urlRewrite('/cms/system/usersgroupsaddaction.cms'); ?>" method="POST">
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Add Group To User </legend>
+					<p><span>Group:</span>
+						<select name="group" id="group">
+							<?cms
+								array groups;
+								map details;
+								int i;
+								string super;
 
-		super = get("isSuperUser");
+								super = get('isSuperUser');
 
-		groups = getGroupList("", 0, 2048);
+								groups = getGroupList('', 0, 2048);
 
-		for (i = 0; i < arrayLength(groups); i++) {
-			details = getGroupDetails(groups[i]["groupID"]);
+								for (i = 0; i < arrayLength(groups); i++) {
+									details = getGroupDetails(groups[i]['groupID']);
 
-			if ((super == "y") || (details["isPublic"] == 1)) { 
-				writeln("<option value=\"" + groups[i]["groupID"] + "\">" + xmlEscape(details["groupName"]) + "</option>");
-			}
-		}
-	?>
-	</select>
-	<?cms 
-		string super;
+									if ((super == 'y') || (details['isPublic'] == 1)) { 
+										writeln('<option value="' + groups[i]['groupID'] + '">' + xmlEscape(details['groupName']) + '</option>');
+									}
+								}
+							?>
+						</select>
+						<?cms 
+							string super;
 
-		super = get("isSuperUser");
+							super = get('isSuperUser');
 
-		if (super == "y") {
-			writeln("<a href=\"javascript:void(0);\" onclick=\"openWindow('" + urlBase("/cms/system/newgroup.cms") + "', '480', '320');\" rel=\"popup-480-240\" title=\"Create new group\"><img border=\"0\" alt=\"Create new group\" src=\"" + urlBase("/cms/system/images/add.gif") + "\"/></a>");
-		}
-		?>
-	</p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="user" value="<?cms write(xmlEscape(get("user"))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
-	</p>
-	</div>
+							if (super == 'y') {
+								writeln('<a href="javascript:void(0)" onclick="openWindow(`' + urlBase('/cms/system/newgroup.cms') + '`, 480, 320)" rel="popup-480-240" title="Create new group"><img border="0" alt="Create new group" src="' + urlBase('/cms/system/images/add.gif') + '"/></a>');
+							}
+						?>
+					</p>
+					<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="user" value="<?cms write(xmlEscape(get('user'))); ?>"/>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK()"/>
+				</p>
+			</div>
     </form>
   </div>
   <div id="loading"> <span>Please Wait...</span> </div>

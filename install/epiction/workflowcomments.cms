@@ -2,13 +2,13 @@
 <html>
 <head>
   <title>Dhufish CMS - Workflow Comments</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <?cms
 	map details;
 	int isonline;
 
-	details = getFileDetails(get("path"));
-	isonline = details["isOnline"];
+	details = getFileDetails(get('path'));
+	isonline = details['isOnline'];
   ?>
   <script type="text/javascript" language="Javascript">
   
@@ -23,7 +23,7 @@
 		id = "win" + r;
 
 		if (isonline == "0") {
-		window.open("<?cms urlRewrite("/cms/system/approve.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite('/cms/system/approve.cms?path=' + xmlEscape(get('path'))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
 		}
 	}
 	function actionReject() {
@@ -31,90 +31,89 @@
 		id = "win" + r;
 
 		if (isonline == "0") {
-		window.open("<?cms urlRewrite("/cms/system/reject.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite('/cms/system/reject.cms?path=' + xmlEscape(get('path'))); ?>", id, "menubar=no,width=480,height=240,screenX=160,screenY=160");
 		}
 	}
 	function actionComment() {
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/system/comment.cms?path=" + xmlEscape(get("path"))); ?>", id, "menubar=no,width=520,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite('/cms/system/comment.cms?path=' + xmlEscape(get('path'))); ?>", id, "menubar=no,width=520,height=240,screenX=160,screenY=160");
 	}
 	
-  -->
   </script>
 </head>
 <body>
   <div id="popupform">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Workflow Comments </legend>
-	<div id="info">
-	<p><span>Comments for file:</span><?cms write(xmlEscape(get("path"))); ?></p>
-	<p><span>File is currently:</span><?cms 
-		if (isonline) {
-			write("Approved");
-		} else {
-			write("Awaiting Approval");
-		}
+		<div id="fields">
+			<fieldset id="outer">
+				<legend> Workflow Comments </legend>
+				<div id="info">
+					<p><span>Comments for file:</span><?cms write(xmlEscape(get('path'))); ?></p>
+					<p><span>File is currently:</span><?cms 
+						if (isonline) {
+							write('Approved');
+						} else {
+							write('Awaiting Approval');
+						}
 
-	 ?></p>
-	<table width="100%" cellpadding="0" cellspacing="0">
-	<tr><th>Username</th><th>Date</th><th>Comment</th></tr>
+					?></p>
+					<table width="100%" cellpadding="0" cellspacing="0">
+						<tr><th>Username</th><th>Date</th><th>Comment</th></tr>
 
-	<?cms
-		string path;
-		int i;
-		map details;
-		map userdetails;
-		array comments;
-		int err;
-	
-		path = get("path");
-		comments = getAllVerifierComments(path);
+						<?cms
+							string path;
+							int i;
+							map details;
+							map userdetails;
+							array comments;
+							int err;
+						
+							path = get('path');
+							comments = getAllVerifierComments(path);
 
-		for (i = 0; i < arrayLength(comments); i++) {
-			details = getVerifierComment(comments[i]["commentID"]); 
-			userdetails = getUserDetails(details["userID"]);
-			if (i % 2) {
-				write("<tr class=\"odd\"><td>");
-			} else {
-				write("<tr><td>");
-			}
-			write(xmlEscape(userdetails["userName"]) + "</td><td>");
-			write(xmlEscape(details["created"]));
-			writeln("</td><td>");
-			write(xmlEscape(details["comment"]));
-			writeln("</td></tr>");
-		}
-		
-		while (i < 5) {
-			if (i % 2) {
-				writeln("<tr class=\"odd\"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
-			} else {
-				writeln("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
-			}
-		
-			i++;
-		}
+							for (i = 0; i < arrayLength(comments); i++) {
+								details = getVerifierComment(comments[i]['commentID']); 
+								userdetails = getUserDetails(details['userID']);
+								if (i % 2) {
+									write('<tr class="odd"><td>');
+								} else {
+									write('<tr><td>');
+								}
+								write(xmlEscape(userdetails['userName']) + '</td><td>');
+								write(xmlEscape(details['created']));
+								writeln('</td><td>');
+								write(xmlEscape(details['comment']));
+								writeln('</td></tr>');
+							}
+							
+							while (i < 5) {
+								if (i % 2) {
+									writeln('<tr class="odd"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
+								} else {
+									writeln('<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
+								}
+							
+								i++;
+							}
 
-	?>
-	</table>
-	</div>
-	<div id="leftmenu">
-	<form action="#">
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="button" onclick="actionApprove();" name="approve" class="button" value="Approve" <?cms if (isonline) write(" style=\"color: #999;\""); ?>/><br/><br/>
-	<input type="button" onclick="actionReject();" name="reject" class="button" value="Reject" <?cms if (isonline) write(" style=\"color: #999;\""); ?>/><br/><br/>
-	<input type="button" onclick="actionComment();" name="comment" class="button" value="Add Comment"/>
-	</form>
-	</div>
-	</fieldset>
-  </div>
-  <div id="actions">
-  <p>
-  <input type="button" onclick="actionOK();" class="button" name="submit-action" value="Close"/>
-  </p>
+						?>
+					</table>
+				</div>
+				<div id="leftmenu">
+					<form action="#">
+						<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+						<input type="button" onclick="actionApprove()" name="approve" class="button" value="Approve" <?cms if (isonline) write(' style="color: #999;"'); ?>/><br/><br/>
+						<input type="button" onclick="actionReject()" name="reject" class="button" value="Reject" <?cms if (isonline) write(' style="color: #999;"'); ?>/><br/><br/>
+						<input type="button" onclick="actionComment()" name="comment" class="button" value="Add Comment"/>
+					</form>
+				</div>
+			</fieldset>
+		</div>
+		<div id="actions">
+			<p>
+				<input type="button" onclick="actionOK()" class="button" name="submit-action" value="Close"/>
+			</p>
   </div>
 </body>
 </html>

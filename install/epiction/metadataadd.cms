@@ -231,65 +231,65 @@
   <div id="popupform">
     <form action="<?cms urlRewrite('/cms/system/metadataaddaction.cms'); ?>" method="POST">
 			<div id="fields">
-			<fieldset id="outer">
-			<legend> Add Metadata Field </legend>
-			<p style="display: block; width: 44em; "><span>Metadata Format:</span>
-			<select name="namespaceselect" onchange="selectNamespace()" id="namespaceselect" class="metadatainput">
-			<option value="http://purl.org/dc/elements/1.1/">Dublin Core v1.1</option>
-			<option value="http://www.naa.gov.au/recordkeeping/gov_online/agls/1.3">AGLS v1.3</option>
-			<option value="urn:custom">Custom</option>
-			</select><span class="hstrut"></span>
-			</p>
-			<p id="namespacep" style="display: none;"><span>Namespace URI:</span>
-			<input type="text" class="metadatainput" id="namespace" name="namespace" size="30" value="<?cms write(xmlEscape(get("namespace"))); ?>" maxlength="250"/>
-			</p>
-			<p style="display: block; width: 44em; height: 2em;"><span>Name:</span>
-			<input type="text" class="metadatainput" name="fieldname" id="fieldname" size="30" value="<?cms write(xmlEscape(get("fieldname"))); ?>" maxlength="250" style="display: none;"/>
-			<select name="dcnameselect" onchange="dcSelectName()" id="dcnameselect" class="metadatainput">
-			<option value="title">Title</option>
-			<option value="creator">Creator</option>
-			<option value="subject">Subject or Keywords</option>
-			<option value="description">Description</option>
-			<option value="publisher">Publisher</option>
-			<option value="contributor">Contributor</option>
-			<option value="date">Date</option>
-			<option value="type">Type</option>
-			<option value="format">Format</option>
-			<option value="identifier">Resource Identifier</option>
-			<option value="source">Source</option>
-			<option value="language">Language</option>
-			<option value="relation">Relation</option>
-			<option value="coverage">Coverage</option>
-			<option value="rights">Rights Management</option>
-			</select>
-			<select name="aglsnameselect" onchange="aglsSelectName()" id="aglsnameselect" class="metadatainput" style="display: none; ">
-			<option value="function">Function</option>
-			<option value="availability">Availability</option>
-			<option value="audience">Audience</option>
-			<option value="mandate">Mandate</option>
-			</select>
-			</p>
-			<p><span>Value:</span>
-			<input type="text" class="metadatainput" name="fieldvalue" size="30" value="<?cms write(xmlEscape(get('fieldvalue'))); ?>" maxlength="250"/>
-			</p>
-			<p><em id="description" style="display: block; height: 2em; width: 44em;">
-				A name given to the resource.
-				</em>
-			</p>
-			<p>
-				<em id="comment" style="display: block; height: 8em; width: 44em;">
-				Typically, Title will be a name by which the resource is formally known.
-				</em>
-			</p>
-			<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
-			</fieldset>
+				<fieldset id="outer">
+					<legend> Add Metadata Field </legend>
+					<p style="display: block; width: 44em; "><span>Metadata Format:</span>
+						<select name="namespaceselect" onchange="selectNamespace()" id="namespaceselect" class="metadatainput">
+							<option value="http://purl.org/dc/elements/1.1/">Dublin Core v1.1</option>
+							<option value="http://www.naa.gov.au/recordkeeping/gov_online/agls/1.3">AGLS v1.3</option>
+							<option value="urn:custom">Custom</option>
+						</select><span class="hstrut"></span>
+					</p>
+					<p id="namespacep" style="display: none;"><span>Namespace URI:</span>
+						<input type="text" class="metadatainput" id="namespace" name="namespace" size="30" value="<?cms write(xmlEscape(get("namespace"))); ?>" maxlength="250"/>
+					</p>
+					<p style="display: block; width: 44em; height: 2em;"><span>Name:</span>
+						<input type="text" class="metadatainput" name="fieldname" id="fieldname" size="30" value="<?cms write(xmlEscape(get("fieldname"))); ?>" maxlength="250" style="display: none;"/>
+						<select name="dcnameselect" onchange="dcSelectName()" id="dcnameselect" class="metadatainput">
+							<option value="title">Title</option>
+							<option value="creator">Creator</option>
+							<option value="subject">Subject or Keywords</option>
+							<option value="description">Description</option>
+							<option value="publisher">Publisher</option>
+							<option value="contributor">Contributor</option>
+							<option value="date">Date</option>
+							<option value="type">Type</option>
+							<option value="format">Format</option>
+							<option value="identifier">Resource Identifier</option>
+							<option value="source">Source</option>
+							<option value="language">Language</option>
+							<option value="relation">Relation</option>
+							<option value="coverage">Coverage</option>
+							<option value="rights">Rights Management</option>
+						</select>
+						<select name="aglsnameselect" onchange="aglsSelectName()" id="aglsnameselect" class="metadatainput" style="display: none; ">
+							<option value="function">Function</option>
+							<option value="availability">Availability</option>
+							<option value="audience">Audience</option>
+							<option value="mandate">Mandate</option>
+						</select>
+					</p>
+					<p><span>Value:</span>
+						<input type="text" class="metadatainput" name="fieldvalue" size="30" value="<?cms write(xmlEscape(get('fieldvalue'))); ?>" maxlength="250"/>
+					</p>
+					<p><em id="description" style="display: block; height: 2em; width: 44em;">
+						A name given to the resource.
+						</em>
+					</p>
+					<p>
+						<em id="comment" style="display: block; height: 8em; width: 44em;">
+						Typically, Title will be a name by which the resource is formally known.
+						</em>
+					</p>
+					<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+				</fieldset>
 			</div>
 			<div id="actions">
-			<p>
-			<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
-			<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
-			<input type="submit" class="button" value="OK" onclick="actionOK()"/>
-			</p>
+				<p>
+					<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK()"/>
+				</p>
 			</div>
     </form>
   </div>

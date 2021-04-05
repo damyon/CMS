@@ -2,19 +2,19 @@
 <html>
 <head>
   <title>Dhufish CMS - Users</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
-	var issuper = "<?cms string super;
+	var issuper = `<?cms string super;
 
-			super = get("isSuperUser");
+			super = get('isSuperUser');
 
-			write(super); ?>";
+			write(super); ?>`;
 
 	var lastColor = "";
 	
 	function actionOK() {
-                window.opener.document.location.reload();
+		window.opener.document.location.reload();
 		window.close();
 	}
 	
@@ -22,7 +22,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/system/newuser.cms"); ?>", id, "menubar=no,width=540,height=400,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite('/cms/system/newuser.cms'); ?>", id, "menubar=no,width=540,height=400,screenX=160,screenY=160");
 	}
 	
 	function actionEdit() {
@@ -32,7 +32,7 @@
 		id = "win" + r;
 
 		if (userID != "" && issuper == "y") {
-			window.open("<?cms urlRewrite("/cms/system/useredit.cms?a=b"); ?>&user=" + userID, id, "menubar=no,width=540,height=400,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite('/cms/system/useredit.cms?a=b'); ?>&user=" + userID, id, "menubar=no,width=540,height=400,screenX=160,screenY=160");
 		}
 	}
 	
@@ -42,8 +42,8 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		if ((userID == "<?cms write(get("userID")); ?>") || ((issuper == "y") && (userID != ""))) {
-			window.open("<?cms urlRewrite("/cms/system/usermetadata.cms?a=b"); ?>&user=" + userID, id, "menubar=no,width=800,height=400,screenX=160,screenY=160");
+		if ((userID == "<?cms write(get('userID')); ?>") || ((issuper == "y") && (userID != ""))) {
+			window.open("<?cms urlRewrite('/cms/system/usermetadata.cms?a=b'); ?>&user=" + userID, id, "menubar=no,width=800,height=400,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -56,7 +56,7 @@
 		id = "win" + r;
 
 		if (userID != "") {
-			window.open("<?cms urlRewrite("/cms/system/usersgroups.cms?a=b"); ?>&user=" + userID, id, "menubar=no,width=680,height=400,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite('/cms/system/usersgroups.cms?a=b'); ?>&user=" + userID, id, "menubar=no,width=680,height=400,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -69,7 +69,7 @@
 		id = "win" + r;
 
 		if ((userID != "") && (issuper == "y")) {
-			window.open("<?cms urlRewrite("/cms/system/userdelete.cms?a=b"); ?>&user=" + userID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite('/cms/system/userdelete.cms?a=b'); ?>&user=" + userID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 		} else {
 			return false;
 		}
@@ -103,7 +103,7 @@
 			ele.style.color = "#000";
 		}
 		ele = document.getElementById("metadatabutton");
-		if (issuper == "y" || userID == "<?cms write(get("userID")); ?>") {
+		if (issuper == "y" || userID == "<?cms write(get('userID')); ?>") {
 			ele.style.color = "#000";
 		} else {
 			ele.style.color = "#999";
@@ -117,83 +117,83 @@
 			ele.value = userID;
 		}
 	}
-  -->
+	
   </script>
 </head>
 <body>
   <div id="popupform">
 	<div id="fields">
-	<fieldset id="outer">
-	<legend> Users </legend>
-	<div id="info">
-	<table width="100%" cellpadding="0" cellspacing="0" id="userstable">
-	<tr><th>Username</th><th>Fullname</th><th>Email</th><th>Administrator</th><th>Enabled</th></tr>
-	<?cms
-		int i;
-		array users;
-		map details;
-		int err;
+		<fieldset id="outer">
+			<legend> Users </legend>
+			<div id="info">
+				<table width="100%" cellpadding="0" cellspacing="0" id="userstable">
+					<tr><th>Username</th><th>Fullname</th><th>Email</th><th>Administrator</th><th>Enabled</th></tr>
+					<?cms
+						int i;
+						array users;
+						map details;
+						int err;
 
-		users = getUserList("", 0, 2048);
+						users = getUserList('', 0, 2048);
 
-		for (i = 0; i < arrayLength(users); i++) {
-			details = getUserDetails(users[i]["userID"]);
-			write("<tr ");
-			if (i % 2) {
-				write(" class=\"odd\" ");
-			}
-			writeln("id=\"user" + users[i]["userID"] + "\" onclick=\"selectUser(" + users[i]["userID"] + ");\" style=\"cursor: pointer;\"><td>" + xmlEscape(details["userName"]) + "</td><td>" + xmlEscape(details["fullName"]) + "</td><td>" + xmlEscape(details["email"]) + "</td><td>");
-			if (details["isSuperUser"] == 1) {
-				write("True");
-			} else {
-				write("False");
-			}
-			write("</td><td>");
+						for (i = 0; i < arrayLength(users); i++) {
+							details = getUserDetails(users[i]['userID']);
+							write('<tr ');
+							if (i % 2) {
+								write(' class="odd" ');
+							}
+							writeln('id="user' + users[i]['userID'] + '" onclick="selectUser(' + users[i]['userID'] + ')" style="cursor: pointer; "><td>' + xmlEscape(details['userName']) + '</td><td>' + xmlEscape(details['fullName']) + '</td><td>' + xmlEscape(details['email']) + '</td><td>');
+							if (details['isSuperUser'] == 1) {
+								write('True');
+							} else {
+								write('False');
+							}
+							write('</td><td>');
 
-			if (details["isOnline"] == 1) {
-				write("True");
-			} else {
-				write("False");
-			}
-			writeln("</td></tr>");
-		}
-		
-		while (i < 10) {
-			if (i % 2) {
-				writeln("<tr class=\"odd\"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
-			} else {
-				writeln("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
-			}
-			i++;
-		}
+							if (details['isOnline'] == 1) {
+								write('True');
+							} else {
+								write('False');
+							}
+							writeln('</td></tr>');
+						}
+						
+						while (i < 10) {
+							if (i % 2) {
+								writeln('<tr class="odd"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
+							} else {
+								writeln('<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
+							}
+							i++;
+						}
 
-	?>
-	</table>
-	</div>
-	<div id="leftmenu">
-	<form action="#">
-	<input type="hidden" name="userID" id="userID" value=""/>
-	<?cms
-		string super;
+					?>
+				</table>
+			</div>
+			<div id="leftmenu">
+				<form action="#">
+					<input type="hidden" name="userID" id="userID" value=""/>
+					<?cms
+						string super;
 
-		super = get("isSuperUser");
+						super = get('isSuperUser');
 
-		if (super == "y") {
-			writeln("<input type=\"button\" onclick=\"actionAdd();\" id=\"addbutton\" name=\"adduser\" class=\"button\" value=\"Add\"/><br/><br/>");
-			writeln("<input type=\"button\" onclick=\"actionEdit();\" id=\"editbutton\" name=\"edituser\" class=\"button\" value=\"Edit\" style=\"color: #999;\"/><br/><br/>");
-			writeln("<input type=\"button\" onclick=\"actionDelete();\" id=\"deletebutton\" name=\"deleteuser\" class=\"button\" value=\"Delete\" style=\"color: #999;\"/><br/><br/>");
-		}
-		writeln("<input type=\"button\" onclick=\"actionGroups();\" id=\"groupsbutton\" name=\"groupsuser\" class=\"button\" value=\"Groups\" style=\"color: #999;\"/><br/><br/>");
-		writeln("<input type=\"button\" onclick=\"actionMetadata();\" id=\"metadatabutton\" name=\"metadatauser\" class=\"button\" value=\"Metadata\" style=\"color: #999;\"/>");
-	?>
-	</form>
-	</div>
-	</fieldset>
+						if (super == 'y') {
+							writeln('<input type="button" onclick="actionAdd()" id="addbutton" name="adduser" class="button" value="Add"/><br/><br/>');
+							writeln('<input type="button" onclick="actionEdit()" id="editbutton" name="edituser" class="button" value="Edit" style="color: #999; "/><br/><br/>');
+							writeln('<input type="button" onclick="actionDelete()" id="deletebutton" name="deleteuser" class="button" value="Delete" style="color: #999; "/><br/><br/>');
+						}
+						writeln('<input type="button" onclick="actionGroups()" id="groupsbutton" name="groupsuser" class="button" value="Groups" style="color: #999; "/><br/><br/>');
+						writeln('<input type="button" onclick="actionMetadata()" id="metadatabutton" name="metadatauser" class="button" value="Metadata" style="color: #999; "/>');
+					?>
+				</form>
+			</div>
+		</fieldset>
   </div>
   <div id="actions">
-  <p>
-  <input type="button" onclick="actionOK();" class="button" name="submit-action" value="Close"/>
-  </p>
+		<p>
+			<input type="button" onclick="actionOK()" class="button" name="submit-action" value="Close"/>
+		</p>
   </div>
 </body>
 </html>

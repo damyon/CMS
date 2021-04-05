@@ -44,23 +44,23 @@
 <body>
   <div id="popupform">
     <form action="<?cms urlRewrite('/cms/system/groupdeleteaction.cms'); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Delete Group </legend>
-	<p>Are you sure you want to delete this group?</p>
-	<p><span>Groupname:</span>
-	<?cms write(xmlEscape(groupname)); ?>
-	</p>
-	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="group" value="<?cms write(xmlEscape(get('group'))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK()" id="ok"/>
-	</p>
-	</div>
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Delete Group </legend>
+					<p>Are you sure you want to delete this group?</p>
+					<p><span>Groupname:</span>
+						<?cms write(xmlEscape(groupname)); ?>
+					</p>
+					<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="group" value="<?cms write(xmlEscape(get('group'))); ?>"/>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK()" id="ok"/>
+				</p>
+			</div>
     </form>
   </div>
   <div id="loading"> <span>Please Wait...</span> </div>

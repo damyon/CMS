@@ -36,33 +36,33 @@
   <div id="popupform">
     <form action="<?cms urlRewrite('/cms/system/notificationsdeleteaction.cms'); ?>" method="POST">
 			<div id="fields">
-			<fieldset id="outer">
-			<legend> Remove Notification Settings </legend>
-			<p><span>Path:</span>
-			<?cms write(xmlEscape(get('path'))); ?>
-			</p>
-			<p><span>Notification Setting:</span>
-			<?cms 
-				map details;
-				int groupID;
-			
-				groupID = get('group');
+				<fieldset id="outer">
+					<legend> Remove Notification Settings </legend>
+					<p><span>Path:</span>
+						<?cms write(xmlEscape(get('path'))); ?>
+					</p>
+					<p><span>Notification Setting:</span>
+						<?cms 
+							map details;
+							int groupID;
+						
+							groupID = get('group');
 
-				details = getGroupDetails(groupID);
-			
-				writeln('Members of the group <em>' + xmlEscape(details['groupName']) + '</em> will be notified of changes to this folder.');
-				?>
-			</p>
-			<p>&nbsp;</p>
-			<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
-			</fieldset>
+							details = getGroupDetails(groupID);
+						
+							writeln('Members of the group <em>' + xmlEscape(details['groupName']) + '</em> will be notified of changes to this folder.');
+							?>
+					</p>
+					<p>&nbsp;</p>
+					<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+				</fieldset>
 			</div>
 			<div id="actions">
-			<p>
-			<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
-			<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
-			<input type="submit" class="button" value="OK" onclick="actionOK()" id="ok"/>
-			</p>
+				<p>
+					<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel()"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK()" id="ok"/>
+				</p>
 			</div>
     </form>
   </div>

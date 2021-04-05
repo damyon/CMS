@@ -2,13 +2,13 @@
 <html>
 <head>
   <title>Dhufish CMS - Versions</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 
 	var lastColor = "";
 	function actionOK() {
-                window.opener.document.location.reload();
+    window.opener.document.location.reload();
 		window.close();
 	}
 	
@@ -20,14 +20,14 @@
 		mimetype = ele.value;
 		id = "win" + r;
 
-		filename = "<?cms write(xmlEscape(get("path"))); ?>";
+		filename = "<?cms write(xmlEscape(get('path'))); ?>";
 		parts = filename.split("/");
 		filename = parts[parts.length - 1];
 
 		if (mimetype.split("/")[0] == "text") {
-			window.open("<?cms urlRewrite("/cms/" + xmlEscape(get("path"))); ?>?CTIME=" + versionTimestamp, id, "menubar=yes,location=yes,toolbar=yes,width=800,height=600,screenX=160,screenY=160");
+			window.open("<?cms urlRewrite("/cms/" + xmlEscape(get('path'))); ?>?CTIME=" + versionTimestamp, id, "menubar=yes,location=yes,toolbar=yes,width=800,height=600,screenX=160,screenY=160");
 		} else {
-			document.location.href = "<?cms urlRewrite("/cms/" + xmlEscape(get("path"))); ?>?CTIME=" + versionTimestamp + "&SAVEASFILENAME=" + filename;
+			document.location.href = "<?cms urlRewrite('/cms/' + xmlEscape(get('path'))); ?>?CTIME=" + versionTimestamp + "&SAVEASFILENAME=" + filename;
 		}
 	}
 
@@ -37,7 +37,7 @@
 		r = Math.round(Math.random() * 1024);
 		id = "win" + r;
 
-		window.open("<?cms urlRewrite("/cms/system/versionsrollback.cms?path=" + xmlEscape(get("path"))); ?>&versionID=" + versionID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
+		window.open("<?cms urlRewrite('/cms/system/versionsrollback.cms?path=' + xmlEscape(get('path'))); ?>&versionID=" + versionID, id, "menubar=no,width=540,height=240,screenX=160,screenY=160");
 	}
 
 	function selectVersion(versionID, timestamp, mimetype) {
@@ -80,74 +80,82 @@
 			ele.value = mimetype;
 		}
 	}
-  -->
+  
   </script>
 </head>
 <body>
   <div id="popupform">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Versions </legend>
-	<div id="info">
-	<p><span>Versions for file:</span><?cms write(xmlEscape(get("path"))); ?></p>
-	<table width="100%" cellpadding="0" cellspacing="0">
-	<tr><th>Publisher</th><th>Version</th><th>Mimetype</th></tr>
+		<div id="fields">
+			<fieldset id="outer">
+				<legend> Versions </legend>
+				<div id="info">
+					<p><span>Versions for file:</span><?cms write(xmlEscape(get('path'))); ?></p>
+					<table width="100%" cellpadding="0" cellspacing="0">
+						<tr><th>Publisher</th><th>Version</th><th>Mimetype</th></tr>
 
-	<?cms
-		string path;
-		int i;
-		int timestamp;
-		array versions;
-		map details;
-		string publishdate;
-		string publisher;
-		int err;
-	
-		path = get("path");
-		versions = getFileVersions(path, 0, 2048);
+						<?cms
+							string path;
+							int i;
+							int timestamp;
+							array versions;
+							map details;
+							string publishdate;
+							string publisher;
+							string clickAction;
+							int err;
+						
+							path = get('path');
+							versions = getFileVersions(path, 0, 2048);
 
-		for (i = 0; i < arrayLength(versions); i++) {
-			details = getFileDetails(versions[i]["path"]);
-			publishdate = getFileMetadata(versions[i]["path"], "dc:date");
-			publisher = getFileMetadata(versions[i]["path"], "dc:publisher");
-			timestamp = details["version"];
-			timestamp += 1;
-			if ((i % 2)) {
-				write("<tr id=\"version" + versions[i]["fileID"] + "\" onclick=\"selectVersion(" + versions[i]["fileID"] + ", " + (timestamp) + ", '" + xmlEscape(details["mimeType"]) + "');\" style=\"cursor: pointer;\" class=\"odd\">");
-			} else {
-				write("<tr id=\"version" + versions[i]["fileID"] + "\" onclick=\"selectVersion(" + versions[i]["fileID"] + ", " + (timestamp) + ", '" + xmlEscape(details["mimeType"]) + "');\" style=\"cursor: pointer;\">");
-			}
-			
-			write("<td>" + xmlEscape(publisher) + "</td><td>" + xmlEscape(publishdate) + "</td><td>" + xmlEscape(details["mimeType"]) + "</td></tr>");
-		}
-		
-		while (i < 5) {
-			if (i % 2) {
-				writeln("<tr class=\"odd\"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
-			} else {
-				writeln("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
-			}
-			i++;
-		}
+							for (i = 0; i < arrayLength(versions); i++) {
+								details = getFileDetails(versions[i]['path']);
+								publishdate = getFileMetadata(versions[i]['path'], 'dc:date');
+								publisher = getFileMetadata(versions[i]['path'], 'dc:publisher');
+								timestamp = details['version'];
+								timestamp += 1;
 
-	?>
-	</table>
-	</div>
-	<div id="leftmenu">
-	<form action="#">
-	<input type="hidden" name="versionID" id="versionID" value=""/>
-	<input type="hidden" name="versionTimestamp" id="versionTimestamp" value=""/>
-	<input type="hidden" name="versionMimetype" id="versionMimetype" value=""/>
-	<input type="button" onclick="actionView();" id="viewbutton" name="viewversion" class="button" value="View" style="color: #999;"/><br/><br/>
-	<input type="button" onclick="actionRollback();" id="rollbackbutton" name="rollbackversion" class="button" value="Rollback" style="color: #999;"/>
-	</form>
-	</div>
-	</fieldset>
-  </div>
-  <div id="actions">
-  <p>
-  <input type="button" onclick="actionOK();" class="button" name="submit-action" value="Close"/>
-  </p>
+								clickAction = 'selectVersion(' + versions[i]['fileID'] + ', ' + (timestamp) + ', `' + xmlEscape(details['mimeType']) + '`) ';
+								if ((i % 2)) {
+									write('<tr id="version' + versions[i]['fileID'] + '" ' +
+												'onclick="' + clickAction + '"' +
+												'style="cursor: pointer; " class="odd">');
+								} else {
+									write('<tr id="version' + versions[i]['fileID'] + '" ' + 
+									      'onclick="' + clickAction + '"' +
+													'style="cursor: pointer;">');
+								}
+								
+								write('<td>' + xmlEscape(publisher) + '</td><td>' + xmlEscape(publishdate) + '</td><td>' + xmlEscape(details['mimeType']) + '</td></tr>');
+							}
+							
+							while (i < 5) {
+								if (i % 2) {
+									writeln('<tr class="odd"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
+								} else {
+									writeln('<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>');
+								}
+								i++;
+							}
+
+						?>
+					</table>
+				</div>
+				<div id="leftmenu">
+					<form action="#">
+						<input type="hidden" name="versionID" id="versionID" value=""/>
+						<input type="hidden" name="versionTimestamp" id="versionTimestamp" value=""/>
+						<input type="hidden" name="versionMimetype" id="versionMimetype" value=""/>
+						<input type="button" onclick="actionView()" id="viewbutton" name="viewversion" class="button" value="View" style="color: #999; "/><br/><br/>
+						<input type="button" onclick="actionRollback()" id="rollbackbutton" name="rollbackversion" class="button" value="Rollback" style="color: #999; "/>
+					</form>
+				</div>
+			</fieldset>
+		</div>
+		<div id="actions">
+			<p>
+				<input type="button" onclick="actionOK()" class="button" name="submit-action" value="Close"/>
+			</p>
+		</div>
   </div>
 </body>
 </html>

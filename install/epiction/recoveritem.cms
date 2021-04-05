@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>Dhufish CMS - Recover Item (/cms/<?cms write(xmlEscape(get("path"))); ?>)</title>
-  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite("/cms/system/css/popup.css"); ?>"></link>
+  <title>Dhufish CMS - Recover Item (/cms/<?cms write(xmlEscape(get('path'))); ?>)</title>
+  <link rel="stylesheet" type="text/css" href="<?cms urlRewrite('/cms/system/css/popup.css'); ?>"></link>
   <script type="text/javascript" language="Javascript">
   
 	function actionCancel() {
@@ -35,33 +35,33 @@
 	string date;
 	int itemID;
 
-	path = get("path");
-	itemID = get("itemID");
+	path = get('path');
+	itemID = get('itemID');
 
-	date = getFileMetadata(itemID, "dc:date");
+	date = getFileMetadata(itemID, 'dc:date');
 
   ?>
 </head>
 <body>
   <div id="popupform">
-    <form action="<?cms urlRewrite("/cms/system/recoveritemaction.cms"); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Recover Item </legend>
-	<p>Are you sure you want to recover this file?</p>
-	<p><span>Recover file:</span><?cms write(xmlEscape(path)); ?></p>
-	<p><span>Version Date:</span><?cms write(xmlEscape(date)); ?></p>
-	<div class="error"><?cms write(xmlEscape(get("error"))); ?></div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="path" value="<?cms write(xmlEscape(get("path"))); ?>"/>
-	<input type="hidden" name="itemID" value="<?cms write(xmlEscape(get("itemID"))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel();" id="cancel"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK();"/>
-	</p>
-	</div>
+    <form action="<?cms urlRewrite('/cms/system/recoveritemaction.cms'); ?>" method="POST">
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Recover Item </legend>
+					<p>Are you sure you want to recover this file?</p>
+					<p><span>Recover file:</span><?cms write(xmlEscape(path)); ?></p>
+					<p><span>Version Date:</span><?cms write(xmlEscape(date)); ?></p>
+					<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="path" value="<?cms write(xmlEscape(get('path'))); ?>"/>
+					<input type="hidden" name="itemID" value="<?cms write(xmlEscape(get('itemID'))); ?>"/>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel()" id="cancel"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK()"/>
+				</p>
+			</div>
     </form>
   </div>
   <div id="loading"> <span>Please Wait...</span> </div>

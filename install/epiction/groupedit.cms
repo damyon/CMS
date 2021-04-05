@@ -47,34 +47,34 @@
 <body>
   <div id="popupform">
     <form action="<?cms urlRewrite('/cms/system/groupeditaction.cms'); ?>" method="POST">
-	<div id="fields">
-	<fieldset id="outer">
-	<legend> Edit Group </legend>
-	<p>Edit the group details.</p>
-	<p><span>Group Name:</span><input type="text" class="forminput" size="16" id="newgroupname" name="newgroupname" value="<?cms write(xmlEscape(get('newgroupname'))); ?>"/></p>
-	<p><span>Public:</span>
-	<select name="newpublic">
-		<?cms
-		if (get('newpublic') == 1) {
-			writeln('<option value="1" selected="selected">True</option>');
-			writeln('<option value="0">False</option>');
-		} else {
-			writeln('<option value="1">True</option>');
-			writeln('<option value="0" selected="selected">False</option>');
-		}
-		?>
-	</select>
-	</p>
-	<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
-	</fieldset>
-	</div>
-	<div id="actions">
-	<p>
-	<input type="hidden" name="group" value="<?cms write(xmlEscape(get('group'))); ?>"/>
-	<input type="button" class="button" value="Cancel" onclick="actionCancel()" id="cancel"/>
-	<input type="submit" class="button" value="OK" onclick="actionOK()"/>
-	</p>
-	</div>
+			<div id="fields">
+				<fieldset id="outer">
+					<legend> Edit Group </legend>
+					<p>Edit the group details.</p>
+					<p><span>Group Name:</span><input type="text" class="forminput" size="16" id="newgroupname" name="newgroupname" value="<?cms write(xmlEscape(get('newgroupname'))); ?>"/></p>
+					<p><span>Public:</span>
+						<select name="newpublic">
+							<?cms
+							if (get('newpublic') == 1) {
+								writeln('<option value="1" selected="selected">True</option>');
+								writeln('<option value="0">False</option>');
+							} else {
+								writeln('<option value="1">True</option>');
+								writeln('<option value="0" selected="selected">False</option>');
+							}
+							?>
+						</select>
+					</p>
+					<div class="error"><?cms write(xmlEscape(get('error'))); ?></div>
+				</fieldset>
+			</div>
+			<div id="actions">
+				<p>
+					<input type="hidden" name="group" value="<?cms write(xmlEscape(get('group'))); ?>"/>
+					<input type="button" class="button" value="Cancel" onclick="actionCancel()" id="cancel"/>
+					<input type="submit" class="button" value="OK" onclick="actionOK()"/>
+				</p>
+			</div>
     </form>
   </div>
   <div id="loading"> <span>Please Wait...</span> </div>
