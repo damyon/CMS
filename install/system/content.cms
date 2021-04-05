@@ -77,7 +77,7 @@
 
 						super = get('isSuperUser');
 
-						if ((path != '') && (path != '/'')) {
+						if ((path != '') && (path != '/')) {
 							details = getFileDetails(path);
 						}
 
@@ -392,7 +392,7 @@
 							pathlist = split(details['path'], '/');
 
 							verifier = isVerifier(details['path']);
-							writeln('<ul id="row" + details['fileID'] + 'context" class="rowcontext">');
+							writeln('<ul id="row' + details['fileID'] + 'context" class="rowcontext">');
 							writeln('<li><a href="javascript:void(0)" onclick="return popupWindow(`' + urlBase('/cms/system/backup.cms?path=' + xmlEscape(details['path'])) + '`, 480, 200)" title="Backup this file"><img alt="Backup" src="' + urlBase('/cms/system/images/backup-red-16x16.png') + '" width="16" height="16"/>Backup</a></li>');
 							writeln('<li><a href="' + urlBase('/cms/system/content.cms?buffer-copy=' + xmlEscape(details['path'])) + '&path=' + xmlEscape(path) + '&filter=' + xmlEscape(get('filter')) + '&skip=' + xmlEscape(get('skip')) + '&pagination=' + xmlEscape(get('pagination')) + '" title="Copy the file"><img alt="Copy" src="' + urlBase('/cms/system/images/copy-red-16x16.png') + '" width="16" height="16"/>Copy</a></li>');
 							if (details['writePermission'] == 1) {
