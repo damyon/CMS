@@ -14,8 +14,8 @@
 
 	parts = split(path, '/');
 	
-	if (parts[0] == 'dhufish') {
-		set('error', 'Cannot lock from dhufish folder.');
+	if (parts[0] == 'system') {
+		set('error', 'Cannot lock from system folder.');
 	}
 	
 	if (get('error') == '') {

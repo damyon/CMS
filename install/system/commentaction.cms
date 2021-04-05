@@ -20,8 +20,8 @@
 
 	parts = split(path, '/');
 	
-	if (parts[0] == 'dhufish') {
-		set('error', 'Cannot comment from dhufish folder.');
+	if (parts[0] == 'system') {
+		set('error', 'Cannot comment from system folder.');
 	}
 	
 	if (get('error') == '') {

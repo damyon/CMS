@@ -480,7 +480,7 @@
 							} else {
 								write('<tr class="even"');
 							}
-							if (((path != '') && (path != '/')) || (details['path'] != 'dhufish')) {
+							if (((path != '') && (path != '/')) || (details['path'] != 'system')) {
 								writeln(' onclick="setSelection(`row' + files[i]['fileID'] + '`)" id="row' + files[i]['fileID'] + '">');	
 							} else {
 								writeln(' id="row' + files[i]['fileID'] + '">');	
@@ -505,14 +505,14 @@
 							
 							writeln('" width="16" height="16" alt="Preview Icon"/>');
 							if (details['type'] == 'FOLDER') {
-								if (((path != '') && (path != '/')) || (details['path'] != 'dhufish')) {
+								if (((path != '') && (path != '/')) || (details['path'] != 'system')) {
 									writeln('<a href="javascript:void(0)" ondblclick="return setLocation(`' + urlBase('/cms/system/content.cms?path=' + xmlEscape(details['path']) + '&pagination=' + page) + '`)">');
 								} else {
 									writeln('<a href="javascript:void(0)" class="disabled">');
 								}
 							}
 							writeln(xmlEscape(details['fileName']));
-							if (((path == '') || (path == '/')) && (details['path'] == 'dhufish')) {
+							if (((path == '') || (path == '/')) && (details['path'] == 'system')) {
 								write(' (system folder)');
 							}
 							if (details['type'] == 'FOLDER') {

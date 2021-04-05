@@ -17,12 +17,12 @@
 			path = path.substring(4);
 		}
 
-		if (path.substring(0, 8) == "dhufish") {
+		if (path.substring(0, 8) == "system") {
 			alert("Cannot navigate to system folder.");
 			return false;
 		}
 
-		if (path.substring(0, 9) == "/dhufish") {
+		if (path.substring(0, 9) == "/system") {
 			alert("Cannot navigate to system folder.");
 			return false;
 		}

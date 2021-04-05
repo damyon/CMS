@@ -132,7 +132,7 @@
 							for (i = 0; i < arrayLength(files); i++) {
 								details = getFileDetails(files[i]['path']);
 								title = getFileMetadata(files[i]['path'], 'dc:title');
-								if ((((get('onlyfolders') == 'false') || (details['mimeType'] == 'application/folder')) && (details['path'] != 'dhufish'))) {
+								if ((((get('onlyfolders') == 'false') || (details['mimeType'] == 'application/folder')) && (details['path'] != 'system'))) {
 									if (count >= skip) {
 										write('<tr style="cursor: pointer; " ');
 

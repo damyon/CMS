@@ -14,8 +14,8 @@
 
 	parts = split(path, '/');
 	
-	if (parts[0] == 'dhufish') {
-		set('error', 'Cannot approve from dhufish folder.');
+	if (parts[0] == 'system') {
+		set('error', 'Cannot approve from system folder.');
 	}
 	
 	if (get('error') == '') {
